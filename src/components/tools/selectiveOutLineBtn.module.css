@@ -1,0 +1,55 @@
+.btnActive{
+    border-radius: 5px;
+    font-family: Dana1;
+    font-size: 22px;
+    color: #FFFFFF;
+    transition: 0.1s ease-in-out all;
+    border-style: none;
+    padding: 2px 25px 2px 25px;
+}
+.btnActive:hover{
+    border: 3px solid #4D76C8 !important;
+
+    background-color: #4D76C8 !important;
+}
+
+.btnActive:focus{
+    border: 3px solid #95AEE8 !important;
+}
+.btnActive:active{
+    background-color: #CCD9F7 !important;
+    color: #1043A9 !important;
+
+}
+
+
+
+
+
+.btnNotActive{
+    border-radius: 5px;
+    font-family: Dana1;
+    font-size: 22px;
+    color: #FFFFFF;
+    transition: 0.1s ease-in-out all;
+    border-style: none;
+    padding: 2px 25px 2px 25px;
+}
+.btnNotActive:hover{
+    background-color: #4D76C8 !important;
+    border: 3px solid #4D76C8 !important;
+
+    color: #fafafa !important;
+}
+
+.btnNotActive:focus{
+    border: 3px solid #95AEE8 !important;
+}
+.btnNotActive:active{
+    background-color: #95AEE8 !important;
+    color: #242424 !important;
+
+}
+
+
+

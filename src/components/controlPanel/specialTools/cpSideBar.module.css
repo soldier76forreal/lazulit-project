@@ -1,0 +1,251 @@
+.sideBar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-left: none;
+    z-index: 10;
+    height: 100%;
+    width: 78px;
+    padding: 6px 14px;
+    background: #354063;
+    transition: all 0.5s ease;
+}
+.active{
+    width: 240px;
+
+}
+.sideBar .logoContent .logo{
+    color:#fff;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.1s ease;
+
+}
+
+.active .logoContent .logo{
+    opacity: 1;
+    pointer-events: none;
+
+}
+.logoIcon{
+margin-left: 5px;
+width: 30px;
+}
+.sideBar .logoContent .logo .logoName{
+    font-size: 19px;
+    margin-top: 4px;
+    font-weight: 400;
+}
+  
+.barsIcon{
+    position: absolute;
+    color:#E6EDFD;
+    right:28%;
+    top:5px;
+    font-size:20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+}
+.active .barsIcon{
+    right:83%;
+
+}
+
+
+.sideBar ul{
+    margin-top: 20px;
+    padding-right: 0px;
+    margin-right: 0px;
+
+}
+.sideBar ul li{
+    position: relative;
+    height: 50px;
+    width: 100% !important;
+    margin: 0 0px;
+    font-family: Dana2;
+    list-style:none;
+    line-height: 50px;
+    border-radius: 5px;
+} 
+.sideBar ul li a{
+    color: #E6EDFD;
+    display: flex;
+    align-items: center;
+
+    
+    text-decoration: none; 
+    transition: all 0.4s ease;
+    border-radius: 4px;
+    white-space: nowrap;
+} 
+.sideBar ul li a:hover{
+    color: #1043A9;
+    background: #E6EDFD;
+
+
+} 
+.listIconStyle{
+     height: 25px;
+     min-width: 50px;
+     color: #E6EDFD;
+     border-radius: 12px;
+     line-height: 50px;
+}
+
+.listIconStyle{
+    height: 25px;
+    min-width: 50px;
+    color: #E6EDFD;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+    transition: all 0.4s ease;
+
+}
+
+.listIconStyle:hover{
+    
+
+}
+.sideBar  ul li a:hover .listIconStyle{
+    height: 25px;
+    min-width: 50px;
+    color: #1043A9;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+    
+}
+
+.sideBar .profile_content{
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    bottom: 0;
+    right: 0;
+}
+.sideBar .profile_content .profile{
+    position: relative;
+    padding:10px 6px;
+    padding-top: 12px;
+    padding-right: 10px ;
+    height: 70px;
+
+
+    background: #E6EDFD;
+}
+.profile_content .profile .profile_details{
+    align-items:center;
+    display: flex;
+    opacity: 0;
+    pointer-events: none;   
+    white-space: nowrap;
+    transition: all 0.2s ease;
+
+}
+.active .profile .profile_details{
+    opacity: 1;
+    pointer-events: auto;
+}
+.profilePhoto{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border: solid #1043A9 2px;
+    border-radius: 10px;
+    
+}
+.profile_content .profile .profile_details .name_job{
+
+    margin-right: 10px;
+      
+}
+.profile_content .profile .profile_details .name{
+
+    font-size:15px;
+    font-weight: 400;
+      
+}
+.profile_content .profile .profile_details .role{
+
+    font-size: 12px;
+    color: #1043A9;
+      
+}
+.log_out{
+    position: absolute;
+    right: 50%;
+    bottom: 0px;
+    color: #1043A9;
+    line-height: 20px;
+    border-radius:12px ;
+    font-size: 20px;
+     min-width: 50px;
+     max-width: 50px;
+     min-height: 50px;
+     max-height: 50px;
+     padding: 12px;
+     top: 10px;
+    transform: translateX(50%);
+    margin-bottom: 17px;
+    text-align: center;
+    transition: all 0.2s ease;
+
+}
+.log_out:hover{
+    background: #354063;
+    color: #E6EDFD;
+
+}
+.active .log_out{
+    font-size: 30px;
+    
+    right: 85%;
+}
+
+
+.sideBar ul li .toolTip{
+    position: absolute;
+    right: 122px;
+    top:0;
+    transform: translateY(-50%) translateX(35%);
+    border-radius: 6px;
+    height: 35px;
+    width: 122px;
+    color: #E6EDFD;
+    opacity: 0;
+    display: block;
+    pointer-events: none;
+    transition: 0s;
+    background: #354063;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.active ul li .toolTip{
+display: none;
+}
+.sideBar ul li:hover .toolTip{
+transition: all 0.5s ease;
+opacity: 1;
+top: 50%;
+}
+
+.links_Name{
+    opacity: 0;
+    transition: all 0.2s ease;
+
+    pointer-events: none;
+}
+.active .links_Name{
+    opacity: 1;
+    pointer-events: auto;
+}

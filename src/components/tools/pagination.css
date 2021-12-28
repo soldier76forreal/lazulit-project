@@ -1,0 +1,64 @@
+.pg{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.pg_ul{
+    display: flex;
+padding-left: 0;
+list-style: none;
+margin-top: 0;
+justify-content: center;
+margin-bottom: 1rem;
+}
+.pg_backClick{
+    background-color: rgb(43, 43, 43);
+    padding: 2px 15px 2px 15px;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    cursor: pointer;
+    transition:0.3s all ease ;
+}
+.pg_forwardClick{
+    background-color: rgb(43, 43, 43);
+    padding: 2px 15px 2px 15px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    cursor: pointer;
+
+    transition:0.3s all ease ;  
+}
+.pg_backClick:hover{
+    background-color: rgb(36, 36, 36);
+
+}
+.pg_forwardClick:hover{
+    background-color: rgb(36, 36, 36);
+
+}
+.pg_item{
+    color: rgb(219, 219, 219);
+    background-color: rgb(53, 53, 53);
+    font-size: 14px;
+    transition:0.3s all ease ;  
+    cursor: pointer;
+
+    padding: 5px 10px 5px 10px;
+}
+.pg_item:hover{
+    color: rgb(219, 219, 219);
+    background-color: rgb(43, 43, 43);
+
+    color:#F38033;
+}
+.pg_iconRight{
+    margin-top: 5px;
+}
+.pg_iconRFirst{
+    margin-top: 5px;
+
+}
+.pg_active{
+    background-color: rgb(43, 43, 43);
+    color:#F38033;
+
+}

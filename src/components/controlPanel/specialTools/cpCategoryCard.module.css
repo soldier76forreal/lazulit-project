@@ -1,0 +1,169 @@
+.cardDiv{
+    width: 100%;
+    background-color: #DBDBDB;
+    display: inline-block;
+    border-radius: 5px;
+    margin-bottom: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rightSideDiv{
+    float: right;
+}
+.rightSideDiv h3{
+    font-size: 20px;
+    color: #354063;
+    font-family: Dana1;
+    padding: 8px 20px 3px 0px;
+}
+.leftSideDiv{
+    float: left;
+
+}
+
+
+.deleteIconDiv{
+    padding-top: 4px;
+    display: inline-block;
+
+    padding-left: 10px;
+}
+.deleteIcon{
+   transition: 0.1s ease-in-out all;
+
+}
+.deleteIcon:hover{
+    color: #fd9c9c;
+ }
+
+ .editIconDiv{
+    display: inline-block;
+    margin-left: 20px;
+
+ }
+ .editIcon{
+    transition: 0.1s ease-in-out all;
+ }
+ .editIcon:hover{
+    color: #6B779C;
+ }
+
+
+
+
+
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 25px;
+    left: 25px;
+    bottom: 2px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #5c5c5c;
+    border-radius: 0px;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  .switchDiv{
+      display: inline-block;
+      height: 100%;
+      }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 26px;
+    border: rgb(155, 155, 155) 3px solid;
+    
+    
+    background-color: #1043A9;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  
+  input:checked + .slider {
+    
+    background-color: #1043A9;
+   
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #b9c3e4;
+    
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+   
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+  .checkboxDiv{
+     
+      display: inline-block;
+      margin-left: 10px;
+  }
+
+
+
+  .submitDate{
+      display: inline-block;
+      margin-left: 70px;
+  }
+
+  .submitDate h3{
+    color: #354063;
+    font-size: 20px;
+    padding-top: 10px;
+    font-family: Dana1;
+}
+
+
+
+
+.profDiv{
+    margin-left: 50px;
+    display: inline-block;
+}
+.profDiv h4{
+    font-size: 20px;
+    display: inline-block;
+    margin-right: 6px;
+    color: #354063;
+    font-family: Dana1;
+}
+.profImg{
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 100%;
+}

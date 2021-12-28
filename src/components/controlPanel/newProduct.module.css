@@ -1,0 +1,23 @@
+.inndeDiv{
+    position: absolute;
+    left: 0px;
+    width: 94.5%;
+}
+
+
+
+.lableDiv{
+    margin-bottom: 12px;
+    margin-right: 8px;
+}
+.lableDiv h4{
+    text-align: right;
+    color: #354063;
+    font-size: 20px;
+}
+.formItemsDiv{
+
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-right: 18px;
+}

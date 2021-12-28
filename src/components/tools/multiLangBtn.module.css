@@ -1,0 +1,102 @@
+.btnDiv{
+    width: fit-content;
+    background-color: #E6EDFD;
+    border-radius: 8px;
+    display: flex;
+    max-height: 61px;
+    height: 100%;
+}
+
+
+
+/* none active btn style */
+.perBtn{
+    background-color: #E6EDFD;
+    border-style: none;
+    display: inline;
+    transition: 0.1s ease-in-out all;
+    text-align: center;
+    font-family: Dana2;
+    display:flex;
+    padding: 8px 10px 8px 10px;
+    color: #354063;
+    border-radius: 8px;
+
+    align-items: center;
+}
+.btnIcon{
+    margin-left: 8px;
+    width: 47px;
+    
+    height: 30px;
+    border: solid 2px #1043A9 ;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    background-position: center;
+    display: inline-block;
+
+    
+}
+
+.perBtn:hover{
+    background-color: #aec9ff !important;
+}
+
+.perBtn:focus{
+    background-color: #3262d3 !important;
+    color: #f0f0f0 !important;
+}
+.perBtn:active{
+    background-color: #1043A9 !important;
+    color: #CCD9F7 !important;
+
+}
+
+
+
+
+/* active active btn style */
+
+.active.perBtn{
+    background-color: #1043A9;
+    border-style: none;
+    display: inline;
+    transition: 0.1s ease-in-out all;
+    text-align: center;
+    font-family: Dana2;
+    display:flex;
+    padding: 8px 10px 8px 10px;
+    color: ivory;
+    border-radius: 8px;
+
+    align-items: center;
+}
+.active.btnIcon{
+    margin-left: 8px;
+    width: 47px;
+    
+    height: 30px;
+    border: solid 2px #E6EDFD;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size: 50px;
+    background-position: center;
+    display: inline-block;
+
+    
+}
+
+.active.perBtn:hover{
+    background-color: #4D76C8 !important;
+}
+
+.active.perBtn:focus{
+    background-color: #3262d3 !important;
+    color: #d6d6d6 !important;
+}
+.active.perBtn:active{
+    background-color: #CCD9F7 !important;
+    color: #1043A9 !important;
+
+}
