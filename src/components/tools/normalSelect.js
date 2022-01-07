@@ -1,10 +1,8 @@
 import { Fragment } from 'react';
 import Select from 'react-select';
 
-
   
 const NormalSelect = (props) =>{
-
     const customStyles = {
         menu: (provided, state) => ({
           ...provided,
@@ -48,7 +46,7 @@ const NormalSelect = (props) =>{
                         neutral50:'#354063',
                     },
                     })}
-            // options={options}
+            options={props.options}
             placeholder={props.placeholder}
             styles={customStyles}
             />

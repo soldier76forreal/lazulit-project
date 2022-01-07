@@ -1,0 +1,28 @@
+.btn{
+    background-color: #FD7474;
+    border-radius: 5px;
+    font-family: Dana1;
+    font-size: 22px;
+    color: #FFFFFF;
+    border: 3px solid #FD7474;
+
+    transition: 0.1s ease-in-out all;
+
+    padding: 2px 25px 2px 25px;
+}
+.btn:hover{
+    border: 3px solid #e23333;
+    color: #f7f7f7 !important;
+
+    background-color: #e23333!important;
+}
+
+.btn:focus{
+    border: 3px solid #d42222;
+}
+.btn:active{
+    background-color: #fa9595 !important;
+    color: #303030 !important;
+    border: 3px solid #fa9595;
+
+}

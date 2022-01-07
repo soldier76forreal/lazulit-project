@@ -1,0 +1,18 @@
+/* overal page adjustment */
+.inndeDiv{
+    position: absolute;
+    left: 0px;
+    width: 94.5%;
+}
+
+.uploadInputSection{
+    padding: 0px 100px 0px 100px;
+
+}
+.headerDiv{
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
+.fileInput{
+
+}

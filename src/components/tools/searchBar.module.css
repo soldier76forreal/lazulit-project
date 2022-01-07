@@ -2,6 +2,7 @@
 height: 100%;
 margin-right: 18px;
 display: flex;
+z-index: 0;
 }
 .searchBar{
     border-color: #1043A9;

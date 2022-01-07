@@ -36,10 +36,10 @@ const customStyles = {
 const MultiSelect = (props) =>{
     return(
         <Select
-        defaultValue={[options[2], options[3]]}
         isMulti
+        onChange={props.onChange}
         name="colors"
-        options={options}
+        options={props.options}
         className="basic-multi-select"
         classNamePrefix="select"
         placeholder={props.placehloder}

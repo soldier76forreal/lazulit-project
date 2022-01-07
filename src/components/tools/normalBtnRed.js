@@ -1,6 +1,6 @@
 //modules
 import { Fragment } from "react";
-import Style from './normalBtn.module.css';
+import Style from './normalBtnRed.module.css';
 
 //required tag
 {/* <NormalBtn onClick={sendNewCategory} btnName='ذخیره' paddingTop={'7px'} paddingButtom={'7px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn> */}
@@ -8,7 +8,7 @@ import Style from './normalBtn.module.css';
 
 
 
-const NormalBtn =(props)=>{
+const NormalBtnRed =(props)=>{
     //style
     const CustomStyle = {
         fontSize:`${props.fontSize}`,
@@ -25,4 +25,4 @@ const NormalBtn =(props)=>{
         </Fragment>
     )
 }
-export default NormalBtn;
+export default NormalBtnRed;

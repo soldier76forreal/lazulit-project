@@ -217,6 +217,7 @@ const CpProductShowCase = () =>{
                         <div style={{width:'100%' , height:'2px' , backgroundColor:'#7B99D5'}}></div>
                     
                         {/* review */}
+                        <StarRating></StarRating>
                         <div className={Style.reviewDiv}>
                             <div className={Style.reviewHeaderDiv}>
                                 <h3>نقد و بررسی تخصصی</h3>

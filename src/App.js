@@ -4,13 +4,14 @@ import ProductsList from './components/controlPanel/productsList';
 import CpSideBar from './components/controlPanel/specialTools/cpSideBar';
 import NewProduct from './components/controlPanel/newProduct';
 import CpProductShowCase from './components/controlPanel/cpProductShowCase';
+import CpUploadCenter from './components/controlPanel/cpUploadCenter';
 //modules
 import {Route , Switch} from "react-router-dom";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { faTimes , faStar ,faSearch , faPlus , faThumbsUp , faChevronLeft ,faChevronRight ,faExclamationCircle , faSignOutAlt , faFile , faUser  , faComments , faTags , faThumbsDown, faReply , faCaretDown , faQuestion , faCheck , faTimesCircle , faThLarge,  faTrashAlt , faEdit, faBars} from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faUpload , faTimes , faStar ,faSearch , faPlus , faThumbsUp , faChevronLeft ,faChevronRight ,faExclamationCircle , faSignOutAlt , faFile , faUser  , faComments , faTags , faThumbsDown, faReply , faCaretDown , faQuestion , faCheck , faTimesCircle , faThLarge,  faTrashAlt , faEdit, faBars} from '@fortawesome/free-solid-svg-icons'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-library.add(faTimes , farStar  , faStar , faSearch , faPlus , faChevronRight , faChevronLeft , faExclamationCircle ,faThumbsUp ,faSignOutAlt, faFile ,faUser, faComments , faTags , faThumbsDown  , faReply ,faCaretDown , faQuestion ,faBars , faThLarge , faCheck ,faTimesCircle , faTrashAlt ,faEdit )
+library.add(faTimes , faUpload , faCheckCircle, farStar  , faStar , faSearch , faPlus , faChevronRight , faChevronLeft , faExclamationCircle ,faThumbsUp ,faSignOutAlt, faFile ,faUser, faComments , faTags , faThumbsDown  , faReply ,faCaretDown , faQuestion ,faBars , faThLarge , faCheck ,faTimesCircle , faTrashAlt ,faEdit )
 
 
 
@@ -39,6 +40,10 @@ function App() {
          </Route> */}
          <Route exact path="/cp/cpProductShowCase"> 
             <CpProductShowCase></CpProductShowCase>
+         </Route>
+         <Route exact path="/cp/cpUploadCenter"> 
+            <CpSideBar></CpSideBar>
+            <CpUploadCenter></CpUploadCenter>
          </Route>
          <Route exact path="/cp/newProduct"> 
             <CpSideBar></CpSideBar>

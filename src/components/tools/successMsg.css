@@ -1,0 +1,48 @@
+.msgDiv{
+    background-color: #4ad994;
+    height: 60px;
+    max-width: 300px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.successMsg{
+    transition: 0.5s all ease-in-out;
+    width: 100%;
+    text-align: center;
+    z-index: 13;
+    position: fixed;
+    margin-top: 30px;
+}
+.iconMsg{
+    display: inline-block;
+    margin-top: 5px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.msgTextDiv{
+    display: inline-block;
+    height: fit-content;
+    margin-top: 7px;
+    margin-right: 5px;
+}
+.msgTextDiv h4{
+    display: inline-block;
+    font-size: 15px;
+    color:#005229 ;
+    font-family: Dana1;
+
+}
+.successMsgAnimateIn{
+    transform: translateY(0);
+}
+.successMsgAnimateOut{
+    transform: translateY(-200%);
+}
+
+

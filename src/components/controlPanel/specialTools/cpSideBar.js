@@ -32,7 +32,7 @@ const CpSideBarPortal =(props)=>{
                     </div>   
                 <ul className={Style.nav_list}>
                     <li>
-                        <Link>
+                        <Link to='cp/dashboard'>
                             <FontAwesomeIcon className={Style.listIconStyle}  icon={"th-large"}></FontAwesomeIcon> 
                             <span className={Style.links_Name}>داشبورد</span> 
                         </Link>
@@ -40,11 +40,27 @@ const CpSideBarPortal =(props)=>{
 
                     </li>
                     <li>
-                        <Link to="/courseList">
+                        <Link to="/cp/products">
                             <FontAwesomeIcon className={Style.listIconStyle}  icon={"file"}></FontAwesomeIcon> 
-                            <span className={Style.links_Name}>آموزش ها</span> 
+                            <span className={Style.links_Name}>پست ها</span> 
                         </Link>
-                        <span className={Style.toolTip}>آموزش ها</span> 
+                        <span className={Style.toolTip}>پست ها</span> 
+
+                    </li>
+                    <li>
+                        <Link to="/cp/tagsAndCategories">
+                            <FontAwesomeIcon className={Style.listIconStyle}  icon={"tags"}></FontAwesomeIcon> 
+                            <span className={Style.links_Name}>تگ ها</span> 
+                        </Link>
+                        <span className={Style.toolTip}>تگ ها</span> 
+
+                    </li>
+                    <li>
+                        <Link to='/cp/cpUploadCenter'>
+                            <FontAwesomeIcon className={Style.listIconStyle}  icon={"upload"}></FontAwesomeIcon> 
+                            <span className={Style.links_Name}>آپلود سنتر</span> 
+                        </Link>
+                        <span className={Style.toolTip}>آپلود سنتر</span> 
 
                     </li>
                     <li>
@@ -53,14 +69,6 @@ const CpSideBarPortal =(props)=>{
                             <span className={Style.links_Name}>نظرها</span> 
                         </Link>
                         <span className={Style.toolTip}>نظرها</span> 
-
-                    </li>
-                    <li>
-                        <Link to="/tags">
-                            <FontAwesomeIcon className={Style.listIconStyle}  icon={"tags"}></FontAwesomeIcon> 
-                            <span className={Style.links_Name}>تگ ها</span> 
-                        </Link>
-                        <span className={Style.toolTip}>تگ ها</span> 
 
                     </li>
                     <li>
@@ -121,7 +129,7 @@ const CpSideBar = (props)=>{
     return(
         <Fragment>
             {ReactDom.createPortal(
-            <CpSideBarPortal>
+            <CpSideBarPortal >
             </CpSideBarPortal>
             ,
             document.getElementById('header_container')

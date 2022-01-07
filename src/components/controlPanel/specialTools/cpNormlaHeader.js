@@ -9,7 +9,7 @@ import {Pagination,Navbar,Row  , Nav ,NavDropdown , Container ,Form ,FormControl
 import NormalHeader from '../../tools/normalHeader';
 import MultiLangBtn from '../../tools/multiLangBtn';
 
-const CpNormalHeader = () =>{
+const CpNormalHeader = (props) =>{
     return(
         <Fragment>
                 <Row dir="rtl">
@@ -18,7 +18,7 @@ const CpNormalHeader = () =>{
                         <div className={Style.topRightDivHeaderContainer}>
                             <div className={Style.headerTitleDiv}>
                                 {/* custom header title component */}
-                                <NormalHeader fontFamily='Dana1' fontSize='27px' color='#354063'  header='محصول جدید'></NormalHeader>
+                                <NormalHeader fontFamily='Dana1' fontSize='27px' color='#354063'  header={props.name}></NormalHeader>
                             </div>                           
                         </div>  
                     </Col>

@@ -1,7 +1,8 @@
 //modules
-import { Fragment, useState } from "react";
+import { Fragment, useState , useEffect } from "react";
 import Style from './tagsAndCategories.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from "axios";
 import {Pagination,Navbar,Row  , Nav ,NavDropdown , Container ,Form ,FormControl ,Button, Col} from 'react-bootstrap';
 //components
 import NormalBtn from "../tools/normalBtn";
@@ -15,7 +16,9 @@ import CpCategoryCard from "./specialTools/cpCategoryCard";
 import MultiSelect from "../tools/reactSelectMulti";
 import CpTagCard from "./specialTools/cpTagCard";
 import Pag from "../tools/pagination";
-
+import SuccessMsg from "../tools/successMsg";
+import FailedMsg from "../tools/failedMsg";
+import Modal from "../tools/modal";
 
 const TagsAndCategories = () =>{
      //------------------------------states------------------------------
@@ -23,8 +26,235 @@ const TagsAndCategories = () =>{
      //page switcher states
      const [pageSwitcherState , setPageSwitcherState] = useState('category');
 
+     //category input state
+     const [category , setCategory] = useState('');
 
+    //modal
+    const [showDeleteModal , setShowDeleteModal] = useState(false);
+
+    //success toast states
+    const [successOpenToast , setSuccessOpenToast] = useState(false);
+    const [successMsgToast , setSuccessMsgToast] = useState('');
+
+    //failed toast states
+    const [failedOpenToast , setFailedOpenToast] = useState(false);
+    const [failedMsgToast , setFailedMsgToast] = useState('');
+    //saves
+    const [allCategories , setAllCategories] = useState([]);
+    const [allTags, setAllTags] = useState([]);
+
+    //add New tag States
+    const [categoryIdToDelete , setCategoryIdToDelete] = useState('');
+   
+
+    //add New tag States
+    const [categoryOfNewTag , setCategoryOfNewTag] = useState('');
+    const [newTag , setNewTag] = useState('');
+
+        //update categories with tags      
+        const [categoryForUpdateWithTags , setCategoryForUpdateWithTags] = useState(null);
+        const [tagsToUpdateCategory , setTagsToUpdateCategory] = useState([]);
     //------------------------------listners------------------------------
+    const saveCategory = (e) =>{
+        setCategory(e.target.value);
+    }
+
+    const closeSuccessMsg = () =>{
+        setSuccessOpenToast(false);
+    }
+
+    const closeFailedMsg = () =>{
+        setFailedOpenToast(false);
+    }
+
+    const saveNewTag = (e) =>{
+        setNewTag(e.target.value);
+    }
+    const saveCategoryOfNewTag =(e) =>{
+        setCategoryOfNewTag(e.value);
+    }
+
+    //update categories with tags    
+    const saveCategoryForUpdateWithTags =(e)=>{
+        setCategoryForUpdateWithTags(e.value);
+    }
+    const saveTagsForUpdateTheCategory = (e)=>{
+
+        var tagsData = e.map(function (i) { return i.value})
+        setTagsToUpdateCategory(tagsData);
+
+    }
+
+
+
+    //open and close Modal of delete btn
+    const openModalByDeleteBtn =(e)=>{
+        setShowDeleteModal(true);
+        setCategoryIdToDelete(e.currentTarget.value);
+    }
+    const closeModalByDeleteBtn =()=>{
+        setShowDeleteModal(false);
+
+    }
+    //------------------------------HTTP request------------------------------
+    //add new category to db
+    const sendNewCategory = async () =>{
+        const  categoryData ={categoryData:category};
+            try{
+                const response = await axios({
+                    method:"post",
+                    url:"http://localhost:3001/tagAndCategory/newCategory",
+                    data:categoryData,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setSuccessOpenToast(true);
+                setSuccessMsgToast(data.msg);
+                const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+            }catch(error){
+                setFailedOpenToast(true);
+                setFailedMsgToast(error.response.data);
+                const closingFailedMsgTimeOut = setTimeout(closeFailedMsg, 3000);
+            }
+    }
+
+        //add new tag to db
+        const sendNewTag = async () =>{
+            const  categoryData ={categoryId:categoryOfNewTag , tag:newTag };
+                try{
+                    const response = await axios({
+                        method:"post",
+                        url:"http://localhost:3001/tagAndCategory/newTag",
+                        data:categoryData,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast(data.msg);
+                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                }catch(error){
+                    setFailedOpenToast(true);
+                    setFailedMsgToast(error.response.data);
+                    const closingFailedMsgTimeOut = setTimeout(closeFailedMsg, 3000);
+                }
+        }
+
+                //update category with tag 
+                const sendTagsForUpdateCategory = async () =>{
+                    const  dataToSend ={categoryId:categoryForUpdateWithTags , tags:tagsToUpdateCategory };
+                        try{
+                            const response = await axios({
+                                method:"post",
+                                url:"http://localhost:3001/tagAndCategory/addTagToCategory",
+                                data:dataToSend,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            setSuccessOpenToast(true);
+                            setSuccessMsgToast(data.msg);
+                            const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                        }catch(error){
+                            setFailedOpenToast(true);
+                            setFailedMsgToast(error.response.data);
+                            const closingFailedMsgTimeOut = setTimeout(closeFailedMsg, 3000);
+                        }
+                }
+
+
+             //get tags
+            const getAllTags = async () =>{
+                if(categoryForUpdateWithTags !== null){
+                    const paramsData = {params:categoryForUpdateWithTags};
+                    try{
+                        const response = await axios({
+                            method:"get",
+                            url:"http://localhost:3001/tagAndCategory/getAllTagsForMultiSelect",
+                            params:paramsData,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setSuccessOpenToast(false);
+                        setAllTags([...data])
+                    }catch(error){
+                        setFailedOpenToast(true);
+                        setFailedMsgToast(error.response.data);
+                    }
+                } else{
+                    setAllTags(["دسته بندی را انتخاب کنید"]);
+
+                }                       
+            }
+
+        //get categories
+        const getAllCategories = async () =>{
+                try{
+                    const response = await axios({
+                        method:"get",
+                        url:"http://localhost:3001/tagAndCategory/getAllCategories",
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setSuccessOpenToast(false);
+                    setAllCategories([...data])
+                }catch(error){
+                    setFailedOpenToast(true);
+                    setFailedMsgToast(error.response.data);
+                }
+        }
+
+
+        //delete category 
+        const deleteCategory = async () =>{
+            const  dataToSend ={categoryId:categoryIdToDelete };
+                try{
+                    const response = await axios({
+                        method:"post",
+                        url:"http://localhost:3001/tagAndCategory/deleteCategory",
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast(data);
+                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                }catch(error){
+                    setFailedOpenToast(true);
+                    setFailedMsgToast(error.response.data);
+                    const closingFailedMsgTimeOut = setTimeout(closeFailedMsg, 3000);
+                }
+        }
+
+
+    //------------------------------USE EFFECTS------------------------------
+
+    useEffect(() => {
+        getAllCategories();
+        getAllTags();
+    }, [])
+    useEffect(() => {
+        getAllTags();
+    }, [categoryForUpdateWithTags])
+
+
+
+
+    //------------------------------mapping Data------------------------------
+
+    const categoriesOptionForNormalSelect = []
+    for(var i = 0 ; allCategories.length>i ; i++){
+    //   if(allCategories[i].validation === false && allCategories[i].deleteDate !== null){
+        categoriesOptionForNormalSelect.push({ value: allCategories[i]._id, label: allCategories[i].category })
+      }
+
+
+      const tagsOptionForMultiSelect = []
+      for(var j = 0 ; allTags.length>j ; j++){
+      //   if(allCategories[i].validation === false && allCategories[i].deleteDate !== null){
+        tagsOptionForMultiSelect.push({ value: allTags[j]._id, label: allTags[j].tag })
+        }
+
+
+        
     //tag And Categories switch
     const pageSwitcherToTag = () =>{
         if(pageSwitcherState === 'category'){
@@ -40,6 +270,11 @@ const TagsAndCategories = () =>{
     } 
     return(
         <Fragment>
+                {/* Modal */}
+                    <Modal delete={deleteCategory} closeModalFn={closeModalByDeleteBtn} showModal={showDeleteModal}></Modal>
+                {/* toasts */}
+                    <SuccessMsg openMsg={successOpenToast} msg={successMsgToast}></SuccessMsg>
+                    <FailedMsg openMsg={failedOpenToast} msg={failedMsgToast}></FailedMsg>
                 <Container>
                     <Row>
                         <Col xs={0} md={12} lg={12}>
@@ -50,7 +285,7 @@ const TagsAndCategories = () =>{
                                         <div className={Style.topRightDivHeaderContainer}>
                                             <div className={Style.headerTitleDiv}>
                                                {/* custom header title component */}
-                                               <NormalHeader fontFamily='Dana1' fontSize='27px' color='#354063'  header='دسته بندی ها'></NormalHeader>
+                                               <NormalHeader fontFamily='Dana1' fontSize='27px' color='#354063'  header={pageSwitcherState === 'tags' ?'تگ ها' : 'دسته بندی ها'}></NormalHeader>
                                             </div>
                                             {/* page switcher */}
                                             <div className={Style.switchBtnDiv}>
@@ -97,14 +332,14 @@ const TagsAndCategories = () =>{
                                         <Row>
                                             <Col  xs={12} md={9} lg={8}>
                                                 <div className={Style.categorySelectDiv}>
-        
+
                                                     <h4>دسته بندی جدید</h4>
-                                                  <NormalInput></NormalInput>
+                                                  <NormalInput onChange={saveCategory} placeholder='دسته بندی جدید را وارد کنید...'></NormalInput>
                                                 </div>
                                             </Col>
                                             <Col  xs={12} md={3} lg={3}>
                                                 <div  style={{marginTop:'29px'}} className={Style.saveBtnDiv}>
-                                                        <NormalBtn btnName='ذخیره' paddingTop={'7px'} paddingButtom={'7px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn>
+                                                        <NormalBtn onClick={sendNewCategory} btnName='ذخیره' paddingTop={'1px'} paddingButtom={'1px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn>
                                                 </div>
                                             </Col>
                                         </Row>
@@ -121,12 +356,12 @@ const TagsAndCategories = () =>{
 
                                 <Row>
                                     {/* card header */}
-                                    <Col xs={12} md={12} lg={12}>
-                                            <div className={Style.tagsCardsDiv}>
-                                            <div className={Style.headerDiv}>
-                                                <div className={Style.rightHeader}>
+                                    <Col  xs={12} md={12} lg={12}>
+                                        <div  className={Style.tagsCardsDiv}>
+                                            {/* <div className={Style.headerDiv}>
+                                                <div className={Style.rightHeader}> */}
                                                     {/* <h4 className={Style.categoryHeader}>دسته بندی</h4> */}
-                                                    <h4 className={Style.tagHeader}>دسته بندی</h4>
+                                                    {/* <h4 className={Style.tagHeader}>دسته بندی</h4>
                                                 </div>
                                                 <div className={Style.leftHeader}>
                                                     <h4 className={Style.deleteHeader}>حذف</h4>
@@ -134,9 +369,9 @@ const TagsAndCategories = () =>{
                                                     <h4 className={Style.validationHeader}>تاییدیه</h4>
                                                     <h4 className={Style.dateHeader}>تاریخ ثبت</h4>
                                                     <h4 className={Style.profHeader}>ثبت شده توسط</h4>
-                                                </div>
+                                                </div> */}
                                                 
-                                            </div>
+                                            {/* </div> */}
                                             {/* {allTagArray.map(data =>{
                                                 return(
                                                     <div>
@@ -147,7 +382,7 @@ const TagsAndCategories = () =>{
                                             })} */}
                                            {/* card it self */}
                                             <div className={Style.cardDiv}>
-                                                <CpCategoryCard></CpCategoryCard>
+                                                <CpCategoryCard deleteOnClick={openModalByDeleteBtn} data={allCategories}></CpCategoryCard>
 
                                             </div>
                                             <div>
@@ -171,19 +406,18 @@ const TagsAndCategories = () =>{
                                                     </div>
                                                 <Col  xs={12} md={4} lg={4}>
                                                         <div className={Style.categorySelectDiv}>
-                                                                <NormalSelect placeholder='دسته بندی را انتخاب کنید...' width='100%'></NormalSelect>
+                                                                <NormalSelect onChange={saveCategoryOfNewTag} options={categoriesOptionForNormalSelect} placeholder='دسته بندی را انتخاب کنید...' width='100%'></NormalSelect>
                                                         </div>
                                                 </Col>
                                                 <Col  xs={12} md={6} lg={6}>
                                                         <div className={Style.categorySelectDiv}>
-                                                                <NormalInput placeholder='تگ جدید را وارد کنید...'></NormalInput>
-                                                            
+                                                                <NormalInput onChange={saveNewTag}  placeholder='تگ جدید را وارد کنید...'></NormalInput>
                                                         </div>
                                                 </Col>
                                                 
                                                 <Col  xs={12} md={3} lg={2}>
                                                     <div className={Style.saveBtnDiv}>
-                                                            <NormalBtn btnName={'ذخیره تگ'} paddingTop={'7px'} paddingButtom={'7px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn>
+                                                            <NormalBtn onClick={sendNewTag} btnName={'ذخیره تگ'} paddingTop={'5px'} paddingButtom={'5px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn>
                                                     </div>
                                                 </Col>
                                             </Row>
@@ -200,19 +434,19 @@ const TagsAndCategories = () =>{
                                                 </div>
                                                 <Col  xs={12} md={4} lg={4}>
                                                         <div className={Style.categorySelectDiv}>
-                                                                <NormalSelect placeholder='دسته بندی را انتخاب کنید...' width='100%'></NormalSelect>
+                                                                <NormalSelect onChange={saveCategoryForUpdateWithTags} options={categoriesOptionForNormalSelect} placeholder='دسته بندی را انتخاب کنید...' width='100%'></NormalSelect>
                                                         </div>
                                                 </Col>
                                                 <Col  xs={12} md={6} lg={6}>
                                                         <div className={Style.categorySelectDiv}>
-                                                                <MultiSelect placehloder='تگ مورد نظر را انتخاب کنید...'></MultiSelect>
+                                                                <MultiSelect onChange={saveTagsForUpdateTheCategory} options={tagsOptionForMultiSelect} placehloder='تگ مورد نظر را انتخاب کنید...'></MultiSelect>
                                                             
                                                         </div>
                                                 </Col>
                                                 
                                                 <Col  xs={12} md={3} lg={2}>
                                                     <div className={Style.saveBtnDiv}>
-                                                            <NormalBtn btnName='ذخیره' paddingTop={'7px'} paddingButtom={'7px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn>
+                                                            <NormalBtn onClick={sendTagsForUpdateCategory} btnName='ذخیره' paddingTop={'5px'} paddingButtom={'5px'} fontSize={'20px'} paddingRight={'20px'} paddingLeft={'20px'} backgroundColor={'#1043A9'} color={'#FFFFFF'} ></NormalBtn>
                                                     </div>
                                                 </Col>
                                             </Row>
@@ -243,10 +477,6 @@ const TagsAndCategories = () =>{
                                                         <h4 className={Style.dateHeader}>تاریخ ثبت</h4>
                                                         <h4 className={Style.profHeader}>ثبت شده توسط</h4>
                                                         <h4 className={Style.profHeader}>دسته بندی</h4>
-
-    
-    
-                                                        
                                                     </div>
                                                     
                                                 </div>

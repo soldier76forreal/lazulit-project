@@ -1,0 +1,264 @@
+.dropZone{
+    border: 2px dashed #1043A9;
+    border-radius: 10px;
+    padding:55px 0;
+    transition: 0.2s ease-in-out all;
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: black;
+}
+
+.active{
+    border: 2px dashed #abc7fd;
+}
+.buttonClick{
+    background-color: #1043A9;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 5px 13px 5px 13px;
+    font-size: 19px;
+}
+.uploadBtnDiv{
+    margin-top: 10px;
+    text-align: right;
+    margin-right: 20px;
+    margin-bottom: 30px;
+}
+.priviewImageDiv{
+    background-color:rgb(241, 241, 241) ;
+    width: 100%;
+    border-radius: 5px;
+}
+.priviewImageStyle{
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+    object-fit: cover !important;
+
+}
+.imageDiv{
+    height: 170px;
+    border-radius: 5px;
+}
+.imageSub{
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px 4px 10px;
+}
+.imageSub h4{
+
+    font-size: 14px;
+   
+
+}
+.formatDiv{
+    background-color:#10a990 ;
+    text-align: center;
+    padding: 2px 0px 1px 0px;
+    width: 60px;
+    font-size: 15px;
+    border-radius: 3px;
+    margin: 0px auto 0px auto;
+    color: rgb(65, 65, 65);
+}
+
+.progressBarDiv{
+    text-align: center;
+    padding: 10px 8px 10px 8px;
+}
+
+
+
+.deleteBtnDiv{
+    margin-top: 5px;
+    margin-right: 5px;
+    position: absolute;
+    padding: 5px 9px 0px 9px;
+    border-radius: 100%;
+    border: none;
+
+    transition: all ease-in-out 0.2s;
+    background-color: rgba(131, 131, 131, 0.61);
+}
+.deleteBtnDiv:hover{
+    margin-top: 5px;
+    margin-right: 5px;
+    position: absolute;
+    padding: 5px 9px 0px 9px;
+    border-radius: 100%;
+    border: none;
+    background-color: rgba(92, 91, 91, 0.61);
+}
+
+
+
+
+.uploadDiv{
+    margin-top: 18px;
+    width: 100%;
+}
+.uploadBtn{
+    width: 100%;
+    padding: 6px 0px 6px 0px;
+    font-size: 18px;
+    border: 3px #1043A9 solid;
+    border-radius: 5px;
+    transition: ease-in-out all 0.2s;
+    color: #1043A9;
+    background: none;
+}
+.uploadBtn:hover{
+
+    border: 3px #6b95e9 solid;
+    color: #6b95e9;
+
+}
+.notActive{
+    width: 100%;
+    padding: 6px 0px 6px 0px;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: ease-in-out all 0.2s;
+    border: 3px #6b95e9 solid;
+    color: #6b95e9;
+    background: none;
+}
+
+
+
+
+
+
+
+
+
+/* files card style */
+.cardSectionDiv{
+    margin-top: 40px;
+}
+.savedFileCard{
+    position: relative;
+    text-align: center !important;
+    background-color: #E6EDFD;
+    border-radius: 3px;
+    margin-top: 8px;
+}
+
+
+.buttonOnTop{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    opacity: 0;
+    transition: ease-in-out 0.3s all;
+}
+.cardImageDiv{
+    display: grid;
+    transition: 0.1s ease-in-out all;
+}
+
+.cardImageDiv img{
+    object-fit: cover;
+    width: 100%;
+    transition: ease-in-out 0.2s all;
+    border-radius: 5px;
+
+}
+.cardDeleteBtnDiv{
+    background-color: #f54e4e;
+    padding: 7px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    transition: ease-in-out 0.2s all;
+}
+.cardDeleteBtnDiv:hover{
+    background-color: #f57c7c;
+    padding: 7px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+.cardCopyLinkBtnDiv{
+    background-color: #1043A9;
+    padding: 7px;
+    border: none;
+    margin-left: 5px;
+    border-radius: 5px;
+    transition: ease-in-out 0.2s all;
+}
+
+.cardCopyLinkBtnDiv:hover{
+    background-color: #2d64d1;
+    padding: 7px;
+    border: none;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+.cardImageDiv:hover .buttonOnTop{
+opacity: 1;
+}
+.cardImageDiv:hover img{
+    filter: brightness(50%);
+
+   
+}
+.fileCardDiv{
+    padding: 5px 5px 0px 5px;
+    text-align: right;
+    padding-top: 10px;
+
+}
+.fileCardDiv h4{
+    font-size: 16px;
+    color: #354063;
+}
+
+
+
+.fileCardProfileDiv{
+    display: inline-block;
+    
+    }
+    .profDiv h4{  
+        cursor: pointer;
+        font-size: 17px;
+        display: inline-block;
+        margin-right: 6px;
+        color: #354063;
+        font-family: Dana1;
+    }
+    .profImg{
+        width: 35px;
+        height: 35px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+    .imageCardFormat{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 93px;
+        opacity: 0;
+        height: 100%;
+        transition: ease-in-out 0.3s all;
+    }
+    .imageCardFormat h4{
+        color: rgb(36, 36, 36);
+        font-size: 16px;
+        background-color: #E6EDFD;
+        padding: 3px 12px 3px 12px;
+        border-radius: 5px;
+    }
+    .cardImageDiv:hover .imageCardFormat{
+        opacity: 1;
+        }

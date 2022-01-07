@@ -50,6 +50,7 @@
 
 .categorySelectDiv{
     margin-right: 17px;
+    z-index: 10;
 }
 .categorySelectDiv h4{
     font-size: 17px;

@@ -63,12 +63,11 @@ width: 30px;
     margin-top: 20px;
     padding-right: 0px;
     margin-right: 0px;
-
+    padding: 0px;
 }
 .sideBar ul li{
     position: relative;
     height: 50px;
-    width: 100% !important;
     margin: 0 0px;
     font-family: Dana2;
     list-style:none;
@@ -79,8 +78,6 @@ width: 30px;
     color: #E6EDFD;
     display: flex;
     align-items: center;
-
-    
     text-decoration: none; 
     transition: all 0.4s ease;
     border-radius: 4px;
