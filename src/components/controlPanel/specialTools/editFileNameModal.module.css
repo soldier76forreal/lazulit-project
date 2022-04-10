@@ -1,0 +1,130 @@
+.backDrop{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 12;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: 0.5s ease-in-out all;
+    backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.644);
+}
+.modalDiv{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 12;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    z-index: 13;
+    transition: 0.5s ease-in-out all;
+
+}
+.fadeIn{
+
+    animation: openModal ease-in-out 0.5s forwards;
+}
+.fadeOut{
+    animation: closeModal ease-in-out 0.5s forwards;
+
+}
+
+
+@keyframes openModal {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+@keyframes closeModal {
+    0% {
+
+        opacity: 1;
+        transform: translateY(0%);
+
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
+
+.modalBoarder{
+    
+    width: 370px;
+    max-width: 100%;
+    transition: 0.5s ease-in-out all;
+    z-index: 16;
+    border-top: aliceblue;
+    height: 300px;
+    border-radius: 10px;
+    border-bottom: #1043A9 6px solid;
+    background-color: rgb(238, 238, 238);
+    max-height: 100%;
+}
+
+.modalSymbol{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 30%;
+    margin-top: 18px;
+}
+.msg{
+    text-align: right;
+    padding: 0px 40px 0px 40px;
+}
+.btnsDiv{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center; 
+}
+.btnDiv{
+    margin-left: auto;
+    margin-right: 73px;
+}
+.btnDiv2{
+    margin-left: 73px;
+    margin-right: auto;
+}
+.scaleIn{ transform: scale(1.0);}
+.scaleOut{transform: scale(0.0);}
+
+.inputDiv{
+    margin-top: 12px;
+}
+.inputDiv h4{
+    padding: 0px 8px 5px 0px !important;
+    margin: 0px !important;
+    color: #525252;
+    font-family: Dana2;
+    font-size: 15px;
+ 
+}
+
+
+
+
+
+

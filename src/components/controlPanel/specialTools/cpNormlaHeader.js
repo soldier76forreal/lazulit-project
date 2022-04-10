@@ -32,7 +32,6 @@ const CpNormalHeader = (props) =>{
                             <div className={Style.multiLangDiv}>
                                 {/* multi lang switcher component */}
                                 <MultiLangBtn></MultiLangBtn>
-
                             </div>
                         </div>
                     </Col>

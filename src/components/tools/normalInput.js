@@ -7,7 +7,7 @@ import Style from './normalInput.module.css';
 const NormalInput = (props) =>{
     return(
         <div className={Style.inputDiv}>
-            <input onChange={props.onChange} id='inp' placeholder={props.placeholder} className={Style.input}></input>
+            <input required={true} defaultValue={props.defaultValue} value={props.value} type={props.type} onChange={props.onChange} id={props.id} placeholder={props.placeholder} className={Style.input}></input>
         </div>
     )
 }

@@ -1,0 +1,116 @@
+.inndeDiv{
+    position: absolute;
+    left: 0px;
+    width: 94.5%;
+    
+}
+
+
+
+.lableDiv{
+    margin-bottom: 12px;
+    margin-right: 8px;
+}
+.lableDiv h4{
+    text-align: right;
+    color: #354063;
+    font-size: 20px;
+}
+.formItemsDiv{
+
+    margin-right: 18px;
+}
+.lineDiv{
+    margin: 15px 70px 15px 200px;
+    width: 100%;
+    height: 2px;
+    background-color: #bbbbbb;
+    
+}
+.inputDiv2{
+    margin-top: 20px;
+}
+.inputDiv3{
+    margin-bottom: 20px;
+    padding-left: 50px;
+
+}
+.featureDiv{
+    margin-bottom: 20px;
+}
+.featureDiv h4{
+    font-size: 16px;
+    width: fit-content;
+    display: block;
+    margin-right: 50px;
+}
+.featureInputDiv{
+    display: flex;
+}
+.featureHeader{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin-left: 45px;
+    margin-bottom: 15px;
+    height: 70px;
+    margin-top: 15px;
+    border-radius: 20px;
+    background-color: #E6EDFD;
+}
+.featureHeader h4{
+    padding-right: 15px;
+    font-size: 18px;
+    margin-top: 6px;
+    font-family: Dana1;
+    color: #354063;
+}
+
+
+
+.saveBtnDiv{
+    width: 100%;
+    margin-top: 20px;
+    padding: 0px 50px 0px 50px;
+}
+.saveForm{
+    font-size: 20px;
+    width: 100%;
+    padding: 8px 0px 8px 0px;
+    border-radius: 5px;
+    border-style: none;
+    font-family: Dana1;
+    transition: 0.3s all ease-in-out;
+    background-color: #E6EDFD;
+    margin-bottom: 20px;
+}
+.saveForm:hover{
+    color: #E6EDFD;
+    background-color: #1043A9;
+}
+
+
+
+.deleteBtnDiv{
+    display: inline-block;
+    width: 16%;
+    padding: 4px 5px 4px 0px;
+}
+
+
+
+.deleteBtn{
+    background-color: #dd1b1b;
+    border: none;
+    border-radius: 5px;
+    transition: ease-in-out 0.2s all;
+    padding: 6px 7px 8px 7px;
+}
+.callForPrice{
+    display: inline-block;
+    float: left;
+}
+.callForPrice h5{
+    font-size: 15px;
+    display: inline-block;
+}

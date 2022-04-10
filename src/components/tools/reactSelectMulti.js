@@ -1,5 +1,10 @@
 import React from 'react';
 import Select from 'react-select';
+const measureOptionForNormalSelect = [
+  { value:0, label:'هر اسلب'},
+  { value:1, label:'هرمتر'},
+  { value:2, label:'هر کاشی'}
+]
 
 const options = [
     { value: 'chocolate', label: 'Chocolate' },
@@ -42,7 +47,9 @@ const MultiSelect = (props) =>{
         options={props.options}
         className="basic-multi-select"
         classNamePrefix="select"
-        placeholder={props.placehloder}
+        ref={props.ref}
+        placeholder={props.placeholder}
+        value={props.value}
         theme={(theme) => ({
             ...theme,
             borderRadius: 0,

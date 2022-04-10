@@ -1,170 +1,192 @@
 .cardDiv{
-    width: 100%;
-    background-color: #DBDBDB;
-    display: inline-block;
-    border-radius: 5px;
-    margin-bottom: 100px;
-    margin-left: auto;
-    margin-right: auto;
+  width: 100%;
+  background-color: #ffffff;
+  min-height: .01%;
+  direction: rtl;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .rightSideDiv{
-    float: right;
+width: 100%;
+padding: 0px;
+height: 100%;
+
 }
 .rightSideDiv h3{
-    font-size: 16px;
-    color: #354063;
-    font-family: Dana1;
-    padding: 10px 20px 3px 0px;
+cursor: pointer;
+  font-size: 17px;
+  color: #354063;
+  font-family: Dana1;
+  padding: 8px 20px 3px 0px;
 }
 .leftSideDiv{
-    float: left;
+
 
 }
 
 
 .deleteIconDiv{
-    padding-top: 4px;
-    display: inline-block;
+  
 
-    padding-left: 15px;
+  padding-right: 9px;
 }
 .deleteIcon{
-   transition: 0.1s ease-in-out all;
+ transition: 0.1s ease-in-out all;
 
 }
 .deleteIcon:hover{
-    color: #fd9c9c;
- }
+  color: #fd9c9c;
+}
 
- .editIconDiv{
-    display: inline-block;
-    margin-left: 27px;
+.editIconDiv{
 
- }
- .editIcon{
-    transition: 0.1s ease-in-out all;
- }
- .editIcon:hover{
-    color: #6B779C;
- }
+  padding-right: 20px;
 
-
+}
+.editIcon{
+  transition: 0.1s ease-in-out all;
+}
+.editIcon:hover{
+  color: #6B779C;
+}
 
 
 
- .switch {
-    position: relative;
-    display: inline-block;
-    width: 51px;
-    height: 25px;
-    left: 25px;
-    bottom: 2px;
-  }
-  
-  .switch input { 
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #5c5c5c;
-    border-radius: 0px;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  .switchDiv{
-      display: inline-block;
-      height: 100%;
-      }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 25px;
-    width: 26px;
-    border: rgb(155, 155, 155) 3px solid;
-    
-    
-    background-color: #1043A9;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
 
-  
-  input:checked + .slider {
-    
-    background-color: #1043A9;
+input[type=checkbox]:checked + label:after {
+color: #354063 !important;
+background-color: #354063 !important;
+}
+
+
+.checkboxDiv{
    
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #b9c3e4;
     
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-   
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
-
-
-  .checkboxDiv{
-     
-      display: inline-block;
-      margin-left: 10px;
-  }
+}
 
 
 
-  .submitDate{
-      display: inline-block;
-      margin-left: 82px;
-  }
+.submitDate{
+  width: 130px;
+    margin-left: 0px;
+}
 
-  .submitDate h3{
-    color: #354063;
-    font-size: 16px;
-    padding-top: 10px;
-    font-family: Dana1;
+.submitDate h3{
+  color: #6e7aa1;
+  font-size: 17px;
+  padding-top: 10px;
+  font-family: Dana1;
 }
 
 
 
 
 .profDiv{
-    margin-left: 75px;
-    display: inline-block;
+width: 300px;
+
 }
-.profDiv h4{    
-    font-size: 16px;
-    display: inline-block;
-    margin-right: 6px;
-    color: #354063;
-    font-family: Dana1;
+.profDiv h4{  
+  cursor: pointer;
+  font-size: 17px;
+  display: inline-block;
+  margin-right: 6px;
+  color: #6e7aa1;
+  font-family: Dana1;
 }
 .profImg{
-    border: 3px #1043A9 solid;
-    width: 28px;
-    height: 28px;
-    object-fit: cover;
-    border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+
+
+
+
+.table {
+width: 100%;
+max-width: 100%;
+margin-bottom: 20px;
+border-collapse: separate;
+border-spacing: 0 7px;
+}
+.table thead {
+width: 100%;
+color: #868686;
+border:3px solid;   
+font-family: Dana2;
+padding: 10px 5px 10px 10px !important;
+}
+.table thead th {
+
+padding: 5px 10px 0px 0px !important;
+}
+
+
+
+
+.table_bordered {
+border: none;
+}
+
+
+
+.editInputDiv{
+height: 100%;
+
+}
+.editInput{
+margin-right: 8px;
+color: #354063;
+border: none;
+padding: 1px 3px 1px 3px;
+border-radius: 5px;
+margin-left: 10px;
+background-color: #ffffff;
+}
+
+.productCode{
+  background-color: #354063;
+  padding: 0px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  height: 100%; 
+   padding: 8px 12px 8px 12px;
+
+  display: inline-block;
+}
+.productCode h5{
+  margin: 0px;
+  font-size: 17px;
+  color: #ffffff;
+  height: 100%;
+  display: inline-block;
+}
+.availableSurface{
+  padding: 0px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  height: 100%; 
+  display: inline-block;
+}
+
+.availableSurface h5{
+  margin: 0px;
+  font-size: 17px;
+  height: 100%;
+  display: inline-block;
+  color: #6e7aa1;
+}
+.priceInput{
+  border: none;
+  background-color: #ffffff;
+  border-radius: 8px;
+  width: 160px;
+  padding: 3px;
 }

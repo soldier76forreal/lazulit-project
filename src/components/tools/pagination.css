@@ -11,7 +11,7 @@ justify-content: center;
 margin-bottom: 1rem;
 }
 .pg_backClick{
-    background-color: rgb(43, 43, 43);
+    background-color: #354063;
     padding: 2px 15px 2px 15px;
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
@@ -19,7 +19,7 @@ margin-bottom: 1rem;
     transition:0.3s all ease ;
 }
 .pg_forwardClick{
-    background-color: rgb(43, 43, 43);
+    background-color: #354063;
     padding: 2px 15px 2px 15px;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
@@ -28,16 +28,17 @@ margin-bottom: 1rem;
     transition:0.3s all ease ;  
 }
 .pg_backClick:hover{
-    background-color: rgb(36, 36, 36);
+    background-color: #4D76C8;
+    
 
 }
 .pg_forwardClick:hover{
-    background-color: rgb(36, 36, 36);
+    background-color: #4D76C8;
 
 }
 .pg_item{
-    color: rgb(219, 219, 219);
-    background-color: rgb(53, 53, 53);
+    color: #354063;
+    background-color: #CCD9F7;
     font-size: 14px;
     transition:0.3s all ease ;  
     cursor: pointer;
@@ -46,9 +47,7 @@ margin-bottom: 1rem;
 }
 .pg_item:hover{
     color: rgb(219, 219, 219);
-    background-color: rgb(43, 43, 43);
-
-    color:#F38033;
+    background-color: #1043A9;
 }
 .pg_iconRight{
     margin-top: 5px;
@@ -58,7 +57,7 @@ margin-bottom: 1rem;
 
 }
 .pg_active{
-    background-color: rgb(43, 43, 43);
-    color:#F38033;
+    background-color: #354063;
+    color:rgb(219, 219, 219);
 
 }

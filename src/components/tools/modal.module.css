@@ -4,7 +4,7 @@
     align-items: center;
     position: fixed;
     top: 0;
-    z-index: 12;
+    z-index: 13;
     bottom: 0;
     left: 0;
     right: 0;
@@ -13,14 +13,25 @@
     background-color: rgba(0, 0, 0, 0.644);
 }
 
+.modalDiv{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 13;
+    width: 100%;
+    height: 100%;
+}
 .fadeIn{
 
     animation: openModal ease-in-out 0.5s forwards;
 }
 .fadeOut{
-    opacity: 0;
-    transform: translateY(-100%);
+    animation: closeModal ease-in-out 0.5s forwards;
+
 }
+
+
 @keyframes openModal {
     0% {
         opacity: 0;
@@ -36,7 +47,22 @@
         transform: translateY(0%);
     }
 }
+@keyframes closeModal {
+    0% {
 
+        opacity: 1;
+        transform: translateY(0%);
+
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+}
 .modalBoarder{
     width: 420px;
     max-width: 100%;
@@ -74,10 +100,10 @@
 }
 .btnDiv{
     margin-left: auto;
-    margin-right: 80px;
+    margin-right: 10px;
 }
 .btnDiv2{
-    margin-left: 80px;
+    margin-left: 10px;
     margin-right: auto;
 }
 .scaleIn{ transform: scale(1.0);}

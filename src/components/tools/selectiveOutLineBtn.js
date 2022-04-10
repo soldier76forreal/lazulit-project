@@ -31,11 +31,10 @@ const SelectiveOutLineBtn =(props)=>{
     }
     return(
         <Fragment>
-            {activeState === true ?
-                <button className={Style.btnActive} value={props.value} id={props.id} onClick={props.onClick}  style={active} >{props.btnName}</button>
-            :activeState === false ?
-                <button className={Style.btnNotActive} value={props.value} id={props.id} onClick={props.onClick}  style={notActive} >{props.btnName}</button>
-            : null }
+            
+                <button className={Style.btnActive} value={props.value} id={props.id} onClick={props.onClick}  style={props.isActive === true ?active :props.isActive === false ? notActive:null} >{props.btnName}</button>
+             
+
         </Fragment>
     )
 }

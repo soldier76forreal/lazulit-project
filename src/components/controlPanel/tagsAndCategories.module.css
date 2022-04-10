@@ -5,7 +5,7 @@
 }
 
 .topRightDivHeaderContainer{
-    display: inline-block;
+    display: flex;
     width: 100%;
     margin-top: 20px;
     margin-right: 10px;
@@ -31,9 +31,8 @@
 
 .switchBtnDiv{
     display: inline-block;
-    float: left;
-    margin-right: auto;
-    margin-left: 100px;
+    margin-right: 20px;
+    margin-left: auto;
 }
 
 
@@ -81,9 +80,20 @@
 
 
 
+.showMoreBtn{
+    padding: 8px 15px 8px 15px;
+    background-color: #3d3d3d;
+    color: rgb(230, 230, 230);
+    font-family: Dana1;
+    border: none;
+    margin-bottom: 10px;
+    transition: 0.2s ease-in-out all;
+    border-radius: 4px;
+}
 
-
-
+.showMoreBtn:hover{
+    background-color: #5a5a5a;
+}
 
 
 

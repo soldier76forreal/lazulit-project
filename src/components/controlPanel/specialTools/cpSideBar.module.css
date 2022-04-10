@@ -73,6 +73,7 @@ width: 30px;
     list-style:none;
     line-height: 50px;
     border-radius: 5px;
+    margin-bottom: 5px;
 } 
 .sideBar ul li a{
     color: #E6EDFD;
@@ -85,6 +86,13 @@ width: 30px;
 } 
 .sideBar ul li a:hover{
     color: #1043A9;
+    background: #E6EDFD;
+    
+
+
+} 
+.activePage li a{
+    color: #1043A9 !important;
     background: #E6EDFD;
 
 
@@ -119,13 +127,23 @@ width: 30px;
     border-radius: 12px;
     line-height: 50px;
     text-align: center;
+
+}
+
+.activePage li a .listIconStyle{
+    height: 25px;
+    min-width: 50px;
+    color: #003cc9 !important;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
     
 }
 
 .sideBar .profile_content{
     position: absolute;
     width: 100%;
-    color: #fff;
+    color: #354063;
     bottom: 0;
     right: 0;
 }

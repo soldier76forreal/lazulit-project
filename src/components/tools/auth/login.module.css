@@ -1,0 +1,374 @@
+.modalBackground{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #F9F9F9;
+    
+}
+.signUpForm{       
+     display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 65vh;
+    background-color: #E6EDFD;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.sideImg{
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    background-color: #1E1D1E;
+    background-repeat: none;
+    background-position: center;
+    background-size: cover  ;
+    height: 65vh;
+}
+
+.contentRow{
+text-align: center;
+
+}
+.container{
+    width: 100% ;
+}
+.input{
+    width: 100%;
+    border-radius: 7px;
+    outline: none;
+    background-color: #FFFFFF;
+    color: #354063;
+    text-align: right;
+    padding-right: 15px;
+    
+    border: solid #94b5f8 2px;
+    font-size: 14px;
+    padding: 13px 38px 13px 20px;
+
+    
+}
+.input:focus{
+
+
+    -webkit-box-shadow: 0px 0px 0px 3px #95AEE8; 
+    box-shadow: 0px 0px 0px 3px #95AEE8; 
+    
+}
+.inputDiv{
+    position: relative;
+    margin-top: 10px;
+}
+.icon{
+    
+    color:  #1043A9;
+    margin-top: 11px;
+    margin-right: 8px;
+position: absolute;
+}
+
+.signUpBtn{
+    padding: 8px 0 8px 0;
+    background-color: #1043A9;
+    width: 100%;
+   
+    border-radius: 7px;
+    box-shadow: none;
+    border-width: 4px;
+    border-style: solid;
+    
+    font-family: Dana1;
+    outline: none;        
+    color: #E7E7E7;
+    border-color: #95AEE8;
+    font-size: 18px;
+    transition: ease-in-out all 0.3s;
+
+}
+.signUpBtn:hover{
+    padding: 8px 0 8px 0;
+    background-color: #4D76C8 ;
+    width: 100%;
+    border-radius: 7px;
+    box-shadow: none;
+    border-width: 4px;
+    border-style: solid;
+    font-family: Dana1;
+    outline: none;        
+    border-color: #4D76C8;
+    font-size: 18px;
+
+}
+.signUpBtn:hover, .signUpBtn:focus {
+    outline: none;
+    border-style: solid;
+    }
+    .signUpBtn:focus{
+        border-color: #95AEE8;
+        background-color: #002163 ;
+    }
+    .signUpBtn:active{
+        border-color: #CCD9F7;
+        background-color: #CCD9F7 ;
+        color: #354063;
+    }
+
+    .logInDiv{
+        color: #354063;
+        margin-top: 8px;
+
+        display: inline-block;
+    }
+    .logInDiv h5{
+        font-size: 15px;
+        display: inline-block;
+    }
+    .logInBtn{
+        color: #285fce;
+    }
+    .signUpHeader{
+            color: #354063;
+            font-family: Dana1;
+            font-size: 50px;
+            margin-bottom: 70px;
+    }
+    .signUpDiv{
+        width: 100% !important;
+        padding: 0px 20px 0px 20px;
+    }
+    .closeBtn{
+        transition: ease-in-out 0.2s all;
+        color: #F38033;
+    }
+    .closeBtn:hover{
+        color: #FCC49F;
+    }
+    .closeBtnDiv{
+        top:16%;
+        right: 20%;
+        position: absolute;
+    }
+
+
+    .errorDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        margin: 0;
+        transform: 0.5s all ease;
+    }
+    .errorDiv h4{
+        display: inline-block;
+        color: #ff1100;
+        width: 300px;
+        font-size: 17px;
+        margin: 0;
+        transform: 0.5s all ease;
+    }
+
+
+    .loaderDiv{
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    
+    }
+    .visibilityIconStyle{
+        color: #afafaf !important;
+        position: absolute;
+        left: 0px;
+        margin-left: 10px;
+        margin-top: 14px;
+        cursor: pointer;
+        transition: all ease-in-out 0.2s;
+    }
+    
+    .visibilityIconStyle:hover{
+        color:#292929 !important;
+    }
+    .activeVisibility{
+        color: #ff1100 !important;
+    }
+ @media only screen and (max-width: 992px) {
+    .contentRow{
+        text-align: center;
+        margin: 0px;
+        padding: 0px;
+    }
+    .closeBtnDiv{
+        top:15%;
+        right: 13%;
+        position: absolute;
+    }
+}
+
+@media only screen and (max-width: 768.98px) {
+
+    .signUpForm{
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px 0px 30px 0px;
+        border-radius: 55px;
+        height: 100%;
+    }
+
+    .sideImg{
+        display: none;
+    }
+    .closeBtnDiv{
+        top:16%;
+        right: 19.5%;
+        position: absolute;
+    }
+    .errorDiv h4{
+        display: inline-block;
+        color: #ff1100;
+        width: 300px;
+        font-size: 13px;
+        margin: 0;
+        transform: 0.5s all ease;
+    }
+    .errorDiv{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 30px;
+        margin: 0;
+        transform: 0.5s all ease;
+    }
+    .signUpBtn{
+        padding: 8px 0 8px 0;
+        background-color: #1043A9;
+        width: 100%;
+       
+        border-radius: 7px;
+        box-shadow: none;
+        border-width: 4px;
+        border-style: solid;
+        
+        font-family: Dana1;
+        outline: none;        
+        color: #E7E7E7;
+        border-color: #95AEE8;
+        margin-bottom: 12px;
+        font-size: 15px;
+        transition: ease-in-out all 0.3s;
+    
+    }
+    .signUpBtn:hover{
+        padding: 6px 0 6px 0;
+        background-color: #4D76C8 ;
+        width: 100%;
+        border-radius: 7px;
+        box-shadow: none;
+        border-width: 4px;
+        border-style: solid;
+        font-family: Dana1;
+        outline: none;        
+        border-color: #4D76C8;
+        font-size: 15px;
+    
+    }
+    .signUpHeader{
+        color: #354063;
+        font-family: Dana1;
+        font-size: 50px;
+        margin-bottom: 40px;
+    }
+ }
+
+ @media (max-width: 576px) {
+
+    .signUpForm{
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px 0px 30px 0px;
+        border-radius: 55px;
+        width: 100%;
+        height: 100%;
+    }
+    .closeBtnDiv{
+        top:16% !important;
+        right: 13.5% !important;
+        position: absolute;
+    }
+    .errorDiv h4{
+        display: inline-block;
+        color: #ff1100;
+        width: 300px;
+        font-size: 13px;
+        margin: 0;
+        transform: 0.5s all ease;
+    }
+
+    
+ }
+
+ @media (max-width: 356px) {
+    .signUpHeader{
+        color: #354063;
+        font-family: Dana1;
+        font-size: 30px;
+        margin-bottom: 30px;
+}
+    .signUpForm{
+        margin-left: auto;
+        margin-right: auto;
+        padding: 40px 0px 30px 0px;
+        border-radius: 55px;
+        width: 100%;
+        height: 100%;
+    }
+    .closeBtnDiv{
+        top:16% !important;
+        right: 13.5% !important;
+        position: absolute;
+    }
+
+
+    .errorDiv h4{
+        display: inline-block;
+        color: #ff1100;
+        width: 300px;
+        font-size: 12px;
+        margin: 0;
+        transform: 0.5s all ease;
+    }
+
+    .input{
+        width: 100%;
+        border-radius: 7px;
+        outline: none;
+        background-color: #FFFFFF;
+        color: #354063;
+        text-align: right;
+        padding-right: 15px;
+        
+        border: solid #94b5f8 2px;
+        font-size: 14px;
+        padding: 8px 38px 8px 20px;
+    
+        
+    }
+
+    .icon{
+    
+        color:  #1043A9;
+        margin-top: 7px;
+        margin-right: 8px;
+    position: absolute;
+    }
+    .visibilityIconStyle{
+        margin-top: 9px;
+    }
+ }
+
+

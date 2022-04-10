@@ -31,6 +31,11 @@ const NormalSelect = (props) =>{
         <div style={{maxWidth:`${props.width}`}}>
                         <Select 
             onChange={props.onChange}
+            value={props.value}
+            id={props.id}
+            inputId={props.inputId}
+            name={props.name}
+            defaultValue={props.defaultValue}
                 theme={(theme) => ({
                     ...theme,
                     borderRadius: 0,
@@ -49,6 +54,7 @@ const NormalSelect = (props) =>{
             options={props.options}
             placeholder={props.placeholder}
             styles={customStyles}
+            ref={props.ref}
             />
         </div>
     )

@@ -19,42 +19,42 @@
 .commentProfItselfName h4{
     color: #354063;
     font-size: 20px;
-    padding-right: 12px;
+    padding-right: 10px;
 }
 .commentProfItselfName {
     display: inline-block;
 }
 .commentItselfProfDiv{
-    margin-top: 15px;
-    margin-right: 35px;
+    padding: 0px 35px 0px 0px;
     display: inline-block;
-    float: right;
+    width: 50%;
 }
 .commentItselfDateDiv h4{
     display: inline-block;
     margin-top: 35px;
-    font-size: 20px;
-    margin-left: 35px;
+    font-size: 15px;
     color: #354063;
+    padding-left: 35px;
 }
 .commentItselfDateDiv{
     display: inline-block;
-    
+    margin-left: 0px;
+    width: 50%;
+    text-align: left;
 }
 .commentTextItselfDiv{
-    text-align: right;
-    padding: 30px 85px 0px 85px;
+  
+    padding: 10px 65px 0px 65px;
 }
 .commentTextItselfDiv p{
     color: #354063;
     font-size: 15px;
 }
 .commentItselfFooterDiv{
-   margin-top: 30px;
+   margin-top: 10px;
    text-align: center;
    padding-bottom: 15px;
 }
-
 .commentLike h5{
     display: inline-block;
     color: #354063;
@@ -127,6 +127,7 @@
     display: inline-block;
     color: #354063;
 }
+
 .commentShowReplyDiv{
 
     cursor: pointer;
@@ -157,3 +158,50 @@
     padding: none;
 
 }
+
+@media only screen and (max-width: 1200.98px) {
+    
+}
+@media only screen and (max-width: 992.98px) {
+    .commentItselfDateDiv h4{
+
+        font-size: 12px;
+ 
+    }
+    .commentProfItselfName h4{
+        font-size: 16px !important;
+    }
+    .commentProfItselfImage{
+        margin: 0px !important;
+    }
+}
+@media only screen and (max-width: 768.98px) {
+ }
+
+ @media only screen and (max-width: 576.98px) {
+    .commentProfItselfImage{
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        font-size: 10px !important;
+    }
+    .commentProfItselfName h4{
+        color: #354063;
+        font-size: 14px !important;
+        padding-right: 10px;
+    }
+    .commentProfItselfName{
+        margin-top: -10px;
+
+
+    }
+    .commentItselfProfDiv{
+        top: 0px;
+    }
+    
+ }
+ @media only screen and (max-width: 356.98px) {
+
+  
+
+ }

@@ -9,6 +9,10 @@
     color: black;
 }
 
+.headerDiv{
+    margin-bottom: 15px;
+    margin-right: 10px;
+}
 .active{
     border: 2px dashed #abc7fd;
 }
@@ -38,6 +42,7 @@
     object-fit: cover !important;
 
 }
+
 .imageDiv{
     height: 170px;
     border-radius: 5px;
@@ -136,14 +141,13 @@
 
 /* files card style */
 .cardSectionDiv{
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .savedFileCard{
     position: relative;
     text-align: center !important;
     background-color: #E6EDFD;
     border-radius: 3px;
-    margin-top: 8px;
 }
 
 
@@ -184,6 +188,21 @@
     padding: 7px;
     border: none;
     margin-right: 5px;
+    border-radius: 5px;
+}
+.renameBtnDiv{
+    background-color: #00A759;
+    padding: 7px;
+    border: none;
+    margin-left: 5px;
+    border-radius: 5px;
+    transition: ease-in-out 0.2s all;
+}
+.renameBtnDiv:hover{
+    background-color: #4de29d;
+    padding: 7px;
+    border: none;
+    margin-left: 5px;
     border-radius: 5px;
 }
 .cardCopyLinkBtnDiv{
@@ -249,7 +268,6 @@ opacity: 1;
         justify-content: center;
         margin-top: 93px;
         opacity: 0;
-        height: 100%;
         transition: ease-in-out 0.3s all;
     }
     .imageCardFormat h4{
@@ -261,4 +279,50 @@ opacity: 1;
     }
     .cardImageDiv:hover .imageCardFormat{
         opacity: 1;
+        }
+
+
+        .filesGrid{
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(4 , 1fr);
+            grid-template-rows:initial;   
+            margin-bottom: 20px;
+                                            
+        }
+
+
+
+        .showMoreBtn{
+            padding: 8px 15px 8px 15px;
+            background-color: #3d3d3d;
+            color: rgb(230, 230, 230);
+            font-family: Dana1;
+            border: none;
+            transition: 0.2s ease-in-out all;
+            border-radius: 4px;
+        }
+
+        .showMoreBtn:hover{
+            background-color: #5a5a5a;
+        }
+
+        .lineDiv{
+            width: 100%;
+            height: 2px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #c9c9c9;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            
+        
+        }
+        .searchBarDiv{
+            margin-top: 25px;
+        }
+
+        .cardImageDiv img{
+            height: 300px;
+
         }

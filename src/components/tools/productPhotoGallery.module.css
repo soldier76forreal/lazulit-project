@@ -1,0 +1,138 @@
+.selectedPhotoDiv{
+    width: 100%;
+    height: 380px;
+    margin-bottom: 10px;
+    position: relative;
+    
+}
+
+.subPhotoDiv{
+    width: 100%;
+    height: 100px;
+}
+.mainImg{
+    object-fit: cover !important;
+   
+    transition: transform .3s ease;
+    width: 100%;
+    border-radius: 5px;
+    max-height: 394px;
+    height: 100%;
+}
+.subImg{
+    object-fit: cover !important;
+    height: auto;
+    transition: transform .3s ease;
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+}
+.subImg:hover{
+    transform: scale(1.03);
+}
+.imageGalleryDiv{
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+
+}
+.activeImage{
+    object-fit: cover !important;
+    height: auto;
+    transition: transform .3s ease;
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+    border: 4px solid #4D76C8;
+}
+.activeImage:hover{
+    transform: scale(1.06);
+}
+
+
+.colStyle{
+    padding: none !important;
+}
+
+.fullViewTip{
+    background-color: #354063;
+    color: #e6e6e6;
+    font-size: 15px;
+    position: absolute;
+    bottom: 0px;
+    padding: 3px 8px 3px 5px;
+    border-radius: 6px;
+    align-items: center;
+    left:0;
+    right:0;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    width: fit-content;
+    opacity: 0;
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
+}
+.selectedPhotoDiv:hover .fullViewTip{
+    opacity: 1;
+}
+.imageGalleryDiv ul{
+    top: 96px !important;
+}
+
+
+
+@media only screen and (max-width: 1200.98px) {
+    
+}
+@media only screen and (max-width: 992.98px) {
+
+    .selectedPhotoDiv{
+        width: 100%;
+        height: 280px;
+        margin-bottom: 10px;
+        position: relative;
+        
+    }
+    .imageGalleryDiv{
+        margin-top: 10px;
+        padding: 7px;
+        border-radius: 10px;
+        background-color: #f0f0f0;
+    }
+    .activeImage{
+        object-fit: cover !important;
+        height: auto;
+        transition: transform .5s ease;
+        width: 100%;
+        border-radius: 5px;
+        height: 100%;
+        border: 4px solid #4D76C8;
+    }
+    .subPhotoDiv{
+        width: 100%;
+        height: 80px;
+        padding:0px 3px 0px 3px !important;
+    }
+    .imageGalleryDiv ul{
+        top: 74px !important;
+        opacity: 0.8;
+    }
+    
+    .selectImg{
+        padding:0px 8px 0px 10px;
+    }
+}
+@media only screen and (max-width: 768.98px) {
+ }
+
+ @media only screen and (max-width: 576.98px) {
+
+ }
+ @media only screen and (max-width: 356.98px) {
+
+    
+
+ }

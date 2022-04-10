@@ -1,0 +1,455 @@
+/* ----------overal div style---------- */
+.inndeDiv{
+    margin-top: 80px;
+}
+
+
+.productRate{
+    background-color: #e4e4e4;
+}
+/* ----------route style---------- */
+.routeBackground{
+    background-color: #E6EDFD;
+    height: 34px;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+/* ----------photo gallery style---------- */
+.selectedPhotoDiv{
+    width: 100%;
+height: 380px;
+margin-bottom: 20px;
+}
+
+.subPhotoDiv{
+width: 100%;
+height: 100px;
+}
+.mainImg{
+    object-fit: cover !important;
+    height: auto;
+    transition: transform .5s ease;
+    width: 100%;
+    border-radius: 5px;
+
+    height: 100%;
+}
+.subImg{
+    object-fit: cover !important;
+    height: auto;
+    transition: transform .5s ease;
+    width: 100%;
+    border-radius: 5px;
+
+    height: 100%;
+}
+
+.subImg:hover{
+    transform: scale(1.07);
+}
+.imageGalleryDiv{
+    padding-left: 30px;
+    margin-top: 20px;
+}
+.activeImage{
+    object-fit: cover !important;
+    height: auto;
+    transition: transform .5s ease;
+    width: 100%;
+    border-radius: 5px;
+    height: 100%;
+    border: 4px solid #4D76C8;
+}
+
+.activeImage:hover{
+    transform: scale(1.07);
+}
+
+
+.colStyle{
+    padding: none !important;
+}
+
+
+/* ---------product Brief style---------- */
+.productBriefDiv{
+    margin-top: 40px;
+}
+.productBriefDiv h4{
+    font-size:35px ;
+    color: #354063;
+    font-family: Dana1;
+    padding: 0px;
+    margin: 0px;
+}
+.productTitleDiv{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.rateTextStyle{
+    display: inline-block;
+    font-size: 15px;
+    color: #354063;
+    margin-right: 10px;
+}
+.horizonDiv{
+    color: #354063;
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 3px;
+}
+.commentText{
+    display: inline-block;
+    font-size: 15px;
+    color: #354063;
+    margin-right: 5px;
+}
+.line{
+    width: 100%;
+    height: 2px;
+    background-color: #354063;
+}
+.featuresDiv h3{
+    font-size: 25px;
+    color: #1043A9;
+    font-family: Dana1;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.featuresDiv{
+    margin-top: 22px;
+}
+ul  {
+    list-style-position:outside;
+    font-size: 16px;
+    margin-right: 0px;
+    padding-right: 0px;
+    margin-top: 12px;
+    list-style-position: inside;
+    
+    
+}
+ul li {
+    margin:0; padding:0;
+}
+.meterDiv{
+    background-color: #4D76C8;
+    width: fit-content;
+    border-radius: 5px;
+    display: inline-block;
+
+}
+.meterDiv h4{
+    font-size: 18px;
+    padding: 8px 10px 8px 10px;
+    color: #EEEEEE;
+}
+
+
+
+.priceItSelfDiv{
+    display: inline-block;
+    padding: 0px 6px 0px 0px;
+
+}
+.priceItSelfDiv h4{
+    display: inline-block;
+    font-size: 18px;
+    color: #C30000;
+    padding-top: 5px;
+
+}
+
+.priceDiv{
+    display: inline-block;
+    padding: 0px 0px 10px 0px;
+}
+.priceUnit{
+    margin-right: 5px;
+    color: #C30000;
+    font-size: 18px;
+    font-family: Dana1;
+}
+
+
+.purchaseDiv{
+    margin-top: 6px;
+}
+.purchaseTitle h4{
+    font-size: 25px;
+    color: #354063;
+    font-family: Dana1;
+    margin-right: 14px;
+}
+
+.contactBtn{
+    width: 100%;
+    background-color: #1043A9;
+    padding: 5px 0px 5px 0px;
+    color: #EEEEEE;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    transition: 0.1s ease-in-out all;
+    font-family: Dana1;
+    border: 5px solid #1043A9;
+
+}
+.contactBtn:hover{
+background-color: #4D76C8;
+border: 5px solid #4D76C8;
+
+}
+.contactBtn:active{
+    background-color: #CCD9F7;
+    color: #1043A9;
+    
+    border: 5px solid #CCD9F7;
+
+    
+    }
+.purchaseBtn{
+    margin-top: 10px;
+}
+
+    .whatsAppBtn{
+        width: 100%;
+        background-color:#00CC81;
+        padding: 5px 0px 5px 0px;
+        color: #202020;
+        font-size: 20px;
+        border: none;
+        margin-top: 5px;
+        border-radius: 5px;
+        transition: 0.1s ease-in-out all;
+        font-family: Dana1;
+        border: 5px solid #00CC81;
+    
+    }
+    .whatsAppBtn:hover{
+    background-color: #48ecb0;
+    border: 5px solid #48ecb0;
+    
+    }
+    .whatsAppBtn:active{
+        background-color: #a7eed4;
+        color: #1d1d1d;
+        
+        border: 5px solid #a7eed4;
+    
+        
+        }
+/* .productPostNavigation{
+     background-color: #E6EDFD;
+     width: 100%;
+     height: 45px;
+     margin-top: 60px;
+} */
+
+/* .productNavigationBtnDiv{
+    text-align: right;
+    height: 100%;
+    margin-right: 20px;
+}
+.navigationBtnStyle{
+    background: none;
+    border: none;
+    padding: 0px 20px 0px 20px;
+    transition: 0.1s ease-in-out all;
+    height: 100% ;
+    font-size: 18px;
+} */
+
+
+/* ---------product navigation style---------- */
+.unortherListActive{
+
+    border: 5px solid #1043A9;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+}
+.unortherList{
+    background-color: #E6EDFD;
+    list-style: none;
+    display: flex;
+
+}
+.unortherList li{
+    cursor: pointer;
+    transition: 0.1s ease-in-out all;
+    font-size: 18px;
+    padding: 10px 20px 10px 20px;
+    list-style: none;
+    
+}
+
+
+.unortherList li:hover{
+    background-color: #CCD9F7 ;
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------- table style -------------*/
+.featuresTable{
+    margin-top: 30px;
+
+}
+.styled_table{
+    width: 100%;
+    margin-top: 10px;
+    margin-right: 20px;
+    text-align: right;
+}
+/* table, td, th {
+    font-size: 17px;
+  }
+  
+  thead {
+    float: right;   
+
+  }
+  
+  
+  thead  th {
+    display: block;   
+    padding: 10px 8px 20px 90px;
+    color: rgb(143, 143, 143);
+    font-family: Dana2;
+    text-align: right;
+    width: 100%;
+  }
+  
+  tbody {
+    font-family: Dana2;
+    float: right;   
+    text-align: right;
+    
+  }
+  tbody tr td{
+    padding: 10px 8px 20px 90px;
+    width: 100%;
+    margin-top: 10px !important;
+  }
+
+  tbody tr td{
+    width: 100%;
+  } */
+
+
+
+
+  /*------------- review section -------------*/
+.reviewDiv{
+    margin-top: 20px;
+}
+  .reviewContentDiv{
+      margin-top: 10px;
+
+  }
+  .reviewDiv p{
+    font-size: 1rem;
+    line-height: 2.57;
+    color: #232933;
+    font-family: Dana2;
+    text-align: justify;
+}
+  .reviewDiv h4{
+      font-family: Dana1;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #1043A9;
+      
+}
+.reviewDiv img{
+    border: #CCD9F7 4px solid;
+    border-radius: 8px;
+    object-fit: cover !important;
+    height: auto;
+    width: 100%;
+    
+}
+video{
+    border-radius: 8px;
+    border: #CCD9F7 4px solid;
+}
+.reviewHeaderDiv{
+    text-align: center;
+}
+.reviewHeaderDiv h3{
+    font-family: Dana1;
+    padding-bottom: 2px;
+    color: #354063;
+    display: inline-block;
+    border:0px solid #354063;
+    border-bottom-width: 3px;
+}
+.reviewHeaderDiv h2{
+    font-family: Dana1;
+    color: #7a7d88;
+    padding: 0px;
+    margin-top: 0px;
+    font-size: 14px;
+}
+
+
+
+
+
+  /*------------- comment section -------------*/
+  .commentSectionDiv{
+    text-align: right;
+}
+
+.commentSectionHeaderDiv{
+    margin-top: 20px;
+    display: inline-block;
+    margin-right: 30px;
+    width: 100%;
+}
+
+.commentBoxDiv{
+    margin-top: 0px;
+    padding: 0px;
+}
+.commentDiv{
+    margin-top: 20px;
+}
+.theRateItSelfDiv{
+    float: left;
+    text-align: right;
+
+}
+.theRateItSelfDiv h5{
+    color: #354063;
+    font-size: 15px;
+    font-family: Dana1;
+
+}
+.theRateItSelfDiv h5 span{
+    color: #1043A9;
+    font-size: 35px;
+    font-family: Dana1;
+
+}
+.theHeaderItSelfDiv{
+    
+    float: right;
+    text-align: right;
+}

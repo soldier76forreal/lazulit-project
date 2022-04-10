@@ -1,0 +1,156 @@
+.cardDiv{
+  width: 100%;
+  background-color: #ffffff;
+  min-height: .01%;
+  direction: rtl;
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: right;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rightSideDiv{
+width: 100%;
+padding: 0px;
+height: 100%;
+
+}
+.rightSideDiv h3{
+cursor: pointer;
+  font-size: 17px;
+  color: #354063;
+  font-family: Dana1;
+  padding: 8px 20px 3px 0px;
+}
+.leftSideDiv{
+
+
+}
+
+
+.deleteIconDiv{
+  
+
+  padding-right: 9px;
+}
+.deleteIcon{
+ transition: 0.1s ease-in-out all;
+
+}
+.deleteIcon:hover{
+  color: #fd9c9c;
+}
+
+.editIconDiv{
+
+  padding-right: 20px;
+
+}
+.editIcon{
+  transition: 0.1s ease-in-out all;
+}
+.editIcon:hover{
+  color: #6B779C;
+}
+
+
+
+
+input[type=checkbox]:checked + label:after {
+color: #354063 !important;
+background-color: #354063 !important;
+}
+
+
+.checkboxDiv{
+   
+    
+}
+
+
+
+.submitDate{
+  width: 130px;
+    margin-left: 0px;
+}
+
+.submitDate h3{
+  color: #6e7aa1;
+  font-size: 17px;
+  padding-top: 10px;
+  font-family: Dana1;
+}
+
+
+
+
+.profDiv{
+width: 180px;
+margin-right: 10px;
+}
+.select{
+  width: 180px;
+  padding: 3px 0px 3px 0px;
+  }
+.profDiv h4{  
+  cursor: pointer;
+  font-size: 17px;
+  display: inline-block;
+  margin-right: 6px;
+  color: #202f63;
+  font-family: Dana1;
+}
+.profImg{
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+
+
+
+
+.table {
+width: 100%;
+max-width: 100%;
+margin-bottom: 20px;
+border-collapse: separate;
+border-spacing: 0 7px;
+}
+.table thead {
+width: 100%;
+color: #868686;
+border:3px solid;   
+font-family: Dana2;
+padding: 10px 5px 10px 10px !important;
+}
+.table thead th {
+
+padding: 5px 10px 0px 0px !important;
+}
+
+
+
+
+.table_bordered {
+border: none;
+}
+
+
+
+.editInputDiv{
+height: 100%;
+
+}
+.editInput{
+margin-right: 8px;
+color: #354063;
+border: none;
+padding: 1px 3px 1px 3px;
+border-radius: 5px;
+margin-left: 10px;
+background-color: #ffffff;
+}

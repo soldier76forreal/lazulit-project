@@ -1,9 +1,26 @@
 /* ----------overal div style---------- */
 .inndeDiv{
-    margin-top: 80px;
+    margin-top: 70px;
+    animation: openModal ease-in-out 0.5s forwards;
+
+
 }
 
+@keyframes openModal {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
 
+    }
+    50% {
+        opacity: 0;
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
 
 /* ----------route style---------- */
 .routeBackground{
@@ -134,14 +151,17 @@ ul li {
     margin:0; padding:0;
 }
 .meterDiv{
-    background-color: #4D76C8;
+    background-color: #354063;
+    
     width: fit-content;
-    border-radius: 5px;
+    border-radius: 4px;
     display: inline-block;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
 
 }
 .meterDiv h4{
-    font-size: 18px;
+    font-size: 17px;
     padding: 8px 10px 8px 10px;
     color: #EEEEEE;
 }
@@ -155,32 +175,41 @@ ul li {
 }
 .priceItSelfDiv h4{
     display: inline-block;
-    font-size: 18px;
-    color: #C30000;
+    font-size: 17px;
+    color: #303030;
     padding-top: 5px;
 
 }
 
 .priceDiv{
     display: inline-block;
-    padding: 0px 0px 10px 0px;
+    padding: 0px 0px 0px 7px;
+    border: solid #dae2fc 3px;
+    background-color: #f0f0f0;
+    border-radius: 7px;
+    
 }
 .priceUnit{
     margin-right: 5px;
-    color: #C30000;
-    font-size: 18px;
+    color: #303030;
+    font-size: 17px;
     font-family: Dana1;
 }
 
 
 .purchaseDiv{
-    margin-top: 6px;
+    margin-top: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
 }
 .purchaseTitle h4{
-    font-size: 25px;
+    font-size: 23px;
     color: #354063;
     font-family: Dana1;
     margin-right: 14px;
+    margin-bottom: 16px;
+    margin-top: 6px;
 
 }
 .contactBtn{
@@ -240,31 +269,36 @@ border: 5px solid #4D76C8;
     
         
         }
-/* .productPostNavigation{
-     background-color: #E6EDFD;
-     width: 100%;
-     height: 45px;
-     margin-top: 60px;
-} */
 
-/* .productNavigationBtnDiv{
-    text-align: right;
-    height: 100%;
-    margin-right: 20px;
-}
-.navigationBtnStyle{
-    background: none;
+
+.stockStyle{
+    display: inline-block;
+    padding: 0px 0px 0px 7px;
     border: none;
-    padding: 0px 20px 0px 20px;
-    transition: 0.1s ease-in-out all;
-    height: 100% ;
-    font-size: 18px;
-} */
+    background-color: #e3e8fc;
+    border-radius: 7px;
+    float: left;
+    opacity: 1;
+    margin-top: 5px;
+}
+.stockStyle h4{
+    color: #354063;
+    font-size: 13px;
+    padding: 8px 3px 8px 6px;
+    display: inline-block;
+}
+.availableSurfaceDiv{
+    font-size: 13px !important;
+    color: #354063 !important;
+    font-family: Dana2 !important;
+}
+.availableSurfaceDiv span{
 
-
-
+    color: #cc0000;
+}
 
 /* ---------product navigation style---------- */
+
 .unortherListActive{
 
     border: 5px solid #1043A9;
@@ -276,6 +310,8 @@ border: 5px solid #4D76C8;
     background-color: #E6EDFD;
     list-style: none;
     display: flex;
+    margin-top: 0px;
+
 
 }
 .unortherList li{
@@ -286,6 +322,7 @@ border: 5px solid #4D76C8;
     list-style: none;
     
 }
+
 
 
 .unortherList li:hover{
@@ -309,6 +346,10 @@ border: 5px solid #4D76C8;
 /*------------- table style -------------*/
 .featuresTable{
     margin-top: 30px;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+     
 
 }
 .styled_table{
@@ -317,77 +358,66 @@ border: 5px solid #4D76C8;
     margin-right: 20px;
     text-align: right;
 }
-/* table, td, th {
-    font-size: 17px;
-  }
-  
-  thead {
-    float: right;   
+.featuresListUl{
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    margin-bottom: 25px;
+}
+.featuresListUl li{
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 20px;
+    margin-left: -10px;
+    margin-bottom: 10px;
+    line-height: 50px;
+}
 
-  }
-  
-  
-  thead  th {
-    display: block;   
-    padding: 10px 8px 20px 90px;
-    color: rgb(143, 143, 143);
+.itemValue{
+    font-size: 16px;
+    font-family: Dana1;
+    color: #181818;
+}
+
+.itemName{
+    font-size: 16px;
     font-family: Dana2;
-    text-align: right;
-    width: 100%;
-  }
-  
-  tbody {
-    font-family: Dana2;
-    float: right;   
-    text-align: right;
-    
-  }
-  tbody tr td{
-    padding: 10px 8px 20px 90px;
-    width: 100%;
-    margin-top: 10px !important;
-  }
-
-  tbody tr td{
-    width: 100%;
-  } */
-
-
+    color: #757575;
+    margin-left: 30px;
+    width: 200px;
+}
 
 
   /*------------- review section -------------*/
 .reviewDiv{
     margin-top: 20px;
 }
-  .reviewContentDiv{
-      margin-top: 10px;
+.reviewContentDiv{
+    margin-top: 10px;
 
-  }
-  .reviewDiv p{
-    font-size: 1rem;
-    line-height: 2.57;
-    color: #232933;
-    font-family: Dana2;
-    text-align: justify;
 }
-  .reviewDiv h4{
-      font-family: Dana1;
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #1043A9;
-      
+.reviewDiv p{
+font-size: 1rem;
+line-height: 2.1;
+color: #232933;
+font-family: Dana2;
+text-align: justify;
+}
+.reviewDiv h4{
+    font-family: Dana1;
+    font-size: 1.7rem;
+    margin-bottom: 10px;
+    color: #1043A9;
 }
 .reviewDiv img{
-    border: #CCD9F7 4px solid;
-    border-radius: 8px;
+    border-radius: 2px;
     object-fit: cover !important;
     height: auto;
     width: 100%;
-    
-}
-video{
-    border-radius: 8px;
-    border: #CCD9F7 4px solid;
+    max-width:700px;
 }
 .reviewHeaderDiv{
     text-align: center;
@@ -405,7 +435,7 @@ video{
     color: #7a7d88;
     padding: 0px;
     margin-top: 0px;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 
@@ -452,4 +482,15 @@ video{
     
     float: right;
     text-align: right;
+}
+
+
+.loaderDiv{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
 }
