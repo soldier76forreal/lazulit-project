@@ -33,8 +33,6 @@ export const AuthContextProvider = (props) =>{
     const logInHandler = async(token) =>{
         Cookies.set('accessToken' , token ,{sameSite: 'strict', secure: true});
         setToken(token);
-        
-        
     }
     const jwt = axios.create(
         ({

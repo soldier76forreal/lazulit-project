@@ -108,6 +108,16 @@ const ProductsList = () =>{
                         const data = await response.data; 
                         setAllProducts([...data.rs]);
                         setAllProductLength(data.ln);
+                    }else if(langCtx.language === 'english'){
+                        const response = await authCtx.jwtInst({
+                            method:"get",
+                            url:`${authCtx.defaultTargetApi}/product/getAllProductsEn`,
+                            params:queryLimit,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setAllProducts([...data.rs]);
+                        setAllProductLength(data.ln);
                     }
                 }catch(error){
                     // setFailedOpenToast(false);
@@ -134,6 +144,16 @@ const ProductsList = () =>{
                             const response = await authCtx.jwtInst({
                                 method:"post",
                                 url:`${authCtx.defaultTargetApi}/product/validationProductAr`,
+                                data:productId,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            setListRefresh(Math.random());
+                            
+                         }else if(langCtx.language === 'english'){
+                            const response = await authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/product/validationProductEn`,
                                 data:productId,
                                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                             })
@@ -167,13 +187,22 @@ const ProductsList = () =>{
                         }else if(langCtx.language === 'arabic'){
                             const response = await authCtx.jwtInst({
                                 method:"post",
-                                url:`${authCtx.defaultTargetApi}/product/stockUpdate`,
+                                url:`${authCtx.defaultTargetApi}/product/stockUpdateAr`,
                                 data:productId,
                                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                             })
                             const data = await response.data; 
                             setListRefresh(Math.random());
-                            }
+                        }else if(langCtx.language === 'english'){
+                            const response = await authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/product/stockUpdateEn`,
+                                data:productId,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            setListRefresh(Math.random());
+                        }
                     
                     }catch(error){
                         setFailedOpenToast(true);
@@ -208,6 +237,16 @@ const ProductsList = () =>{
                             const response = await authCtx.jwtInst({
                                 method:"post",
                                 url:`${authCtx.defaultTargetApi}/product/priceUpdateAr`,
+                                data:dataToSend,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            closeEdit(false);
+                            setListRefresh(Math.random());
+                         }else if(langCtx.language === 'english'){
+                            const response = await authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/product/priceUpdateEn`,
                                 data:dataToSend,
                                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                             })
@@ -257,6 +296,19 @@ const ProductsList = () =>{
                             setShowDeleteModal(false);
                             const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
                             setListRefresh(Math.random());
+                         }else if(langCtx.language === 'english'){
+                            const response = await authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/product/deleteProductEn`,
+                                data:dataToSend,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data =  response; 
+                            setSuccessOpenToast(true);
+                            setSuccessMsgToast(await data.data);
+                            setShowDeleteModal(false);
+                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                            setListRefresh(Math.random());
                          }
                         
                     }catch(error){
@@ -285,6 +337,16 @@ const ProductsList = () =>{
                         const response = await authCtx.jwtInst({
                             method:"post",
                             url:`${authCtx.defaultTargetApi}/product/searchInProductAr`,
+                            data:dataToSend,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setSearchInProductData([...data]);
+                        setSearchLoading(false); 
+                     }else if(langCtx.language === 'english'){
+                        const response = await authCtx.jwtInst({
+                            method:"post",
+                            url:`${authCtx.defaultTargetApi}/product/searchInProductEn`,
                             data:dataToSend,
                             config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                         })
