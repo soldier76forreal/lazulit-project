@@ -48,7 +48,6 @@ const CpEditProduct = () =>{
      const ref6 = useRef();
      const ref7 = useRef();
      const ref8 = useRef();
-
      const history = useHistory();
      const params = useParams();
      const authCtx = useContext(AuthContext);

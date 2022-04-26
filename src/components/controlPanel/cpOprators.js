@@ -389,7 +389,7 @@ const CpOprators =(props)=>{
                                 }else if(langCtx.language === 'english'){
                                     const response = await authCtx.jwtInst({
                                         method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/opSearchEr`,
+                                        url:`${authCtx.defaultTargetApi}/oprators/opSearchEn`,
                                         data:dataToSend,
                                         config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                                     })

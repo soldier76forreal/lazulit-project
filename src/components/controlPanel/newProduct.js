@@ -205,7 +205,7 @@ const NewProduct = () =>{
                     }else if(langCtx.language === 'english'){
                         const response = await authCtx.jwtInst({
                             method:"get",
-                            url:`${authCtx.defaultTargetApi}/getAllCategoriesEn`,
+                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategoriesEn`,
                             config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                         })
                         const data = await response.data; 
@@ -624,6 +624,7 @@ const NewProduct = () =>{
                 setAvailableSurfaceErr("متراژ کل را بنویسید");
                 ref8.current.scrollIntoView(); 
             }
+            
             if(availableSurface !== '' && productCode !== '' && decoded.id !== undefined && imageGalleryFirst !== '' && imageGallerySecond !== '' && imageGalleryThird !== '' && imageGalleryFourth !== '' && title !== '' && categories.length !== 0 && callOprator !== '' && whatsAppOprator !== '' && price !== '' && measure !== '' &&  productRiview !== '' && tags.length !== 0  && selectedListData.length !== 0 ){
                 if( keyFeature.length < 5 && keyFeature.length > 2 ){
                     try{
