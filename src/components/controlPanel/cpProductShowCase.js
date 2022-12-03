@@ -68,12 +68,12 @@ const CpProductShowCase = () =>{
     const getProduct = async () =>{
 
             try{
-                if(langCtx.language === 'persian'){
                     const response = await authCtx.jwtInst({
                         method:"get",
                         url:`${authCtx.defaultTargetApi}/newProduct/getProduct`,
                         params:{id:
-                            params.productId
+                            params.productId,
+                            language:langCtx.language
                         },
                         config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                     })
@@ -87,50 +87,8 @@ const CpProductShowCase = () =>{
                     setpContactBtn(dataRes.phoneContacts[1]);
                     setPageLoading(false);
                     document.title = dataRes.product.title;
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getProductAr`,
-                        params:{id:
-                            params.productId
-                        },
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const dataRes = response.data;
-                    setProduct(dataRes.product);
-                    setKeyFeature([...dataRes.product.keyFeatures]);
-                    setPrice(dataRes.product.price);
-                    setImageGallery([...dataRes.product.images]);
-                    setFeature([...dataRes.product.features]);
-                    setWaContactBtn(dataRes.phoneContacts[0]);
-                    setpContactBtn(dataRes.phoneContacts[1]);
-                    setPageLoading(false);
-                    document.title = dataRes.product.title;
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getProductEn`,
-                        params:{id:
-                            params.productId
-                        },
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const dataRes = response.data;
-                    setProduct(dataRes.product);
-                    setKeyFeature([...dataRes.product.keyFeatures]);
-                    setPrice(dataRes.product.price);
-                    setImageGallery([...dataRes.product.images]);
-                    setFeature([...dataRes.product.features]);
-                    setWaContactBtn(dataRes.phoneContacts[0]);
-                    setpContactBtn(dataRes.phoneContacts[1]);
-                    setPageLoading(false);
-                    document.title = dataRes.product.title;
-                }
-
-
             }catch(err){
-
-                
+                console.log(err);
             }       
          
     }
@@ -246,7 +204,11 @@ const CpProductShowCase = () =>{
                                                         {product.stock === true ?
                                                             <div className={Style.stockStyle}>
                                                                 <CheckCircleIcon sx={{color:'#00CC81' , fontSize:'23px' , marginRight:'7px' , marginTop:'2px'}}></CheckCircleIcon>
-                                                                <h4 className={Style.availableSurfaceDiv}>موجودی انبار:<span>{product.availableSurface}</span> متر</h4>
+                                                                {product.availableSurface === null?
+                                                                    <h4 className={Style.availableSurfaceDiv}>موجودی انبار</h4>
+                                                                :
+                                                                    <h4 className={Style.availableSurfaceDiv}>موجودی انبار:<span>{product.availableSurface}</span> متر </h4>
+                                                                }
                                                             </div>
                                                         :
                                                             <div className={Style.stockStyle}>
@@ -319,7 +281,7 @@ const CpProductShowCase = () =>{
                                             <h3>نقد و بررسی تخصصی</h3>
                                             <h2>{product.title}</h2>
                                         </div>
-                                        <div onScroll={(e)=>{console.log(e);}} dir="rtl" className={Style.reviewContentDiv} dangerouslySetInnerHTML={{__html: `${product.productRiview}`}} />
+                                        <div  dir="rtl" className={Style.reviewContentDiv} dangerouslySetInnerHTML={{__html: `${product.productRiview}`}} />
                                         {/* <div id="productRiview" dir="rtl" className={Style.reviewContentDiv}>
                                         
                                         </div> */}

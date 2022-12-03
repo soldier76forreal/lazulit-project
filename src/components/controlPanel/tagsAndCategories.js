@@ -169,51 +169,19 @@ const TagsAndCategories = () =>{
     //------------------------------HTTP request------------------------------
     //add new category to db
     const sendNewCategory = async () =>{
-        const  categoryData ={categoryData:category , author:decoded.id};
+        const  categoryData ={categoryData:category , author:decoded.id , language:langCtx.language};
             try{
-                if(langCtx.language === 'persian'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/newCategory`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast(data.msg);
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setNewCategory(data.result)
-
-                }else if(langCtx.language === 'arabic'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/newCategoryAr`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast(data.msg);
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setNewCategory(data.result)
-
-                }else if(langCtx.language === 'english'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/newCategoryEn`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast(data.msg);
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setNewCategory(data.result)
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"post",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/newCategory`,
+                    data:categoryData,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setSuccessOpenToast(true);
+                setSuccessMsgToast(data.msg);
+                const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                setNewCategory(data.result);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -223,50 +191,19 @@ const TagsAndCategories = () =>{
 
     //add new tag to db
     const sendNewTag = async () =>{
-        const  categoryData ={categoryId:categoryOfNewTag , tag:newTag , author:decoded.id};
+        const  categoryData ={categoryId:categoryOfNewTag , tag:newTag , author:decoded.id , language:langCtx.language};
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/newTag`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast(data.msg);
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setNewTagUpdate(Math.random());
-                }else if(langCtx.language === 'arabic'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/newTagAr`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast(data.msg);
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setNewTagUpdate(Math.random());
-
-                }else if(langCtx.language === 'english'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/newTagEn`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast(data.msg);
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setNewTagUpdate(Math.random());
-
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"post",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/newTag`,
+                    data:categoryData,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setSuccessOpenToast(true);
+                setSuccessMsgToast(data.msg);
+                const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                setNewTagUpdate(Math.random());
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -277,52 +214,20 @@ const TagsAndCategories = () =>{
     //update Category
     const updateCategory = async (id , value) =>{
         setLoadingStatus(true);
-        const  categoryData ={id:id , value:value };
+        const  categoryData ={id:id , value:value , language:langCtx.language };
             try{
-                if(langCtx.language === 'persian'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/updateCategory`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast('ویرایش انجام شد');
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setUpdatedCategoryRefresh(Math.random());
-                    setLoadingStatus(false);
-                }else if(langCtx.language === 'arabic'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/updateCategoryAr`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast('ویرایش انجام شد');
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setUpdatedCategoryRefresh(Math.random());
-                    setLoadingStatus(false);
-                }else if(langCtx.language === 'english'){
-
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/updateCategoryEn`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setSuccessOpenToast(true);
-                    setSuccessMsgToast('ویرایش انجام شد');
-                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    setUpdatedCategoryRefresh(Math.random());
-                    setLoadingStatus(false);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"post",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/updateCategory`,
+                    data:categoryData,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setSuccessOpenToast(true);
+                setSuccessMsgToast('ویرایش انجام شد');
+                const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                setUpdatedCategoryRefresh(Math.random());
+                setLoadingStatus(false);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -334,37 +239,16 @@ const TagsAndCategories = () =>{
     // //validation Category
     const validationUpdate = async (e) =>{
 
-        const  categoryData ={id:e.target.value};
+        const  categoryData ={id:e.target.value , language:langCtx.language};
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/validationUpdate`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setCheckBoxId(data);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/validationUpdateAr`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setCheckBoxId(data);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"post",
-                        url:`${authCtx.defaultTargetApi}/tagAndCategory/validationUpdateEn`,
-                        data:categoryData,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setCheckBoxId(data);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"post",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/validationUpdate`,
+                    data:categoryData,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setCheckBoxId(data);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -374,52 +258,22 @@ const TagsAndCategories = () =>{
 
         //update category with tag 
         const sendTagsForUpdateCategory = async () =>{
-            const  dataToSend ={categoryId:categoryForUpdateWithTags , tags:tagsToUpdateCategory };
+            const  dataToSend ={categoryId:categoryForUpdateWithTags , tags:tagsToUpdateCategory , language:langCtx.language };
 
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/addTagToCategory`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('اضافه کردن انجام شد');
-                        setCategoryForUpdateWithTagsUpdate(Math.random());
-                        setCategoryForUpdateWithTags('');
-                        setTagsToUpdateCategory([...[]]);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/addTagToCategoryAr`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setCategoryForUpdateWithTagsUpdate(Math.random());
-                        setCategoryForUpdateWithTags('');
-                        setTagsToUpdateCategory([...[]]);
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('اضافه کردن انجام شد');
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/addTagToCategoryEn`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setCategoryForUpdateWithTagsUpdate(Math.random());
-                        setCategoryForUpdateWithTags('');
-                        setTagsToUpdateCategory([...[]]);
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('اضافه کردن انجام شد');
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                    }
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/tagAndCategory/addTagToCategory`,
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast('اضافه کردن انجام شد');
+                    setCategoryForUpdateWithTagsUpdate(Math.random());
+                    setCategoryForUpdateWithTags('');
+                    setTagsToUpdateCategory([...[]]);
+                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
                 }catch(error){
                     setFailedOpenToast(true);
                     console.log(error);
@@ -432,184 +286,89 @@ const TagsAndCategories = () =>{
          //get tags
         const getAllTags = async () =>{
             if(categoryForUpdateWithTags !== null){
-                const paramsData = {params:categoryForUpdateWithTags};
+                const paramsData = {params:categoryForUpdateWithTags , language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForMultiSelect`,
-                            params:paramsData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setSuccessOpenToast(false);
-                        setAllTags([...data])
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForMultiSelectAr`,
-                            params:paramsData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setSuccessOpenToast(false);
-                        setAllTags([...data])
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForMultiSelectEn`,
-                            params:paramsData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setSuccessOpenToast(false);
-                        setAllTags([...data])
-                    }
-
+                    const response = await authCtx.jwtInst({
+                        method:"get",
+                        url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForMultiSelect`,
+                        params:paramsData,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setSuccessOpenToast(false);
+                    setAllTags([...data]);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast(error.response.data);
                 }
             } else{
                 setAllTags(["دسته بندی را انتخاب کنید"]);
-
             }                       
         }
 
         //get categories    
         const getAllCategories = async () =>{
-            let queryLimit = {limit:0};
+            let queryLimit = {limit:0 , language:langCtx.language};
             if(queryParams.get('limit') === null){
                 queryLimit.limit = 20;
             }else{
                 queryLimit.limit = queryParams.get('limit');
             }
-                try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllCategories`,
-                            params:queryLimit,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data.rs]);
-                        SetCategoryLength(data.ln);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllCategoriesAr`,
-                            params:queryLimit,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data.rs]);
-                        SetCategoryLength(data.ln);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllCategoriesEn`,
-                            params:queryLimit,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data.rs]);
-                        SetCategoryLength(data.ln);
-                    }
-                }catch(error){
-                    console.log(error);
-                }
+            try{
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllCategories`,
+                    params:queryLimit,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllCategories([...data.rs]);
+                SetCategoryLength(data.ln);
+            }catch(error){
+                console.log(error);
+            }
         }
 
 
         //get tags for list    
         const getAllTagsForList = async () =>{
-            let queryLimit = {limit:0};
+            let queryLimit = {limit:0 , language:langCtx.language};
             if(queryParams.get('limit') === null){
                 queryLimit.limit = 20;
             }else{
                 queryLimit.limit = queryParams.get('limit');
             }
-                try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForList`,
-                            params:queryLimit,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTagsForList([...data.rs]);
-                        setAllTagsForListLength(data.ln);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForListAr`,
-                            params:queryLimit,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTagsForList([...data.rs]);
-                        setAllTagsForListLength(data.ln);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForListEn`,
-                            params:queryLimit,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTagsForList([...data.rs]);
-                        setAllTagsForListLength(data.ln);
-                    }
-
-                }catch(error){
-                    console.log(error);
-                }
+            try{
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/getAllTagsForList`,
+                    params:queryLimit,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllTagsForList([...data.rs]);
+                setAllTagsForListLength(data.ln);
+            }catch(error){
+                console.log(error);
+            }
         }
 
         //search category
         const searchInCategories = async () =>{
-
-            const  dataToSend ={searching:searchInCategoriesText };
-                    try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInCategory`,
-                                data:dataToSend,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSearchInCategorieData([...data]);
-                            setSearchLoading(false); 
-                        }else if(langCtx.language === 'arabic'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInCategoryAr`,
-                                data:dataToSend,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSearchInCategorieData([...data]);
-                            setSearchLoading(false); 
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInCategoryEn`,
-                                data:dataToSend,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSearchInCategorieData([...data]);
-                            setSearchLoading(false); 
-                        }
-
-
-                    }catch(error){
-    
-    
-                    }
+            const  dataToSend ={searching:searchInCategoriesText , language:langCtx.language };
+            try{
+                const response = await authCtx.jwtInst({
+                    method:"post",
+                    url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInCategory`,
+                    data:dataToSend,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setSearchInCategorieData([...data]);
+                setSearchLoading(false); 
+            }catch(error){
+                console.log(error);
+            }
         }
         useEffect(() => {
             if(searchInCategoriesText !== ''){
@@ -631,48 +390,20 @@ const TagsAndCategories = () =>{
 
         //delete category 
         const deleteCategory = async () =>{
-            const  dataToSend ={categoryId:categoryIdToDelete };
+            const  dataToSend ={categoryId:categoryIdToDelete , language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteCategory`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                        setDeleteUpdate(data);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteCategoryAr`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                        setDeleteUpdate(data);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteCategoryEn`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                        setDeleteUpdate(data);
-                    }
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteCategory`,
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data =  response; 
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast(await data.data);
+                    setShowDeleteModal(false);
+                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                    setDeleteUpdate(data);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast("خطایی رخ داده است");
@@ -680,49 +411,20 @@ const TagsAndCategories = () =>{
                 }
         }
         const deleteTag = async () =>{
-            const  dataToSend = JSON.parse(tagIdToDelete);
+            const  dataToSend = {id:JSON.parse(tagIdToDelete),language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteTag`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteTagModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                        setDeleteTagUpdate(data);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteTagAr`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteTagModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                        setDeleteTagUpdate(data);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteTagEn`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteTagModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                        setDeleteTagUpdate(data);
-                    }
-
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/tagAndCategory/deleteTag`,
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data =  response; 
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast(await data.data);
+                    setShowDeleteTagModal(false);
+                    const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                    setDeleteTagUpdate(data);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast("خطایی رخ داده است");
@@ -734,40 +436,19 @@ const TagsAndCategories = () =>{
             const tagValidationUpdate = async (e) =>{
                 // const  categoryData = await JSON.parse(e.target.value);
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/tagValidation`,
-                            data:JSON.parse(e.target.value),
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setCheckBoxTagUpdate(Math.random());
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/tagValidationAr`,
-                            data:JSON.parse(e.target.value),
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setCheckBoxTagUpdate(Math.random());
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/tagAndCategory/tagValidationEn`,
-                            data:JSON.parse(e.target.value),
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setCheckBoxTagUpdate(Math.random());
-                    }
-
-                    }catch(error){
-                        setFailedOpenToast(true);
-                        setFailedMsgToast('خطایی رخ داده است');
-                        const closingFailedMsgTimeOut = setTimeout(closeFailedMsg, 3000);
-                    }
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/tagAndCategory/tagValidation`,
+                        data:{id:JSON.parse(e.target.value) , language:langCtx.language},
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setCheckBoxTagUpdate(Math.random());
+                }catch(error){
+                    setFailedOpenToast(true);
+                    setFailedMsgToast('خطایی رخ داده است');
+                    const closingFailedMsgTimeOut = setTimeout(closeFailedMsg, 3000);
+                }
             }
 
 
@@ -775,43 +456,20 @@ const TagsAndCategories = () =>{
                 const searchTags = async () =>{
                     setSearchLoading(false);
                     if(searchForTagsText !== ''){
-                        const  dataToSend ={searching:searchForTagsText};
+                        const  dataToSend ={searching:searchForTagsText , language:langCtx.language};
                             try{
-                                if(langCtx.language === 'persian'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInTags`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSearchForTagsData([...data]);
-                                    setSearchLoading(false);
-                                }else if(langCtx.language === 'arabic'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInTagsAr`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSearchForTagsData([...data]);
-                                    setSearchLoading(false);
-                                }else if(langCtx.language === 'english'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInTagsEn`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSearchForTagsData([...data]);
-                                    setSearchLoading(false);
-                                }
-
+                                const response = await authCtx.jwtInst({
+                                    method:"post",
+                                    url:`${authCtx.defaultTargetApi}/tagAndCategory/searchInTags`,
+                                    data:dataToSend,
+                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                                })
+                                const data = await response.data; 
+                                console.log(response.data)
+                                setSearchForTagsData([...data.rs]);
+                                setSearchLoading(false);
                             }catch(error){
-
-
+                                console.log(error);
                             }
                     }
                 }
@@ -819,49 +477,20 @@ const TagsAndCategories = () =>{
             //update tag
             const updateTag = async (id , value) =>{
                 setLoadingStatus(true);
-                const  categoryData ={id:id.substring(0, id.length - 1) , value:value };                 
+                const  categoryData ={id:id.substring(0, id.length - 1) , value:value , language:langCtx.language};                 
                     try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/tagAndCategory/updateTag`,
-                                data:categoryData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('ویرایش انجام شد');
-                            const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                            setUpdateTagsEdit(Math.random());
-                            setLoadingStatus(false);
-                        }else if(langCtx.language === 'arabic'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/tagAndCategory/updateTagAr`,
-                                data:categoryData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('ویرایش انجام شد');
-                            const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                            setUpdateTagsEdit(Math.random());
-                            setLoadingStatus(false);
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/tagAndCategory/updateTagEn`,
-                                data:categoryData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('ویرایش انجام شد');
-                            const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
-                            setUpdateTagsEdit(Math.random());
-                            setLoadingStatus(false);
-                        }
-
+                        const response = await authCtx.jwtInst({
+                            method:"post",
+                            url:`${authCtx.defaultTargetApi}/tagAndCategory/updateTag`,
+                            data:categoryData,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setSuccessOpenToast(true);
+                        setSuccessMsgToast('ویرایش انجام شد');
+                        const closingSuccessMsgTimeOut = setTimeout(closeSuccessMsg, 3000);
+                        setUpdateTagsEdit(Math.random());
+                        setLoadingStatus(false);
                     }catch(error){
                         setFailedOpenToast(true);
                         setFailedMsgToast(error.response.data);

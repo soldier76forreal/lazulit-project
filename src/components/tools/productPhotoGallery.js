@@ -30,6 +30,7 @@ const ProductPhotoGallery = (props) =>{
         touchMove:true,
         swipeToSlide: true,
         arrows:false,
+        
       };
 
     return(

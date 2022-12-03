@@ -160,49 +160,21 @@ const CpOprators =(props)=>{
             }
             if(pnOne !== '' || pnTwo !== ''){
                 if(isNum(pnOne) && isNum(pnTwo)){
-                        const  dataToSend ={firstName:fn , lastName:ln , phoneNumbers:phoneNumbersArray , id:opratorIdToEdit};
+                        const  dataToSend ={firstName:fn , lastName:ln , phoneNumbers:phoneNumbersArray , id:opratorIdToEdit , language:langCtx.language};
                         console.log(dataToSend);
                         try{
-                            if(langCtx.language === 'persian'){
-                                const response = await  authCtx.jwtInst({
-                                    method:"post",
-                                    url:`${authCtx.defaultTargetApi}/oprators/updateOprator`,
-                                    data:dataToSend,
-                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                })
-                                const data = await response.data; 
-                                setSuccessOpenToast(true);
-                                setSuccessMsgToast('ویرایش با موفقیت انجام شد!');
-                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                setNewOprator(data);
-                                setShowEditModal(false);
-                            }else if(langCtx.language === 'arabic'){
-                                const response = await  authCtx.jwtInst({
-                                    method:"post",
-                                    url:`${authCtx.defaultTargetApi}/oprators/updateOpratorAr`,
-                                    data:dataToSend,
-                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                })
-                                const data = await response.data; 
-                                setSuccessOpenToast(true);
-                                setSuccessMsgToast('ویرایش با موفقیت انجام شد!');
-                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                setNewOprator(data);
-                                setShowEditModal(false);
-                            }else if(langCtx.language === 'english'){
-                                const response = await  authCtx.jwtInst({
-                                    method:"post",
-                                    url:`${authCtx.defaultTargetApi}/oprators/updateOpratorEn`,
-                                    data:dataToSend,
-                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                })
-                                const data = await response.data; 
-                                setSuccessOpenToast(true);
-                                setSuccessMsgToast('ویرایش با موفقیت انجام شد!');
-                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                setNewOprator(data);
-                                setShowEditModal(false);
-                            }
+                            const response = await  authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/oprators/updateOprator`,
+                                data:dataToSend,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            setSuccessOpenToast(true);
+                            setSuccessMsgToast('ویرایش با موفقیت انجام شد!');
+                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                            setNewOprator(data);
+                            setShowEditModal(false);
                         }catch(error){
                             console.log(error);
                             setFailedOpenToast(true);
@@ -239,45 +211,19 @@ const CpOprators =(props)=>{
                 }
                 if(phoneNumberOne !== '' || phoneNumberTwo !== ''){
                     if(isNum(phoneNumberOne) && isNum(phoneNumberTwo)){
-                            const  dataToSend ={ author:decoded.id ,firstName:firstName , lastName:lastName , phoneNumbers:phoneNumbersArray};
+                            const  dataToSend ={ author:decoded.id ,firstName:firstName , lastName:lastName , phoneNumbers:phoneNumbersArray, language:langCtx.language};
                             try{
-                                if(langCtx.language === 'persian'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/newOprator`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSuccessOpenToast(true);
-                                    setSuccessMsgToast('اپراتور با موفقیت ثبت شد');
-                                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                    setNewOprator(Math.random());
-                                }else if(langCtx.language === 'arabic'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/newOpratorAr`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSuccessOpenToast(true);
-                                    setSuccessMsgToast('اپراتور با موفقیت ثبت شد');
-                                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                    setNewOprator(Math.random());
-                                }else if(langCtx.language === 'english'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/newOpratorEn`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSuccessOpenToast(true);
-                                    setSuccessMsgToast('اپراتور با موفقیت ثبت شد');
-                                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                    setNewOprator(Math.random());
-                                }
+                                const response = await authCtx.jwtInst({
+                                    method:"post",
+                                    url:`${authCtx.defaultTargetApi}/oprators/newOprator`,
+                                    data:dataToSend,
+                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                                })
+                                const data = await response.data; 
+                                setSuccessOpenToast(true);
+                                setSuccessMsgToast('اپراتور با موفقیت ثبت شد');
+                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                                setNewOprator(Math.random());
                             }catch(error){
                                 console.log(error);
                                 setFailedOpenToast(true);
@@ -316,47 +262,24 @@ const CpOprators =(props)=>{
              
             //get all oprators 
             const getOprators = async() =>{
-                let queryLimit = {limit:0};
+                let queryLimit = {limit:0 , language:langCtx.language};
                 if(queryParams.get('limit') === null){
                     queryLimit.limit = 20;
                 }else{
                     queryLimit.limit = queryParams.get('limit');
                 }
                     try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method:"get",
-                                url:`${authCtx.defaultTargetApi}/oprators/getOprators`,
-                                params:queryLimit,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setOprators([...data.rs]);
-                            setOpratorsLength(data.ln);
-                        }else if(langCtx.language === 'arabic'){
-                            const response = await authCtx.jwtInst({
-                                method:"get",
-                                url:`${authCtx.defaultTargetApi}/oprators/getOpratorsAr`,
-                                params:queryLimit,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setOprators([...data.rs]);
-                            setOpratorsLength(data.ln);
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method:"get",
-                                url:`${authCtx.defaultTargetApi}/oprators/getOpratorsEn`,
-                                params:queryLimit,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setOprators([...data.rs]);
-                            setOpratorsLength(data.ln);
-                        }
-                        
+                        const response = await authCtx.jwtInst({
+                            method:"get",
+                            url:`${authCtx.defaultTargetApi}/oprators/getOprators`,
+                            params:queryLimit,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setOprators([...data.rs]);
+                        setOpratorsLength(data.ln);
                     }catch(error){
-
+                        console.log(error);
                     }
                 }  
                 
@@ -364,44 +287,20 @@ const CpOprators =(props)=>{
                 const searchOprators = async () =>{
                     setSearchLoading(false);
                     if(searchOpratorsValue !== ''){
-                        const  dataToSend ={searching:searchOpratorsValue};
-                            try{
-                                if(langCtx.language === 'persian'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/opSearch`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSearchedOprators([...data]);
-                                    setSearchLoading(false);
-                                }else if(langCtx.language === 'arabic'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/opSearchAr`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSearchedOprators([...data]);
-                                    setSearchLoading(false);
-                                }else if(langCtx.language === 'english'){
-                                    const response = await authCtx.jwtInst({
-                                        method:"post",
-                                        url:`${authCtx.defaultTargetApi}/oprators/opSearchEn`,
-                                        data:dataToSend,
-                                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                    })
-                                    const data = await response.data; 
-                                    setSearchedOprators([...data]);
-                                    setSearchLoading(false);
-                                }
-
-                            }catch(error){
-
-
-                            }
+                        const  dataToSend ={searching:searchOpratorsValue , language:langCtx.language};
+                        try{
+                            const response = await authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/oprators/opSearch`,
+                                data:dataToSend,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            setSearchedOprators([...data]);
+                            setSearchLoading(false);
+                        }catch(error){
+                            console.log(error);
+                        }
                     }
                 }
 
@@ -424,48 +323,20 @@ const CpOprators =(props)=>{
 
                 //delete oprator 
                 const deleteOprator = async () =>{
-                    const  dataToSend ={opratorId:opratorIdToDelete };
+                    const  dataToSend ={opratorId:opratorIdToDelete , language:langCtx.language};
                         try{
-                            if(langCtx.language === 'persian'){
-                                const response = await authCtx.jwtInst({
-                                    method:"post",
-                                    url:`${authCtx.defaultTargetApi}/oprators/deleteOprator`,
-                                    data:dataToSend,
-                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                })
-                                const data = await response.data; 
-                                setSuccessOpenToast(true);
-                                setSuccessMsgToast(data.msg);
-                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                setShowDeleteModal(false);
-                                setOpratorsLength(data.ln);
-                            }else if(langCtx.language === 'arabic'){
-                                const response = await authCtx.jwtInst({
-                                    method:"post",
-                                    url:`${authCtx.defaultTargetApi}/oprators/deleteOpratorAr`,
-                                    data:dataToSend,
-                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                })
-                                const data = await response.data; 
-                                setSuccessOpenToast(true);
-                                setSuccessMsgToast(data.msg);
-                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                setShowDeleteModal(false);
-                                setOpratorsLength(data.ln);
-                            }else if(langCtx.language === 'english'){
-                                const response = await authCtx.jwtInst({
-                                    method:"post",
-                                    url:`${authCtx.defaultTargetApi}/oprators/deleteOpratorEn`,
-                                    data:dataToSend,
-                                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                                })
-                                const data = await response.data; 
-                                setSuccessOpenToast(true);
-                                setSuccessMsgToast(data.msg);
-                                const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                                setShowDeleteModal(false);
-                                setOpratorsLength(data.ln);
-                            }
+                            const response = await authCtx.jwtInst({
+                                method:"post",
+                                url:`${authCtx.defaultTargetApi}/oprators/deleteOprator`,
+                                data:dataToSend,
+                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                            })
+                            const data = await response.data; 
+                            setSuccessOpenToast(true);
+                            setSuccessMsgToast(data.msg);
+                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                            setShowDeleteModal(false);
+                            setOpratorsLength(data.ln);
                         }catch(error){
                             setFailedOpenToast(true);
                             setFailedMsgToast(error.response.data);

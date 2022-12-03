@@ -30,7 +30,7 @@ import AuthContext from "../../store/auth";
 import Language from "../../store/language";
 
 
-const ProductsList = () =>{
+const LiveGallery = () =>{
      //------------------------------history and location------------------------------
      const history = useHistory();
      const location = useLocation();
@@ -295,7 +295,7 @@ const ProductsList = () =>{
                                         <div className={Style.topRightDivHeaderContainer}>
                                             <div className={Style.headerTitleDiv}>
                                                {/* custom header title component */}
-                                               <NormalHeader fontFamily='Dana1' fontSize='27px' color='#354063'  header='محصولات'></NormalHeader>
+                                               <NormalHeader fontFamily='Dana1' fontSize='27px' color='#354063'  header='گالری زنده'></NormalHeader>
                                             </div>                           
                                         </div>  
                                     </Col>
@@ -324,7 +324,7 @@ const ProductsList = () =>{
                                         </div>
                                         <div className={Style.rightToolBarDiv}>
                                             <div className={Style.newPostWithoutBtnDiv}>
-                                                    <Link to='/cp/products/newProduct'><BtnNewThingWithIcon btnName='محصول جدید' paddingTop={'0px'} paddingButtom={'0px'} fontSize={'16px'} paddingRight={'0px'} paddingLeft={'10px'} backgroundColor={'#3C3C3C'} color={'#FFFFFF'} ></BtnNewThingWithIcon></Link>
+                                                    <Link to='/liveGallery/newLiveGallery'><BtnNewThingWithIcon btnName='گالری جدید' paddingTop={'0px'} paddingButtom={'0px'} fontSize={'16px'} paddingRight={'0px'} paddingLeft={'10px'} backgroundColor={'#3C3C3C'} color={'#FFFFFF'} ></BtnNewThingWithIcon></Link>
                                             </div>
                                             {/* <div className={Style.filterDiv}>
                                                 <h3>فیلتر کردن براساس:</h3>
@@ -396,4 +396,4 @@ const ProductsList = () =>{
     )
 }
 
-export default ProductsList;
+export default LiveGallery;

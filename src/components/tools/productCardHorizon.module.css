@@ -1,0 +1,143 @@
+.productCardDiv{
+    width: 100%;
+    height: 100%;
+    max-height: 160px;
+    background-color: #F8FBFE;
+    border-radius: 15px;
+    transition: 0.3s  ease-in-out all;
+    -webkit-box-shadow: 0px 0px 23px -12px rgba(0,41,173,0.49); 
+    box-shadow: 0px 0px 23px -12px rgba(0,41,173,0.49);
+    
+}
+.productCardDiv:hover{
+    background-color: #F8FBFE;
+    filter: drop-shadow(0 0 0.35rem #1043A9);
+
+}
+
+.productCardDiv h4{
+    font-size: 22px;
+    text-align: right;
+    font-family: Dana1;
+    padding: 10px 17px 0px 17px;
+    color: #010102;
+    line-height: 23px;
+}
+.cardInfo{
+    width: fit-content;
+    padding: 0px;
+    margin: 0px 0px 10px 0px;
+    position: absolute;
+    bottom: 0px;
+}
+@media only screen and (max-width: 1280.98px) {
+
+    .measure h4{
+        padding: 4px 8px 4px 8px;
+        color: #EFEFEF;
+        border-radius: 7px;
+        font-size: 12px;
+        display: inline-block;
+        background-color: #354063;
+    }
+    .priceDiv h5{
+        font-size: 12px;
+        padding-right: 4px;
+    }
+    .ratingStar h4{
+        display: inline-block;
+        padding: 3px 0px 0px 2px;
+        font-size: 12px;
+    
+    }
+}
+
+
+
+
+.imageDiv{
+    display: inline-block;
+    height: 100%;
+}
+.titleDiv{
+    display: block;
+    margin-top: 10px;
+
+}
+.titleDiv h4{
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+    display: inline-block;
+    margin: 0px !important;
+
+}
+.caption{
+    display: block;
+    margin-top: 0px;
+}
+.caption h3{
+    font-size: 13px;
+    display: inline-block;
+}
+.imageDiv img{
+    width: 180px;
+    height: 100%;
+    max-height:360px;
+    background-repeat: none;
+    background-position: center;
+    object-fit: cover;
+    border-radius: 15px;
+    display: inline-block;
+    border: #CCD9F7 4px solid;
+}
+.mainDiv{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    max-height:360px;
+    background-color: #F8FBFE;
+    border-radius: 15px;
+    transition: 0.3s  ease-in-out all;
+    -webkit-box-shadow: 0px 0px 23px -12px rgba(0,41,173,0.49); 
+    box-shadow: 0px 0px 23px -12px rgba(0,41,173,0.49);
+}
+.mainDiv:hover{
+    background-color: #F8FBFE;
+    filter: drop-shadow(0 0 0.35rem #1043A9);
+
+}
+
+.caption p{
+    font-size: 14px;
+    margin: 0px;
+}
+.functionBtnDiv{
+    position: absolute;
+}
+.deleteIcon{
+    cursor: pointer;
+    color: #c40404;
+    transition: all ease-in-out 0.2s;
+    font-size: 25px;
+
+}
+.editIcon{
+    color: #1043A9;
+    transition: all ease-in-out 0.2s;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 25px;
+}
+.deleteIcon:hover{
+    color: #e65d5d;
+}
+.editIcon:hover{
+    color: #4578dd;
+}
+.caption button{
+    background: none;
+    border: none;
+    
+}

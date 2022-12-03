@@ -36,16 +36,13 @@ const CpUploadCenter = (props) =>{
             if(pageSwitcherState === 'file' || pageSwitcherState === 'video'){
                 setPageSwitcherState('image');
             }
-    
         } 
         const pageSwitcherToVideo = () =>{
-    
             if(pageSwitcherState === 'file' || pageSwitcherState === 'image'){
                 setPageSwitcherState('video');
             }
         } 
         const pageSwitcherToFile = () =>{
-    
             if(pageSwitcherState === 'image' || pageSwitcherState === 'video'){
                 setPageSwitcherState('file');
             }

@@ -14,6 +14,10 @@ import CpProductListPage from './components/controlPanel/cpProductListPage';
 import AuthContext from './store/auth';
 import CpUser from './components/controlPanel/cpUsers';
 import Comments from './components/controlPanel/cpComments';
+import BlogPost from './components/controlPanel/blogPost';
+import NewBlogPost from './components/controlPanel/newBlogPost';
+import LiveGallery from './components/controlPanel/liveGallery';
+import NewLiveGallery from './components/controlPanel/newLiveGallery';
 
 //modules
 import {Route , Switch , Redirect} from "react-router-dom";
@@ -23,6 +27,9 @@ import { faCheckCircle, faUpload , faTimes , faStar ,faSearch , faPlus , faThumb
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 import CpEditProduct from './components/controlPanel/cpEditProduct';
 import jwtDecode from 'jwt-decode';
+import ShowBlog from './components/controlPanel/showBlog';
+import BlogPostEdit from './components/controlPanel/blogPostEdit';
+
 library.add(faTimes , faUpload , faCheckCircle, farStar  , faStar , faSearch , faPlus , faChevronRight , faChevronLeft , faExclamationCircle ,faThumbsUp ,faSignOutAlt, faFile ,faUser, faComments , faTags , faThumbsDown  , faReply ,faCaretDown , faQuestion ,faBars , faThLarge , faCheck ,faTimesCircle , faTrashAlt ,faEdit , faHeadset )
 
 
@@ -60,7 +67,12 @@ function App() {
                <CpUser></CpUser>
             </Route>
           :<Redirect to='/logIn'/>}
-         
+         {authCtx.isLoggedIn === true ?
+            <Route exact path="/liveGallery"> 
+               <CpSideBar></CpSideBar>
+               <LiveGallery></LiveGallery>
+            </Route>
+          :<Redirect to='/logIn'/>}
 
          {authCtx.isLoggedIn === true ?
             <Route exact path="/cp/categories/productList"> 
@@ -69,6 +81,12 @@ function App() {
             </Route>
           :<Redirect to='/logIn'/>}
 
+         {authCtx.isLoggedIn === true ?
+            <Route exact path="/liveGallery/newLiveGallery"> 
+               <CpSideBar></CpSideBar>
+               <NewLiveGallery></NewLiveGallery>
+            </Route>
+          :<Redirect to='/logIn'/>}
          {authCtx.isLoggedIn === true ?
             <Route exact path="/cp/categories/productList/productShowCase/:productId"> 
                <CpProductShowCase></CpProductShowCase>
@@ -105,9 +123,33 @@ function App() {
           :<Redirect to='/logIn'/>}
 
          {authCtx.isLoggedIn === true ?
+            <Route exact path="/cp/blog"> 
+               <CpSideBar></CpSideBar>
+               <BlogPost></BlogPost>
+            </Route>
+          :<Redirect to='/logIn'/>}
+          
+          {authCtx.isLoggedIn === true ?
+            <Route exact path="/cp/blog/showBlog/:blogId"> 
+               <ShowBlog></ShowBlog>
+            </Route>
+          :<Redirect to='/logIn'/>}
+         {authCtx.isLoggedIn === true ?
+            <Route exact path="/cp/blog/editBlog/:blogId"> 
+               <BlogPostEdit></BlogPostEdit>
+            </Route>
+          :<Redirect to='/logIn'/>}
+
+         {authCtx.isLoggedIn === true ?
             <Route exact path="/cp/products/newProduct"> 
                <CpSideBar></CpSideBar>
                <NewProduct></NewProduct>
+            </Route>
+          :<Redirect to='/logIn'/>}
+         {authCtx.isLoggedIn === true ?
+            <Route exact path="/cp/products/newBlogPost"> 
+               <CpSideBar></CpSideBar>
+               <NewBlogPost></NewBlogPost>
             </Route>
           :<Redirect to='/logIn'/>}
          {authCtx.isLoggedIn === true ?

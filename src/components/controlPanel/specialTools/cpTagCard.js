@@ -1,7 +1,7 @@
 //modules
 import Style from './cpTagCard.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import { useState , useContext } from 'react';
 import {Navbar  , Nav ,NavDropdown ,Form ,FormControl ,Button} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
@@ -15,9 +15,12 @@ import DoneIcon from '@mui/icons-material/Done';
 import CloseIcon from '@mui/icons-material/Close';
 import UnstyledSwitches from '../../tools/switch';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../../store/auth';
+
 
 import Loader from '../../tools/loader';
 const CpTagCard = (props) =>{
+    const authCtx = useContext(AuthContext);
     const [editStatus , setEditStatus] = useState(false);
     const [editId , setEditId] = useState('');
     const [editValue , setEditValue] = useState('');
@@ -88,14 +91,17 @@ const CpTagCard = (props) =>{
                                     </td>
                                     <td>
                                         <div  className={Style.profDiv}>
-                                            <img className={Style.profImg} src={`${prof}`}></img>
-                                            <h4>محمد فلاح</h4>
+                                            {data.author.profileImage !== undefined?
+                                                <img alt={data.author.firstName+' '+data.author.lastName} title={data.author.firstName+' '+data.author.lastName} className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${data.author.profileImage.filename}`}></img>
+                                                :
+                                                <img alt='placeholder' title='placeholder' className={Style.profImg} src={`${prof}`}></img>
+                                            }
+                                            <h4>{data.author.firstName+' '+data.author.lastName}</h4>
                                         </div>
                                     </td>
                                     <td>
                                         <div className={Style.submitDate}>
-                                            <h3>1400/03/14</h3>
-
+                                            <h3>{moment(data.tag.insertDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</h3>
                                             {/* <h3>{moment(dt.insertDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</h3> */}
                                         </div>
                                     </td>
@@ -107,7 +113,8 @@ const CpTagCard = (props) =>{
                                                     <Form.Check 
                                                     key={i}
                                                     onChange={props.validationUpdate}  
-                                                    value={JSON.stringify({tagId : data.tag._id , categoryId:d.categoryId})}                                                        checked={false}
+                                                    value={JSON.stringify({tagId : data.tag._id , categoryId:d.categoryId})}                                                        
+                                                    checked={false}
                                                     type="switch"
                                                     id="custom-switch"
                                                     style={{fontSize:'25px' , marginRight:'10px'}}
@@ -118,7 +125,8 @@ const CpTagCard = (props) =>{
                                                     <Form.Check 
                                                     key={i}
                                                     onChange={props.validationUpdate}  
-                                                    value={JSON.stringify({tagId : data.tag._id , categoryId:data.category._id})}                                                    checked={true}
+                                                    value={JSON.stringify({tagId : data.tag._id , categoryId:data.category._id})}                                                    
+                                                    checked={true}
                                                     type="switch"
                                                     id="custom-switch"
                                                     style={{fontSize:'25px' , marginRight:'10px'}}
@@ -132,7 +140,7 @@ const CpTagCard = (props) =>{
                                     </td>
 
                                     <td>
-                                    <div className={Style.editIconDiv}><button id={data.tag._id + i} value={data.tag.tag} style={{border:'none' , background:'none'}} onClick={editItem}><EditIcon  className={Style.editIcon} sx={{ fontSize: 30,color: '#354063' ,iconHover:'#FFF' }}></EditIcon></button></div>
+                                        <div className={Style.editIconDiv}><button id={data.tag._id + i} value={data.tag.tag} style={{border:'none' , background:'none'}} onClick={editItem}><EditIcon  className={Style.editIcon} sx={{ fontSize: 30,color: '#354063' ,iconHover:'#FFF' }}></EditIcon></button></div>
                                     </td>
                                     <td>
                                         <div className={Style.deleteIconDiv}><button value={JSON.stringify({tagId : data.tag._id , categoryId:data.category._id})} style={{border:'none' , background:'none'}} onClick={(e)=>{props.deleteOnClick(true); props.tagIdToDelete(e.currentTarget.value)}}><DeleteIcon  className={Style.deleteIcon} sx={{ fontSize: 30,color: '#FD7474' ,iconHover:'#FFF' }}></DeleteIcon></button></div>

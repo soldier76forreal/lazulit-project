@@ -1,6 +1,6 @@
 import {Container, Form , Row ,Col , Pagination} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Style from  "./commentItself.module.css";
+import Style from  "./commentReplys.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from '@mui/material/Avatar';
 import PlaceHolderImg from '../../assets/a.jpg'
@@ -17,21 +17,19 @@ import { Link } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import SendIcon from '@mui/icons-material/Send';
 import Language from '../../store/language';
-import CommentReplys from './commentReplys';
 import SuccessMsg from './successMsg';
+
 import FailedMsg from './failedMsg';
 import Modal from './modal';
 
-let CommentItself = (props) =>{
+let CommentReplys = (props) =>{
     const authCtx = useContext(AuthContext);
     const langCtx = useContext(Language);
     const [author , setAuthor] = useState();
     const decode = jwtDecode(Cookies.get('accessToken'));
     const [openReplySection , setOpenReplySection] = useState(false);
-    const [showReply , setShowReply] = useState(false);
-
     const decoded = jwtDecode(Cookies.get('accessToken'));
-    
+    const [replysTo , setReplysTo] = useState('');
     const [comment , setComment] = useState('');
     //modal
     const [showDeleteModal , setShowDeleteModal] = useState(false);
@@ -50,27 +48,19 @@ let CommentItself = (props) =>{
             setOpenReplySection(false);
         }
     }
-
-    const shwoReplys = () =>{
-        if(showReply === false){
-            setShowReply(true);
-        }else if(showReply === true){
-            setShowReply(false);
-        }
-    }
     const sendCommentReply = async(e) =>{
         var data;
             data = {
-                rootComment: props.comment.comment._id,
-                targetPost  : props.comment.comment.targetPost ,
+                rootComment: props.rootComment.comment._id,
+                targetPost  : props.rootComment.comment.targetPost ,
                 author : jwtDecode(Cookies.get('accessToken')).id,
-                replyedTo : props.comment.comment._id,
+                replyedTo : props.data.replys._id,
                 comment:comment
             }
         try{
             const response = await authCtx.jwtInst({
                 method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/newCommentReplyCp`,
+                url:`${authCtx.defaultTargetApi}/comment/newCommentReplyToReplyCp`,
                 data:data,
                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
             })
@@ -85,7 +75,6 @@ let CommentItself = (props) =>{
 
 
 
-
     const like = async(e) =>{
         var dataToSend = {}
         if(e.currentTarget.value !== undefined){
@@ -97,7 +86,7 @@ let CommentItself = (props) =>{
         try{
             const response =await authCtx.jwtInst({
                 method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/likeCommentCp`,
+                url:`${authCtx.defaultTargetApi}/comment/likeCommentReplyCp`,
                 data:dataToSend,
                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
             })
@@ -118,7 +107,7 @@ let CommentItself = (props) =>{
         try{
             const response = await authCtx.jwtInst({
                 method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/dislikeCommentCp`,
+                url:`${authCtx.defaultTargetApi}/comment/dislikeCommentReplyCp`,
                 data:dataToSend,
                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
             })
@@ -134,7 +123,7 @@ let CommentItself = (props) =>{
         try{
             const response = await authCtx.jwtInst({
                 method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/commentValidationUpdate`,
+                url:`${authCtx.defaultTargetApi}/comment/commentValidationUpdateReply`,
                 data:validationUpdate,
                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
             })
@@ -151,7 +140,7 @@ let CommentItself = (props) =>{
         try{
             const response  =await authCtx.jwtInst({
                 method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/deleteCommentCp`,
+                url:`${authCtx.defaultTargetApi}/comment/deleteCommentReplyCp`,
                 data:validationUpdate,
                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
             })
@@ -176,24 +165,24 @@ let CommentItself = (props) =>{
         <Col  xs={12} md={12} lg={12}>
 
          
-        <div className={Style.commentItselfDiv}>
+        <div style={{width:'90%' , margin:'3px auto 0px auto'}} className={Style.commentItselfDiv}>
                <div className={Style.commentItselfDateDiv}>
-                    <h4 >{moment(props.comment.comment.insertDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</h4>
+                    <h4 >{moment(props.data.replys.insertDate, 'YYYY/MM/DD').locale('fa').format('YYYY/MM/DD')}</h4>
 
                    <div style={{display:'inline-block' , marginLeft:'12px'}}>
-                        {props.comment.comment.validation === true?
+                        {props.data.replys.validation === true?
                             <Form.Check 
                                 onChange={commentValidation}  
-                                value={props.comment.comment._id}                                                   
+                                value={props.data.replys._id}                                                   
                                 type="switch"
                                 checked={true}
                                 id="custom-switch"
                                 style={{fontSize:'25px' , marginRight:'10px'}}
                             />
-                            :props.comment.comment.validation === false?
+                            :props.data.replys.validation === false?
                             <Form.Check 
                             onChange={commentValidation}  
-                                value={props.comment.comment._id}  
+                                value={props.data.replys._id}  
                                 checked={false}
                                 type="switch"
                                 id="custom-switch"
@@ -202,47 +191,56 @@ let CommentItself = (props) =>{
                         :null}
 
                    </div>
-                   <div style={{display:'inline-block' , marginLeft:'-10px' }} className={Style.deleteIconDiv}><button onClick={(e)=>{setShowDeleteModal(true); setItemToDelete(e.currentTarget.value)}}  value={props.comment.comment._id} style={{border:'none' , background:'none' , padding:'0px'}} ><DeleteIcon onClick={(e)=>{setShowDeleteModal(true); setItemToDelete(e.currentTarget.value)}} className={Style.deleteIcon} sx={{ fontSize: 30,color: '#FD7474' ,iconHover:'#FFF' }}></DeleteIcon></button></div>
-                   <Link to={`/cp/products/productShowCase/${props.comment.comment.targetPost}`}><div style={{display:'inline-block' , marginLeft:'11px' }} className={Style.deleteIconDiv}><button   value={props.comment.comment._id} style={{border:'none' , background:'none' , padding:'0px'}} ><OpenInNewIcon  className={Style.deleteIcon} sx={{ fontSize: 30,color: 'rgb(16, 67, 169)' ,iconHover:'#FFF' }}></OpenInNewIcon></button></div></Link>
+                   <div style={{display:'inline-block' , marginLeft:'-10px' }} className={Style.deleteIconDiv}><button onClick={(e)=>{setShowDeleteModal(true); setItemToDelete(e.currentTarget.value)}}  value={props.data.replys._id} style={{border:'none' , background:'none' , padding:'0px'}} ><DeleteIcon onClick={(e)=>{setShowDeleteModal(true); setItemToDelete(e.currentTarget.value)}} className={Style.deleteIcon} sx={{ fontSize: 30,color: '#FD7474' ,iconHover:'#FFF' }}></DeleteIcon></button></div>
+                   <Link to={`/cp/products/productShowCase/${props.data.replys.targetPost}`}><div style={{display:'inline-block' , marginLeft:'11px' }} className={Style.deleteIconDiv}><button   value={props.data.replys._id} style={{border:'none' , background:'none' , padding:'0px'}} ><OpenInNewIcon  className={Style.deleteIcon} sx={{ fontSize: 30,color: 'rgb(16, 67, 169)' ,iconHover:'#FFF' }}></OpenInNewIcon></button></div></Link>
 
               </div>
               <div  dir="rtl"  className={Style.commentItselfProfDiv}>
-                <div className={Style.commentProfItselfImage}>
-                    <TextAvatar text={`${props.comment.user.firstName} ${props.comment.user.lastName}`}></TextAvatar>
-                </div>
-                 <div className={Style.commentProfItselfName}>
-                    <h4>{`${props.comment.user.firstName} ${props.comment.user.lastName}`}</h4>
-                 </div>
+                  {props.data.replys.rootComment === props.data.replys.replyedTo ? 
+                    <div className={Style.commentProfItselfName}>
+                       <h4 style={{fontSize:'15px', padding:'0px'  , display:'inline-block'}}>{`${props.data.user.firstName} ${props.data.user.lastName}`}</h4><span style={{fontSize:'13px' , padding:'0px 5px 0px 5px' , display:'inline-block'}}> در پاسخ به </span><h4 style={{fontSize:'15px' , padding:'0px', display:'inline-block'}}>{`${props.rootComment.user.firstName} ${props.rootComment.user.lastName}`}</h4>
+                    </div>
+                 :props.reply.map((data)=>{
+                     if(data.replys._id === props.data.replys.replyedTo){
+                         return(
+                             
+                            <div className={Style.commentProfItselfName}>
+                                <h4 style={{fontSize:'15px', padding:'0px'  , display:'inline-block'}}>{`${props.data.user.firstName} ${props.data.user.lastName}`}</h4><span style={{fontSize:'13px' , padding:'0px 5px 0px 5px' , display:'inline-block'}}> در پاسخ به </span><h4 style={{fontSize:'15px' , padding:'0px', display:'inline-block'}}>{`${data.user.firstName} ${data.user.lastName}`}</h4>
+                            </div>
+                         )
+                     }
+                 })
+                }
               </div>
 
               <div className={Style.commentTextItselfDiv}>
                   <p>
-                    {props.comment.comment.comment}
+                    {props.data.replys.comment}
                   </p>
               </div>
               <div   dir="rtl" className={Style.commentItselfFooterDiv}>
                     <div className={Style.commentLikeAndDislike}>
                             <div className={Style.commentLike}>
-                                <h5>{props.comment.comment.likes.length}</h5>
-                                {props.comment.comment.likes.includes(decode.id)?
-                                    <button  value={props.comment.comment._id} onClick={like} style={{background:'none' , border:'none'}}>
+                                <h5>{props.data.replys.likes.length}</h5>
+                                {props.data.replys.likes.includes(decode.id)?
+                                    <button  value={props.data.replys._id} onClick={like} style={{background:'none' , border:'none'}}>
                                         <FontAwesomeIcon  className={Style.commentLikeBtn} size="lg" icon="thumbs-up" color="#009C0B" />
                                     </button>
                                 :
-                                    <button value={props.comment.comment._id} onClick={like} style={{background:'none' , border:'none'}}>
+                                    <button value={props.data.replys._id} onClick={like} style={{background:'none' , border:'none'}}>
                                         <FontAwesomeIcon  className={Style.commentLikeBtn} size="lg" icon="thumbs-up" color="#DCDCDC" />
                                     </button>
                                 }
                             </div>
                         
                             <div className={Style.commentDislike}>
-                                <h5>{props.comment.comment.dislikes.length}</h5>
-                                {props.comment.comment.dislikes.includes(decode.id)?
-                                    <button  value={props.comment.comment._id} onClick={dislike} style={{background:'none' , border:'none'}}>
+                                <h5>{props.data.replys.dislikes.length}</h5>
+                                {props.data.replys.dislikes.includes(decode.id)?
+                                    <button  value={props.data.replys._id} onClick={dislike} style={{background:'none' , border:'none'}}>
                                         <FontAwesomeIcon className={Style.commentDislikeBtn} size="lg" icon="thumbs-down" color="#D90000" />
                                     </button>
                                 :
-                                    <button  value={props.comment.comment._id} onClick={dislike} style={{background:'none' , border:'none'}}>
+                                    <button  value={props.data.replys._id} onClick={dislike} style={{background:'none' , border:'none'}}>
                                         <FontAwesomeIcon className={Style.commentDislikeBtn} size="lg" icon="thumbs-down" color="#DCDCDC" />
                                     </button>
 
@@ -251,11 +249,7 @@ let CommentItself = (props) =>{
                         
 
                     </div>
-                      <div onClick={shwoReplys} className={Style.commentShowReplyDiv}>
-                          
-                        <FontAwesomeIcon className={showReply === true?`${Style.commentShowReplyArrow} ${Style.rotateIn}`:showReply === false?`${Style.commentShowReplyArrow} ${Style.rotateOut}`:null} icon="caret-down" color="#DCDCDC" />
-                        <h5><span>{props.comment.replysLength} </span>پاسخ</h5>
-                        <FontAwesomeIcon className={showReply === true?`${Style.commentShowReplyArrow} ${Style.rotateIn}`:showReply === false?`${Style.commentShowReplyArrow} ${Style.rotateOut}`:null}  icon="caret-down" color="#DCDCDC" />
+                      <div className={Style.commentShowReplyDiv}>
                       </div>
                   <div className={Style.commentReplyBtnDiv}>
                       <button onClick={commentReplyOpen} className={Style.replyBtnButton}>
@@ -287,20 +281,12 @@ let CommentItself = (props) =>{
         </Col>
     :null}
 
-         {showReply === true?
-         props.comment.replys.map((data , i)=>{   
-             return(
-                 <CommentReplys setRefreshList={props.setRefreshList} rootComment={props.comment} reply={props.comment.replys} data={data}></CommentReplys>
-             )
-        })
-        :null
-    }
 </Fragment>
     );
 }
 
 
 
-export default CommentItself;
+export default CommentReplys;
 
 

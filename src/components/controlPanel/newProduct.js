@@ -1,6 +1,6 @@
 //modules
 import { Fragment, useState , useEffect , useRef , useContext } from "react";
-import Style from './newProduct.module.css';
+import Style from './newBlogPost.module.css';
 import Checkbox from '@mui/material/Checkbox';
 import axios from "axios";
 import { Redirect , useHistory } from "react-router-dom";
@@ -57,6 +57,7 @@ const NewProduct = () =>{
      const ref6 = useRef();
      const ref7 = useRef();
      const ref8 = useRef();
+     const ref9 = useRef();
 
      const history = useHistory();
 
@@ -134,9 +135,13 @@ const NewProduct = () =>{
     const [selectedListErr , setSelectedListErr] = useState('');
     const [specialFeatureErr , setSpecialFeatureErr] = useState('');
 
-
     const [specialFeature , setSpecialFeature] = useState([]);
 
+        //-----------------------------------------------------------------------oprators state
+        const [pageTitle , setPageTitle] = useState('');
+        const [pageTitleErr , setPageTitleErr] = useState('');
+        const [pageDescription , setPageDescription] = useState('');
+        const [pageDescriptionErr , setPageDescriptionErr] = useState('');
     //------------------------------listners------------------------------
 
     const saveCategoriesInState = (e) =>{
@@ -155,8 +160,8 @@ const NewProduct = () =>{
         const data = e.editor.getData();
         setProductRiview(data);
         setProductRiviewErr('');
-
     }
+    
     let tempArray = [...specialFeature];
     const addSpecialFeature = (e) =>{
         setSpecialFeatureErr('')
@@ -186,31 +191,14 @@ const NewProduct = () =>{
         //------------------------------------get categories
         const getAllCategories = async () =>{
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategories`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data]);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategoriesAr`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data]);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategoriesEn`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data]);
-                    }
+                    const response = await authCtx.jwtInst({
+                        method:"get",
+                        url:`${authCtx.defaultTargetApi}/newProduct/getAllCategories`,
+                        params:{language:langCtx.language},
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setAllCategories([...data]);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast(error.response.data);
@@ -218,40 +206,19 @@ const NewProduct = () =>{
         }
         //------------------------------------get tags
         const getAllTags = async () =>{
-            
-            let dataTag = {categoriesId:categories};
+
+            let dataTag = {categoriesId:categories , language:langCtx.language};
 
             if(allCategories.length !== 0){
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllTags`,
-                            params : dataTag,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTags([...data]);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllTagsAr`,
-                            params : dataTag,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTags([...data]);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllTagsEn`,
-                            params : dataTag,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTags([...data]);
-                    }
-
+                    const response = await authCtx.jwtInst({
+                        method:"get",
+                        url:`${authCtx.defaultTargetApi}/newProduct/getAllTags`,
+                        params : dataTag,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setAllTags([...data]);  
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast(error.response.data);
@@ -263,32 +230,14 @@ const NewProduct = () =>{
         //------------------------------------get all oprators
         const getAllCallOprator = async () =>{
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllOprator`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllOprator([...data]);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllOpratorAr`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllOprator([...data]);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllOpratorEn`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllOprator([...data]);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    params:{language:langCtx.language},
+                    url:`${authCtx.defaultTargetApi}/newProduct/getAllOprator`,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllOprator([...data]);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -298,32 +247,14 @@ const NewProduct = () =>{
         //------------------------------------get all WaOprators
         const getAllWaOprator = async () =>{
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOprator`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllWa(data);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOpratorAr`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllWa(data);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOpratorEn`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllWa(data);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    params:{language:langCtx.language},
+                    url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOprator`,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllWa(data);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -337,9 +268,9 @@ const NewProduct = () =>{
                 try{
                     const listData = {
                         listName : titleName,
-                        featureList : featureListArray
+                        featureList : featureListArray,
+                        language:langCtx.language
                     }
-                    if(langCtx.language === 'persian'){
                         const response = await authCtx.jwtInst({
                             method:"post",
                             url:`${authCtx.defaultTargetApi}/newProduct/newFeatureList`,
@@ -353,35 +284,6 @@ const NewProduct = () =>{
                         setSuccessOpenToast(true);
                         setSuccessMsgToast("لیست اضافه شد");
                         const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/newFeatureListAr`,
-                            data:listData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setNewFeatureListModal(false);
-                        setNewFeatureList(Math.random());
-                        setSelectedList('');
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast("لیست اضافه شد");
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/newFeatureListEn`,
-                            data:listData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setNewFeatureListModal(false);
-                        setNewFeatureList(Math.random());
-                        setSelectedList('');
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast("لیست اضافه شد");
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast("لیست اضافه نشد!خطایی رخ داده است");
@@ -398,32 +300,15 @@ const NewProduct = () =>{
         //------------------------------------get all Feature
         const getAllFeatureList = async (titleName , featureListArray) =>{
             try{
-
-                if(langCtx.language === 'persian'){
                     const response = await authCtx.jwtInst({
                         method:"get",
+                        params:{language:langCtx.language},
                         url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureList`,
                         config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                     })
                     const data = await response.data; 
                     setAllFeatureList(data);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureListAr`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllFeatureList(data);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureListEn`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllFeatureList(data);
-                }
+
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -435,10 +320,8 @@ const NewProduct = () =>{
         //-----------------------------------get feature list
         const getTheList = async () =>{
             if(selectedList !== ''){    
-                const listId = {listId:selectedList};
+                const listId = {listId:selectedList , language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-
                         const response = await authCtx.jwtInst({
                             method:"get",
                             params:listId,
@@ -451,37 +334,6 @@ const NewProduct = () =>{
                             tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
                         }
                         setSelectedListData([...tempFeatureListArr]);
-
-                    }else if(langCtx.language === 'arabic'){
-
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            params:listId,
-                            url:`${authCtx.defaultTargetApi}/newProduct/getTheListAr`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        var tempFeatureListArr = [];
-                        for(var i = 0 ;data.featureList.length>i ; i++ ){
-                            tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
-                        }
-                        setSelectedListData([...tempFeatureListArr]);
-
-                    }else if(langCtx.language === 'english'){
-
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            params:listId,
-                            url:`${authCtx.defaultTargetApi}/newProduct/getTheListEn`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        var tempFeatureListArr = [];
-                        for(var i = 0 ;data.featureList.length>i ; i++ ){
-                            tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
-                        }
-                        setSelectedListData([...tempFeatureListArr]);
-                    }
                 
                 }catch(error){
                     setFailedOpenToast(true);
@@ -492,58 +344,23 @@ const NewProduct = () =>{
 
         //-----------------------------------delete feature list
         const deleteTheList = async () =>{
-            const  dataToSend ={deleteTheListId:selectedList };
+            const  dataToSend ={deleteTheListId:selectedList , language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureList`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-    
-                        setShowDeleteModal(false);
-                        setListDeleteUpdate(Math.random());
-                        setSelectedList('');
-                        setSelectedListData([]);
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('لیست حذف شد');
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureListAr`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-    
-                        setShowDeleteModal(false);
-                        setListDeleteUpdate(Math.random());
-                        setSelectedList('');
-                        setSelectedListData([]);
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('لیست حذف شد');
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureListEn`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-    
-                        setShowDeleteModal(false);
-                        setListDeleteUpdate(Math.random());
-                        setSelectedList('');
-                        setSelectedListData([]);
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('لیست حذف شد');
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }
-                    
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureList`,
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data =  response; 
+
+                    setShowDeleteModal(false);
+                    setListDeleteUpdate(Math.random());
+                    setSelectedList('');
+                    setSelectedListData([]);
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast('لیست حذف شد');
+                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast("خطا!لیست حذف نشد");
@@ -563,7 +380,7 @@ const NewProduct = () =>{
                     keyFeature.push(selectedListData[i]);
                 }
             }
-            let productData = {author:decoded.id , productCode : productCode , availableSurface : availableSurface ,title:title , productRiview:productRiview , price:{measure:measure , price:price} , contactBtn:contactBtnArray , images:galleryImages , categories:categories , tags:tags  , featureList : selectedListData , keyFeatures : keyFeature};
+            let productData = {author:decoded.id , productCode : productCode , availableSurface : availableSurface ,title:title , productRiview:productRiview , price:{measure:measure , price:price} , contactBtn:contactBtnArray , images:galleryImages , categories:categories , tags:tags  , featureList : selectedListData , keyFeatures : keyFeature , language:langCtx.language , pageTitle:pageTitle , pageDescription:pageDescription};
 
             if(keyFeature.length > 4 ){
                 setSpecialFeatureErr("تعداد خصوصیات ویژه انتخاب شده بیشتر از حد مجاز است");
@@ -620,57 +437,22 @@ const NewProduct = () =>{
                 setProductCodeErr("کد محصول را بنویسید");
                 ref7.current.scrollIntoView(); 
             }
-            if(availableSurface === ''){
-                setAvailableSurfaceErr("متراژ کل را بنویسید");
-                ref8.current.scrollIntoView(); 
-            }
+
             
-            if(availableSurface !== '' && productCode !== '' && decoded.id !== undefined && imageGalleryFirst !== '' && imageGallerySecond !== '' && imageGalleryThird !== '' && imageGalleryFourth !== '' && title !== '' && categories.length !== 0 && callOprator !== '' && whatsAppOprator !== '' && price !== '' && measure !== '' &&  productRiview !== '' && tags.length !== 0  && selectedListData.length !== 0 ){
+            if(productCode !== '' && decoded.id !== undefined && imageGalleryFirst !== '' && imageGallerySecond !== '' && imageGalleryThird !== '' && imageGalleryFourth !== '' && title !== '' && categories.length !== 0 && callOprator !== '' && whatsAppOprator !== '' && price !== '' && measure !== '' &&  productRiview !== '' && tags.length !== 0  && selectedListData.length !== 0 ){
                 if( keyFeature.length < 5 && keyFeature.length > 2 ){
                     try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/newProduct/saveNewProduct`,
-                                data:productData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('محصول ذخیره شد');
-                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                            const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
-
-                        }else if(langCtx.language === 'arabic'){
-
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/newProduct/saveNewProductAr`,
-                                data:productData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('محصول ذخیره شد');
-                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                            const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
-
-                        }else if(langCtx.language === 'english'){
-
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/newProduct/saveNewProductEn`,
-                                data:productData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('محصول ذخیره شد');
-                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                            const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
-                        }
-
-
+                        const response = await authCtx.jwtInst({
+                            method:"post",
+                            url:`${authCtx.defaultTargetApi}/newProduct/saveNewProduct`,
+                            data:productData,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setSuccessOpenToast(true);
+                        setSuccessMsgToast('محصول ذخیره شد');
+                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                        const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
                     }catch(error){
                         setFailedOpenToast(true);
                         setFailedMsgToast(error.response.data);
@@ -1022,8 +804,24 @@ const NewProduct = () =>{
                                                 </Col>
                                             :null}
                                             </Row>
+                                            
                                     </div>
                                </Row>
+                               <Row ref={ref9} dir="rtl">
+                                        <div className={Style.formItemsDiv}>
+                                            <div className={Style.featureHeader}><h4>Document head</h4></div>
+                                            <Col xs={12} md={12} lg={6}>
+                                                <div className={Style.inputDiv2}>
+                                                    <div className={Style.lableDiv}><h4>Title</h4></div>
+                                                    <NormalInput onChange={(e)=>{setPageTitle(e.target.value); setPageTitleErr('')}} placeholder='...'></NormalInput>
+                                                </div>
+                                                <div className={Style.inputDiv2}>
+                                                    <div className={Style.lableDiv}><h4>Description</h4></div>
+                                                    <NormalInput onChange={(e)=>{setPageDescription(e.target.value); setPageDescriptionErr('')}} placeholder='...'></NormalInput>
+                                                </div>
+                                            </Col>
+                                        </div> 
+                                </Row>
                                <div className={Style.saveBtnDiv}>
                                    <button onClick={saveProduct} className={Style.saveForm}>ذخیره</button>
                                </div>

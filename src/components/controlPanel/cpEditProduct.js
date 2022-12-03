@@ -48,6 +48,7 @@ const CpEditProduct = () =>{
      const ref6 = useRef();
      const ref7 = useRef();
      const ref8 = useRef();
+     const ref9 = useRef();
      const history = useHistory();
      const params = useParams();
      const authCtx = useContext(AuthContext);
@@ -64,6 +65,10 @@ const CpEditProduct = () =>{
      const [imageGallerySecond , setImageGallerySecond] = useState('');
      const [imageGalleryThird , setImageGalleryThird] = useState('');
      const [imageGalleryFourth , setImageGalleryFourth] = useState('');
+     const [imageGalleryFifth , setImageGalleryFifth] = useState('');
+     const [imageGallerySixth , setImageGallerySixth] = useState('');
+     const [imageGallerySeventh , setImageGallerySeventh] = useState('');
+     const [imageGalleryEighth , setImageGalleryEighth] = useState('');
      const [galleryImages , setGalleryImages] = useState([]);
      
     //-----------------------------------------------------------------------gallery Error
@@ -123,11 +128,13 @@ const CpEditProduct = () =>{
 
     const [selectedListErr , setSelectedListErr] = useState('');
     const [specialFeatureErr , setSpecialFeatureErr] = useState('');
-
-
     const [specialFeature , setSpecialFeature] = useState([]);
 
-    
+    //-----------------------------------------------------------------------oprators state
+    const [pageTitle , setPageTitle] = useState('');
+    const [pageTitleErr , setPageTitleErr] = useState('');
+    const [pageDescription , setPageDescription] = useState('');
+    const [pageDescriptionErr , setPageDescriptionErr] = useState('');
         
 
     //------------------------------listners------------------------------
@@ -177,31 +184,14 @@ const CpEditProduct = () =>{
         //------------------------------------get categories
         const getAllCategories = async () =>{
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategories`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data]);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategoriesAr`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data]);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllCategoriesEn`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllCategories([...data]);
-                    }
+                    const response = await authCtx.jwtInst({
+                        method:"get",
+                        params:{language:langCtx.language},
+                        url:`${authCtx.defaultTargetApi}/newProduct/getAllCategories`,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setAllCategories([...data]);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast(error.response.data);
@@ -213,69 +203,27 @@ const CpEditProduct = () =>{
             for(var n = 0 ; categories.length > n ; n++){
                 ids.push(categories[n].value);
             }
-            let dataTag = {categoriesId:ids};
-
+            let dataTag = {categoriesId:ids , language:langCtx.language};
             if(allCategories.length !== 0){
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllTags`,
-                            params : dataTag,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTags([...data]);
-                        var tempTag = [];
-                        for(var q= 0 ; productData.tags.length>q ; q++){
-                            for(var z= 0 ; data.length>z ; z++){
-                
-                                if(productData.tags[q]=== data[z]._id ){
-                                    tempTag.push({value:data[z]._id , label:data[z].tag});
-                                }
+                    const response = await authCtx.jwtInst({
+                        method:"get",
+                        url:`${authCtx.defaultTargetApi}/newProduct/getAllTags`,
+                        params : dataTag,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setAllTags([...data]);
+                    var tempTag = [];
+                    for(var q= 0 ; productData.tags.length>q ; q++){
+                        for(var z= 0 ; data.length>z ; z++){
+            
+                            if(productData.tags[q]=== data[z]._id ){
+                                tempTag.push({value:data[z]._id , label:data[z].tag});
                             }
                         }
-                        setTags([...tempTag])
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllTagsAr`,
-                            params : dataTag,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTags([...data]);
-                        var tempTag = [];
-                        for(var q= 0 ; productData.tags.length>q ; q++){
-                            for(var z= 0 ; data.length>z ; z++){
-                
-                                if(productData.tags[q]=== data[z]._id ){
-                                    tempTag.push({value:data[z]._id , label:data[z].tag});
-                                }
-                            }
-                        }
-                        setTags([...tempTag])
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            url:`${authCtx.defaultTargetApi}/newProduct/getAllTagsEn`,
-                            params : dataTag,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setAllTags([...data]);
-                        var tempTag = [];
-                        for(var q= 0 ; productData.tags.length>q ; q++){
-                            for(var z= 0 ; data.length>z ; z++){
-                
-                                if(productData.tags[q]=== data[z]._id ){
-                                    tempTag.push({value:data[z]._id , label:data[z].tag});
-                                }
-                            }
-                        }
-                        setTags([...tempTag])
                     }
-
+                    setTags([...tempTag])
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast(error.response.data);
@@ -283,36 +231,17 @@ const CpEditProduct = () =>{
             }
 
         }
-
         //------------------------------------get all oprators
         const getAllCallOprator = async () =>{
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllOprator`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllOprator([...data]);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllOpratorAr`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllOprator([...data]);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllOpratorEn`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllOprator([...data]);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    params:{language:langCtx.language},
+                    url:`${authCtx.defaultTargetApi}/newProduct/getAllOprator`,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllOprator([...data]);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -322,90 +251,41 @@ const CpEditProduct = () =>{
         //------------------------------------get all WaOprators
         const getAllWaOprator = async () =>{
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOprator`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllWa(data);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOpratorAr`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllWa(data);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOpratorEn`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllWa(data);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    params:{language:langCtx.language},
+                    url:`${authCtx.defaultTargetApi}/newProduct/getAllWaOprator`,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllWa(data);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
             }
         }
-
-
         //------------------------------------save new Feature in db
         const saveFeatureList = async (titleName , featureListArray) =>{
             if(titleName !== ''){
                 try{
                     const listData = {
                         listName : titleName,
-                        featureList : featureListArray
+                        featureList : featureListArray,
+                        language:langCtx.language
                     }
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/newFeatureList`,
-                            data:listData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setNewFeatureListModal(false);
-                        setNewFeatureList(Math.random());
-                        setSelectedList('');
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast("لیست اضافه شد");
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/newFeatureListAr`,
-                            data:listData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setNewFeatureListModal(false);
-                        setNewFeatureList(Math.random());
-                        setSelectedList('');
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast("لیست اضافه شد");
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/newFeatureListEn`,
-                            data:listData,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        setNewFeatureListModal(false);
-                        setNewFeatureList(Math.random());
-                        setSelectedList('');
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast("لیست اضافه شد");
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/newProduct/newFeatureList`,
+                        data:listData,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    setNewFeatureListModal(false);
+                    setNewFeatureList(Math.random());
+                    setSelectedList('');
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast("لیست اضافه شد");
+                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast("لیست اضافه نشد!خطایی رخ داده است");
@@ -422,32 +302,14 @@ const CpEditProduct = () =>{
         //------------------------------------get all Feature
         const getAllFeatureList = async (titleName , featureListArray) =>{
             try{
-                if(langCtx.language === 'persian'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureList`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllFeatureList(data);
-                }else if(langCtx.language === 'arabic'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureListAr`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllFeatureList(data);
-                }else if(langCtx.language === 'english'){
-                    const response = await authCtx.jwtInst({
-                        method:"get",
-                        url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureListEn`,
-                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                    })
-                    const data = await response.data; 
-                    setAllFeatureList(data);
-                }
-
+                const response = await authCtx.jwtInst({
+                    method:"get",
+                    params:{language:langCtx.language},
+                    url:`${authCtx.defaultTargetApi}/newProduct/getAllFeatureList`,
+                    config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                })
+                const data = await response.data; 
+                setAllFeatureList(data);
             }catch(error){
                 setFailedOpenToast(true);
                 setFailedMsgToast(error.response.data);
@@ -459,49 +321,20 @@ const CpEditProduct = () =>{
         //-----------------------------------get feature list
         const getTheList = async () =>{
             if(selectedList !== ''){    
-                const listId = {listId:selectedList};
+                const listId = {listId:selectedList , language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            params:listId,
-                            url:`${authCtx.defaultTargetApi}/newProduct/getTheList`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        var tempFeatureListArr = [];
-                        for(var i = 0 ;data.featureList.length>i ; i++ ){
-                            tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
-                        }
-                        setSelectedListData([...tempFeatureListArr]);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            params:listId,
-                            url:`${authCtx.defaultTargetApi}/newProduct/getTheListAr`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        var tempFeatureListArr = [];
-                        for(var i = 0 ;data.featureList.length>i ; i++ ){
-                            tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
-                        }
-                        setSelectedListData([...tempFeatureListArr]);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"get",
-                            params:listId,
-                            url:`${authCtx.defaultTargetApi}/newProduct/getTheListEn`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data = await response.data; 
-                        var tempFeatureListArr = [];
-                        for(var i = 0 ;data.featureList.length>i ; i++ ){
-                            tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
-                        }
-                        setSelectedListData([...tempFeatureListArr]);
+                    const response = await authCtx.jwtInst({
+                        method:"get",
+                        params:listId,
+                        url:`${authCtx.defaultTargetApi}/newProduct/getTheList`,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data = await response.data; 
+                    var tempFeatureListArr = [];
+                    for(var i = 0 ;data.featureList.length>i ; i++ ){
+                        tempFeatureListArr.push({title:data.featureList[i].title , content:data.featureList[i].content , checked:false})
                     }
-
+                    setSelectedListData([...tempFeatureListArr]);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast(error.response.data);
@@ -511,59 +344,22 @@ const CpEditProduct = () =>{
 
         //-----------------------------------delete feature list
         const deleteTheList = async () =>{
-            const  dataToSend ={deleteTheListId:selectedList };
+            const  dataToSend ={deleteTheListId:selectedList , language:langCtx.language};
                 try{
-                    if(langCtx.language === 'persian'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureList`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-                        setShowDeleteModal(false);
-                        setListDeleteUpdate(Math.random());
-                        setSelectedList('');
-                        setSelectedListData([]);
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('لیست حذف شد');
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'arabic'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureListAr`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-    
-                        setShowDeleteModal(false);
-                        setListDeleteUpdate(Math.random());
-                        setSelectedList('');
-                        setSelectedListData([]);
-    
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('لیست حذف شد');
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }else if(langCtx.language === 'english'){
-                        const response = await authCtx.jwtInst({
-                            method:"post",
-                            url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureListEn`,
-                            data:dataToSend,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const data =  response; 
-    
-                        setShowDeleteModal(false);
-                        setListDeleteUpdate(Math.random());
-                        setSelectedList('');
-                        setSelectedListData([]);
-    
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast('لیست حذف شد');
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                    }
-
+                    const response = await authCtx.jwtInst({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/newProduct/deleteFeatureList`,
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data =  response; 
+                    setShowDeleteModal(false);
+                    setListDeleteUpdate(Math.random());
+                    setSelectedList('');
+                    setSelectedListData([]);
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast('لیست حذف شد');
+                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
                 }catch(error){
                     setFailedOpenToast(true);
                     setFailedMsgToast("خطا!لیست حذف نشد");
@@ -580,7 +376,6 @@ const CpEditProduct = () =>{
         //-----------------------------------save product to db
         const saveProduct = async() =>{
             let contactBtnArray  = [whatsAppOprator.value , callOprator.value];
-            console.log(contactBtnArray);
             let keyFeature = [];
             for(var i = 0 ; selectedListData.length > i ; i++){
                 if(selectedListData[i].checked === true){
@@ -595,7 +390,7 @@ const CpEditProduct = () =>{
             for(var c = 0 ; categories.length > c ; c++){
                 tempCategory.push(categories[c].value);
             }
-            let productData = {productIdToUpdate:params.productId , title:title , productCode : productCode , availableSurface : availableSurface  , productRiview:productRiview , price:{measure:measure.label , price:price} , contactBtn:contactBtnArray , images:galleryImages , categories:tempCategory , tags:tempTag  , featureList : selectedListData , keyFeatures : keyFeature};
+            let productData = {productIdToUpdate:params.productId , title:title , productCode : productCode , availableSurface : availableSurface  , productRiview:productRiview , price:{measure:measure.label , price:price} , contactBtn:contactBtnArray , images:galleryImages , categories:tempCategory , tags:tempTag  , featureList : selectedListData , keyFeatures : keyFeature , language:langCtx.language , pageTitle:pageTitle , pageDescription:pageDescription};
             if(keyFeature.length > 4 ){
                 setSpecialFeatureErr("تعداد خصوصیات ویژه انتخاب شده بیشتر از حد مجاز است");
                 ref6.current.scrollIntoView(); 
@@ -651,54 +446,20 @@ const CpEditProduct = () =>{
                 setProductCodeErr("کد محصول را بنویسید");
                 ref7.current.scrollIntoView(); 
             }
-            if(availableSurface === ''){
-                setAvailableSurfaceErr("متراژ کل را بنویسید")
-                ref8.current.scrollIntoView(); 
-            }
-            if(availableSurface !== '' && productCode !== '' && imageGalleryFirst !== '' && imageGallerySecond !== '' && imageGalleryThird !== '' && imageGalleryFourth !== '' && title !== '' && categories.length !== 0 && callOprator !== '' && whatsAppOprator !== '' && price !== '' && measure !== '' &&  productRiview !== '' && tags.length !== 0  && selectedListData.length !== 0 ){
+            if(productCode !== '' && imageGalleryFirst !== '' && imageGallerySecond !== '' && imageGalleryThird !== '' && imageGalleryFourth !== '' && title !== '' && categories.length !== 0 && callOprator !== '' && whatsAppOprator !== '' && price !== '' && measure !== '' &&  productRiview !== '' && tags.length !== 0  && selectedListData.length !== 0 ){
                 if( keyFeature.length < 5 && keyFeature.length > 2 ){
                     try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/newProduct/updateProduct`,
-                                data:productData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('محصول ویرایش شد');
-                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                            const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
-
-                        }else if(langCtx.language === 'arabic'){
-
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/newProduct/updateProductAr`,
-                                data:productData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('محصول ویرایش شد');
-                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                            const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
-
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/newProduct/updateProductEn`,
-                                data:productData,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setSuccessOpenToast(true);
-                            setSuccessMsgToast('محصول ویرایش شد');
-                            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-                            const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
-                        }
-
+                        const response = await authCtx.jwtInst({
+                            method:"post",
+                            url:`${authCtx.defaultTargetApi}/newProduct/updateProduct`,
+                            data:productData,
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const data = await response.data; 
+                        setSuccessOpenToast(true);
+                        setSuccessMsgToast('محصول ویرایش شد');
+                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                        const redirect = setTimeout(()=>{history.push(`/cp/products/newProduct/productShowCase/${data._id}`)}, 500);
                     }catch(error){
                         setFailedOpenToast(true);
                         setFailedMsgToast(error.response.data);
@@ -733,8 +494,12 @@ const CpEditProduct = () =>{
             addItem(1 , imageGallerySecond);
             addItem(2 , imageGalleryThird);
             addItem(3 , imageGalleryFourth);
-           
-        }, [imageGalleryFirst , imageGallerySecond ,imageGalleryThird ,imageGalleryFourth])
+            addItem(4 , imageGalleryFifth);
+            addItem(5 , imageGallerySixth);
+            addItem(6 , imageGallerySeventh);
+            addItem(7 , imageGalleryEighth);
+
+        }, [imageGalleryFirst , imageGallerySecond ,imageGalleryThird ,imageGalleryFourth , imageGalleryFifth , imageGallerySixth ,imageGallerySeventh , imageGalleryEighth ])
 
 
 
@@ -753,10 +518,9 @@ const CpEditProduct = () =>{
                 //-----------------------------------get The product
                 const getTheProduct = async () =>{
                     try{
-                        if(langCtx.language === 'persian'){
                             const response = await authCtx.jwtInst({
                                 method:"get",
-                                params:{id:params.productId},
+                                params:{id:params.productId , language:langCtx.language},
                                 url:`${authCtx.defaultTargetApi}/product/getTheProduct`,
                                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                             })
@@ -776,151 +540,40 @@ const CpEditProduct = () =>{
                             setImageGallerySecond(data.images[1]);
                             setImageGalleryThird(data.images[2]);
                             setImageGalleryFourth(data.images[3]);
-                            var tempCat = [];
-                            for(var y= 0 ; data.categories.length>y ; y++){
-                                
-                                for(var j= 0 ; allCategories.length>j ; j++){
-                                    
-                                    if(data.categories[y]=== allCategories[j]._id ){
-                                        tempCat.push({value:allCategories[j]._id , label:allCategories[j].category});
-                                    }
-                                }
-                            }
-                            setCategories([...tempCat])
-    
-                            var tempContactBtn = {};
-                            for(var x = 0 ; allOprator.length> x ; x++){
-                                if(data.contactButtons[1] ===allOprator[x]._id){
-                                    tempContactBtn={value:allOprator[x]._id , label:`${allOprator[x].firstName} ${allOprator[x].lastName}`}
-                                }
-                            }                        
-                            setCallOprator(tempContactBtn);
-    
-    
-                            var tempWaBtn = {};
-                            for(var k = 0 ; allWa.length> k ; k++){
-                                if(data.contactButtons[0] ===allWa[k]._id){
-                                    tempWaBtn={value:allWa[k]._id , label:`${allWa[k].firstName} ${allWa[k].lastName}`}
-                                }
-                            }                        
-                            setWhatsAppOprator(tempWaBtn);
-    
-                            
-    
-                            setSelectedListData([...data.features]);
-                        }else if(langCtx.language === 'arabic'){
-                            const response = await authCtx.jwtInst({
-                                method:"get",
-                                params:{id:params.productId},
-                                url:`${authCtx.defaultTargetApi}/product/getTheProductAr`,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setProductRiview(data.productRiview);
-                            setProductData(data);
-                            setTitle(data.title);
-                            setProductCode(data.productCode);
-                            setAvailableSurface(data.availableSurface);
-                            for(var i= 0 ; measureOptionForNormalSelect.length>i ; i++){
-                                if(measureOptionForNormalSelect[i].label === data.price.measure){
-                                    setMeasure(measureOptionForNormalSelect[i]);
-                                }
-                            }
-                            setPrice(data.price.price);
-                            setImageGalleryFirst(data.images[0]);
-                            setImageGallerySecond(data.images[1]);
-                            setImageGalleryThird(data.images[2]);
-                            setImageGalleryFourth(data.images[3]);
-                            var tempCat = [];
-                            for(var y= 0 ; data.categories.length>y ; y++){
-                                
-                                for(var j= 0 ; allCategories.length>j ; j++){
-                                    
-                                    if(data.categories[y]=== allCategories[j]._id ){
-                                        tempCat.push({value:allCategories[j]._id , label:allCategories[j].category});
-                                    }
-                                }
-                            }
-                            setCategories([...tempCat])
-    
-                            var tempContactBtn = {};
-                            for(var x = 0 ; allOprator.length> x ; x++){
-                                if(data.contactButtons[1] ===allOprator[x]._id){
-                                    tempContactBtn={value:allOprator[x]._id , label:`${allOprator[x].firstName} ${allOprator[x].lastName}`}
-                                }
-                            }                        
-                            setCallOprator(tempContactBtn);
-    
-    
-                            var tempWaBtn = {};
-                            for(var k = 0 ; allWa.length> k ; k++){
-                                if(data.contactButtons[0] ===allWa[k]._id){
-                                    tempWaBtn={value:allWa[k]._id , label:`${allWa[k].firstName} ${allWa[k].lastName}`}
-                                }
-                            }                        
-                            setWhatsAppOprator(tempWaBtn);
-    
-                            
-    
-                            setSelectedListData([...data.features]);
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method:"get",
-                                params:{id:params.productId},
-                                url:`${authCtx.defaultTargetApi}/product/getTheProductEn`,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setProductRiview(data.productRiview);
-                            setProductData(data);
-                            setTitle(data.title);
-                            setProductCode(data.productCode);
-                            setAvailableSurface(data.availableSurface);
-                            for(var i= 0 ; measureOptionForNormalSelect.length>i ; i++){
-                                if(measureOptionForNormalSelect[i].label === data.price.measure){
-                                    setMeasure(measureOptionForNormalSelect[i]);
-                                }
-                            }
-                            setPrice(data.price.price);
-                            setImageGalleryFirst(data.images[0]);
-                            setImageGallerySecond(data.images[1]);
-                            setImageGalleryThird(data.images[2]);
-                            setImageGalleryFourth(data.images[3]);
-                            var tempCat = [];
-                            for(var y= 0 ; data.categories.length>y ; y++){
-                                
-                                for(var j= 0 ; allCategories.length>j ; j++){
-                                    
-                                    if(data.categories[y]=== allCategories[j]._id ){
-                                        tempCat.push({value:allCategories[j]._id , label:allCategories[j].category});
-                                    }
-                                }
-                            }
-                            setCategories([...tempCat])
-    
-                            var tempContactBtn = {};
-                            for(var x = 0 ; allOprator.length> x ; x++){
-                                if(data.contactButtons[1] ===allOprator[x]._id){
-                                    tempContactBtn={value:allOprator[x]._id , label:`${allOprator[x].firstName} ${allOprator[x].lastName}`}
-                                }
-                            }                        
-                            setCallOprator(tempContactBtn);
-    
-    
-                            var tempWaBtn = {};
-                            for(var k = 0 ; allWa.length> k ; k++){
-                                if(data.contactButtons[0] ===allWa[k]._id){
-                                    tempWaBtn={value:allWa[k]._id , label:`${allWa[k].firstName} ${allWa[k].lastName}`}
-                                }
-                            }                        
-                            setWhatsAppOprator(tempWaBtn);
-    
-                            
-    
-                            setSelectedListData([...data.features]);
-                        }
+                            setImageGalleryFifth(data.images[4]);
+                            setImageGallerySixth(data.images[5]);
+                            setImageGallerySeventh(data.images[6]);
+                            setImageGalleryEighth(data.images[7]);
 
-                        
+                            var tempCat = [];
+                            for(var y= 0 ; data.categories.length>y ; y++){
+                                
+                                for(var j= 0 ; allCategories.length>j ; j++){
+                                    
+                                    if(data.categories[y]=== allCategories[j]._id ){
+                                        tempCat.push({value:allCategories[j]._id , label:allCategories[j].category});
+                                    }
+                                }
+                            }
+                            setCategories([...tempCat])
+                            var tempContactBtn = {};
+                            for(var x = 0 ; allOprator.length> x ; x++){
+                                if(data.contactButtons[1] ===allOprator[x]._id){
+                                    tempContactBtn={value:allOprator[x]._id , label:`${allOprator[x].firstName} ${allOprator[x].lastName}`}
+                                }
+                            }                        
+                            setCallOprator(tempContactBtn);
+    
+                            var tempWaBtn = {};
+                            for(var k = 0 ; allWa.length> k ; k++){
+                                if(data.contactButtons[0] ===allWa[k]._id){
+                                    tempWaBtn={value:allWa[k]._id , label:`${allWa[k].firstName} ${allWa[k].lastName}`}
+                                }
+                            }                        
+                            setWhatsAppOprator(tempWaBtn);
+                            setSelectedListData([...data.features]);
+                            setPageTitle(data.pageTitle);
+                            setPageDescription(data.pageDescription);
                     }catch(error){
                         setFailedOpenToast(true);
                         setFailedMsgToast("خطا");
@@ -1069,14 +722,14 @@ const CpEditProduct = () =>{
                                             :
                                                  <div className={Style.featureHeader}><h4>گالری تصاویر</h4></div>
                                             }
-                                            <Row>
-                                                <Col xs={12} md={12} lg={5}>
+                                                                                       <Row>
+                                                <Col  xs={12} md={12} lg={4}>
                                                     <ProductPhotoGallery galleryImages={galleryImages}></ProductPhotoGallery>
                                                 </Col>
-                                                <Col style={{padding:'0px 0px 0px 70px'}} xs={12} md={12} lg={7}>
+                                                <Col style={{padding:'0px 0px 0px 70px'}} xs={12} md={12} lg={4}>
                                                     <div style={{marginTop:'95px'}}>
                                                         <div className={Style.inputDiv2}>
-                                                            <div className={Style.lableDiv}><h4 style={{fontFamily:'Dana1' , color:'#ac0000'}}>تصویر اول(کاور)</h4></div>
+                                                        <div className={Style.lableDiv}><h4 style={{fontFamily:'Dana1' , color:'#ac0000'}}>تصویر اول(کاور)</h4></div>
                                                             <NormalInput value={imageGalleryFirst} onChange={(e)=>{setImageGalleryFirst(e.target.value); setImageGalleryErr('')}} placeholder='لینک تصویر...'></NormalInput>
                                                         </div>
                                                         <div className={Style.inputDiv2}>
@@ -1093,7 +746,29 @@ const CpEditProduct = () =>{
                                                         </div>
                                                     </div>
                                                 </Col>
+                                                <Col style={{padding:'0px 0px 0px 70px'}} xs={12} md={12} lg={4}>
+                                                    <div style={{marginTop:'95px'}}>
+                                                        <div className={Style.inputDiv2}>
+                                                            <div className={Style.lableDiv}><h4>تصویر پنجم</h4></div>
+                                                            <NormalInput  value={imageGalleryFifth} onChange={(e)=>{setImageGalleryFifth(e.target.value); setImageGalleryErr('')}} placeholder='لینک تصویر...'></NormalInput>
+                                                        </div>
+                                                        <div className={Style.inputDiv2}>
+                                                            <div   className={Style.lableDiv}><h4>تصویر ششم</h4></div>
+                                                            <NormalInput value={imageGallerySixth} onChange={(e)=>{setImageGallerySixth(e.target.value); setImageGalleryErr('')}} placeholder='لینک تصویر...'></NormalInput>
+                                                        </div>
+                                                        <div className={Style.inputDiv2}>
+                                                            <div className={Style.lableDiv}><h4>تصویر هفتم</h4></div>
+                                                            <NormalInput value={imageGallerySeventh} onChange={(e)=>{setImageGallerySeventh(e.target.value); setImageGalleryErr('')}} placeholder='لینک تصویر...'></NormalInput>
+                                                        </div>
+                                                        <div className={Style.inputDiv2}>
+                                                            <div className={Style.lableDiv}><h4>تصویر هشتم</h4></div>
+                                                            <NormalInput value={imageGalleryEighth} onChange={(e)=>{setImageGalleryEighth(e.target.value); setImageGalleryErr('')}} placeholder='لینک تصویر...'></NormalInput>
+                                                        </div>
+                                                    </div>
+                                                </Col>
                                             </Row>
+
+
                                     </div>
                                </Row>
                                <Row ref={ref3} dir="rtl">
@@ -1219,6 +894,21 @@ const CpEditProduct = () =>{
                                             </Row>
                                     </div>
                                </Row>
+                               <Row ref={ref9} dir="rtl">
+                                        <div className={Style.formItemsDiv}>
+                                            <div className={Style.featureHeader}><h4>Document head</h4></div>
+                                            <Col xs={12} md={12} lg={6}>
+                                                <div className={Style.inputDiv2}>
+                                                    <div className={Style.lableDiv}><h4>Title</h4></div>
+                                                    <NormalInput value={pageTitle} onChange={(e)=>{setPageTitle(e.target.value); setPageTitleErr('')}} placeholder='...'></NormalInput>
+                                                </div>
+                                                <div className={Style.inputDiv2}>
+                                                    <div className={Style.lableDiv}><h4>Description</h4></div>
+                                                    <NormalInput value={pageDescription} onChange={(e)=>{setPageDescription(e.target.value); setPageDescriptionErr('')}} placeholder='...'></NormalInput>
+                                                </div>
+                                            </Col>
+                                        </div> 
+                                </Row>
                                <div className={Style.saveBtnDiv}>
                                    <button onClick={saveProduct} className={Style.saveForm}>ذخیره</button>
                                </div>

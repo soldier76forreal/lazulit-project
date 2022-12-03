@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactDom from "react-dom";
 import jwt_decode from "jwt-decode";
 import AuthContext from "../../../store/auth";
-
+import BookIcon from '@mui/icons-material/Book';
 // import Logo from "../../assets/logo.png";
 import {Route , Redirect, Switch ,Link ,useHistory } from "react-router-dom";
 import ActivePage from "../../../store/activePage";
@@ -44,11 +44,11 @@ const CpSideBarPortal =(props)=>{
                 <ul className={Style.nav_list}>
                     <div className={activePageCtx.activePage === 'dashBoard'? Style.activePage : null}>  
                         <li>
-                            <Link to='cp/dashboard'>
+                            <a href='https://analytics.google.com/'>
                                 <FontAwesomeIcon className={Style.listIconStyle}  icon={"th-large"}></FontAwesomeIcon> 
-                                <span className={Style.links_Name}>داشبورد</span> 
-                            </Link>
-                            <span className={Style.toolTip}>داشبورد</span> 
+                                <span className={Style.links_Name}>google analytics</span> 
+                            </a>
+                            <span className={Style.toolTip}>google analytics</span> 
 
                         </li>
                     </div>
@@ -81,7 +81,7 @@ const CpSideBarPortal =(props)=>{
                             <span className={Style.toolTip}>آپلود سنتر</span> 
                         </li>
                     </div> 
-                    <div className={activePageCtx.activePage === 'comment'? Style.activePage : null}>
+                    <div className={activePageCtx.activePage === 'comments'? Style.activePage : null}>
                         <li>
                                 <Link to='/cp/comments'>
                                     <FontAwesomeIcon className={Style.listIconStyle}  icon={"comments"}></FontAwesomeIcon> 
@@ -108,6 +108,15 @@ const CpSideBarPortal =(props)=>{
                                 <span className={Style.links_Name}>کاربر ها</span> 
                             </Link>
                             <span className={Style.toolTip}>کاربرها</span>  
+                        </li>
+                    </div>
+                    <div className={activePageCtx.activePage === 'blog'? Style.activePage : null}>
+                        <li>
+                            <Link to='/cp/blog'>
+                                <BookIcon className={Style.listIconStyle} sx={{fontSize:'28px'}}></BookIcon> 
+                                <span className={Style.links_Name}>بلاگ پست</span> 
+                            </Link>
+                            <span className={Style.toolTip}>بلاگ پست</span>  
                         </li>
                     </div>
 
@@ -142,9 +151,9 @@ const CpSideBarPortal =(props)=>{
                     <div className={Style.profile}>
                         <div className={Style.profile_details}>
                            {decoded.profileImage !== undefined?
-                                <img src={`${authCtx.defaultTargetApi}/uploads/${decoded.profileImage.filename}`} className={Style.profilePhoto}></img>
+                                <img alt={`${decoded.firstName} ${decoded.lastName}`} title={`${decoded.firstName} ${decoded.lastName}`} src={`${authCtx.defaultTargetApi}/uploads/${decoded.profileImage.filename}`} className={Style.profilePhoto}></img>
                                 :
-                                <img className={Style.profilePhoto} src={`${prof}`}></img>
+                                <img alt='placeholder' title='placeholder' className={Style.profilePhoto} src={`${prof}`}></img>
                             }
                             <div className={Style.name_job}>
                             <div className={Style.name}>{`${decoded.firstName} ${decoded.lastName}`}</div>

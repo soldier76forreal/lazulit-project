@@ -53,10 +53,10 @@ const CpProductListPage = () =>{
             const getProducts = async() =>{
                 if(queryParams.get('state') === 'category'){
                 try{
-                    if(langCtx.language === 'persian'){
                         setPageLoading(true);
                         const response = await authCtx.jwtInst({
                             method: 'get',
+                            params:{language:langCtx.language},
                             url: `${authCtx.defaultTargetApi}/product/productListByCategory?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
                             config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                         })
@@ -76,63 +76,15 @@ const CpProductListPage = () =>{
                         }
                         setPageLoading(false);
                         setProducts(recivedData.data.results);
-                    }else if(langCtx.language === 'arabic'){
-                        setPageLoading(true);
-                        const response = await authCtx.jwtInst({
-                            method: 'get',
-                            url: `${authCtx.defaultTargetApi}/product/productListByCategoryAr?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const recivedData = response;
-                        if(recivedData.data.now.total<9){
-                            setMaxPage(recivedData.data.now.total);
-                        }else{
-                            setMaxPage(9);
-                        }
-                        setCurrentPage(recivedData.data.now.page);
-                        setTotalPage(recivedData.data.now.total);
-                        if(recivedData.data.previous !== undefined){
-                            setPrevPage(recivedData.data.previous.page);
-                        }
-                        if(recivedData.data.next !== undefined){
-                            setNextPage(recivedData.data.next.page);
-                        }
-                        setPageLoading(false);
-                        setProducts(recivedData.data.results);
-                    }else if(langCtx.language === 'english'){
-                        setPageLoading(true);
-                        const response = await authCtx.jwtInst({
-                            method: 'get',
-                            url: `${authCtx.defaultTargetApi}/product/productListByCategoryEn?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                        })
-                        const recivedData = response;
-                        if(recivedData.data.now.total<9){
-                            setMaxPage(recivedData.data.now.total);
-                        }else{
-                            setMaxPage(9);
-                        }
-                        setCurrentPage(recivedData.data.now.page);
-                        setTotalPage(recivedData.data.now.total);
-                        if(recivedData.data.previous !== undefined){
-                            setPrevPage(recivedData.data.previous.page);
-                        }
-                        if(recivedData.data.next !== undefined){
-                            setNextPage(recivedData.data.next.page);
-                        }
-                        setPageLoading(false);
-                        setProducts(recivedData.data.results);
-                    }
-
                 }catch(error){
-        
+                    console.log(error);
                 }
                  }else if(queryParams.get('state') === 'tag'){
                     try{
-                        if(langCtx.language === 'persian'){
                             setPageLoading(true);
                             const response = await authCtx.jwtInst({
                                 method: 'get',
+                                params:{language:langCtx.language},
                                 url: `${authCtx.defaultTargetApi}/product/productListByTag?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
                                 config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                             })
@@ -152,56 +104,9 @@ const CpProductListPage = () =>{
                             }
                             setPageLoading(false);
                             setProducts(recivedData.data.results);
-                        }else if(langCtx.language === 'arabic'){
-                            setPageLoading(true);
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByTagAr?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPage(recivedData.data.now.total);
-                            }else{
-                                setMaxPage(9);
-                            }
-                            setCurrentPage(recivedData.data.now.page);
-                            setTotalPage(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPage(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPage(recivedData.data.next.page);
-                            }
-                            setPageLoading(false);
-                            setProducts(recivedData.data.results);
-                        }else if(langCtx.language === 'english'){
-                            setPageLoading(true);
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByTagEn?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPage(recivedData.data.now.total);
-                            }else{
-                                setMaxPage(9);
-                            }
-                            setCurrentPage(recivedData.data.now.page);
-                            setTotalPage(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPage(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPage(recivedData.data.next.page);
-                            }
-                            setPageLoading(false);
-                            setProducts(recivedData.data.results);
-                        }
 
                     }catch(error){
-            
+                        console.log(error);
                     }
                  }
             }
@@ -209,153 +114,55 @@ const CpProductListPage = () =>{
             const searchProducts = async() =>{
                 if(queryParams.get('state') === 'category'){
                     try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByCategorySearch?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                params:{title:searchText},
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPageSearch(recivedData.data.now.total);
-                            }else{
-                                setMaxPageSearch(9);
-                            }
-                            setCurrentPageSearch(recivedData.data.now.page);
-                            setTotalPageSearch(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPageSearch(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPageSearch(recivedData.data.next.page);
-                            }
-                            setSearchData(recivedData.data.results);
-                            setSearchLoading(false);
-                        }else if(langCtx.language === 'arabic'){
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByCategorySearchAr?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                params:{title:searchText},
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPageSearch(recivedData.data.now.total);
-                            }else{
-                                setMaxPageSearch(9);
-                            }
-                            setCurrentPageSearch(recivedData.data.now.page);
-                            setTotalPageSearch(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPageSearch(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPageSearch(recivedData.data.next.page);
-                            }
-                            setSearchData(recivedData.data.results);
-                            setSearchLoading(false);
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByCategorySearchEn?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                params:{title:searchText},
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPageSearch(recivedData.data.now.total);
-                            }else{
-                                setMaxPageSearch(9);
-                            }
-                            setCurrentPageSearch(recivedData.data.now.page);
-                            setTotalPageSearch(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPageSearch(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPageSearch(recivedData.data.next.page);
-                            }
-                            setSearchData(recivedData.data.results);
-                            setSearchLoading(false);
+                        const response = await authCtx.jwtInst({
+                            method: 'get',
+                            url: `${authCtx.defaultTargetApi}/product/productListByCategorySearch?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
+                            params:{title:searchText , language:langCtx.language},
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const recivedData = response;
+                        if(recivedData.data.now.total<9){
+                            setMaxPageSearch(recivedData.data.now.total);
+                        }else{
+                            setMaxPageSearch(9);
                         }
-
+                        setCurrentPageSearch(recivedData.data.now.page);
+                        setTotalPageSearch(recivedData.data.now.total);
+                        if(recivedData.data.previous !== undefined){
+                            setPrevPageSearch(recivedData.data.previous.page);
+                        }
+                        if(recivedData.data.next !== undefined){
+                            setNextPageSearch(recivedData.data.next.page);
+                        }
+                        setSearchData(recivedData.data.results);
+                        setSearchLoading(false);
                     }catch(error){
             
                     }
                 }else if(queryParams.get('state') === 'tag'){
                     try{
-                        if(langCtx.language === 'persian'){
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByTagSearch?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                params:{title:searchText},
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPageSearch(recivedData.data.now.total);
-                            }else{
-                                setMaxPageSearch(9);
-                            }
-                            setCurrentPageSearch(recivedData.data.now.page);
-                            setTotalPageSearch(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPageSearch(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPageSearch(recivedData.data.next.page);
-                            }
-                            setSearchData(recivedData.data.results);
-                            setSearchLoading(false);
-                        }else if(langCtx.language === 'arabic'){
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByTagSearchAr?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                params:{title:searchText},
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPageSearch(recivedData.data.now.total);
-                            }else{
-                                setMaxPageSearch(9);
-                            }
-                            setCurrentPageSearch(recivedData.data.now.page);
-                            setTotalPageSearch(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPageSearch(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPageSearch(recivedData.data.next.page);
-                            }
-                            setSearchData(recivedData.data.results);
-                            setSearchLoading(false);
-                        }else if(langCtx.language === 'english'){
-                            const response = await authCtx.jwtInst({
-                                method: 'get',
-                                url: `${authCtx.defaultTargetApi}/product/productListByTagSearchEn?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
-                                params:{title:searchText},
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const recivedData = response;
-                            if(recivedData.data.now.total<9){
-                                setMaxPageSearch(recivedData.data.now.total);
-                            }else{
-                                setMaxPageSearch(9);
-                            }
-                            setCurrentPageSearch(recivedData.data.now.page);
-                            setTotalPageSearch(recivedData.data.now.total);
-                            if(recivedData.data.previous !== undefined){
-                                setPrevPageSearch(recivedData.data.previous.page);
-                            }
-                            if(recivedData.data.next !== undefined){
-                                setNextPageSearch(recivedData.data.next.page);
-                            }
-                            setSearchData(recivedData.data.results);
-                            setSearchLoading(false);
+                        const response = await authCtx.jwtInst({
+                            method: 'get',
+                            url: `${authCtx.defaultTargetApi}/product/productListByTagSearch?page=${queryParams.get('page') === null ? '1' : queryParams.get('page')}&limit=20&id=${queryParams.get('id')}`,
+                            params:{title:searchText , language:langCtx.language},
+                            config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                        })
+                        const recivedData = response;
+                        if(recivedData.data.now.total<9){
+                            setMaxPageSearch(recivedData.data.now.total);
+                        }else{
+                            setMaxPageSearch(9);
                         }
-
+                        setCurrentPageSearch(recivedData.data.now.page);
+                        setTotalPageSearch(recivedData.data.now.total);
+                        if(recivedData.data.previous !== undefined){
+                            setPrevPageSearch(recivedData.data.previous.page);
+                        }
+                        if(recivedData.data.next !== undefined){
+                            setNextPageSearch(recivedData.data.next.page);
+                        }
+                        setSearchData(recivedData.data.results);
+                        setSearchLoading(false);
                     }catch(error){
             
                     }

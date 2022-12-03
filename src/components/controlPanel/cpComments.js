@@ -34,6 +34,7 @@ import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 
 
+
 const Comments = () =>{
      //------------------------------history and location------------------------------
      const history = useHistory();
@@ -56,10 +57,8 @@ const Comments = () =>{
      const [allProductLength , setAllProductLength] = useState('');
      const [activeFilter , setActiveFilter] = useState(null);
 
-
      const [searchInProductText , setSearchInProductText] = useState('');
      const [searchInProductData , setSearchInProductData] =  useState([]);
-
 
     //modal
      const [showDeleteModal , setShowDeleteModal] = useState(false);
@@ -80,49 +79,6 @@ const Comments = () =>{
     const [failedOpenToast , setFailedOpenToast] = useState(false);
     const [failedMsgToast , setFailedMsgToast] = useState('');
 
-    const like = async(e) =>{
-        var dataToSend = {}
-        if(e.currentTarget.value !== undefined){
-            dataToSend = {
-                targetComment : e.currentTarget.value,
-                author: decoded.id
-            }
-        }
-        try{
-            const response =await authCtx.jwtInst({
-                method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/likeCommentCp`,
-                data:dataToSend,
-                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-            })
-            setRefreshList(Math.random());
-
-        }catch{
-            console.log('خطایی رخ داده')
-        }
-    }
-    const dislike = async(e) =>{
-        var dataToSend = {}
-        if(e.currentTarget.value !== undefined){
-            dataToSend = {
-                targetComment : e.currentTarget.value,
-                author: decoded.id
-            }
-        }
-        try{
-            const response = await authCtx.jwtInst({
-                method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/dislikeCommentCp`,
-                data:dataToSend,
-                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-            })
-            setRefreshList(Math.random());
-
-
-        }catch{
-            console.log('خطایی رخ داده')
-        }
-    }
 
     const productComments = async() =>{
         let queryLimit = '';
@@ -151,43 +107,7 @@ const Comments = () =>{
     }
         //------------------------------useEffect------------------------------
 
-    const commentValidation =async (e) =>{
-        const validationUpdate = {id:e.target.value};
-        console.log(e.target.value);
-        try{
-            const response = await authCtx.jwtInst({
-                method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/commentValidationUpdate`,
-                data:validationUpdate,
-                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-            })
-            const data = await response.data;
-            setRefreshList(Math.random());
-        }catch{
-            console.log('خطایی رخ داده')
-        }
-    }
 
-
-    const deleteComment = async () =>{
-        const validationUpdate = {id:itemToDelete};
-        try{
-            const response  =await authCtx.jwtInst({
-                method:'post',
-                url:`${authCtx.defaultTargetApi}/comment/deleteCommentCp`,
-                data:validationUpdate,
-                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-            })
-            const data = await response.data;
-            setRefreshList(Math.random());
-            setShowDeleteModal(false)
-            setSuccessOpenToast(true);
-            setSuccessMsgToast('دیدگاه حذف شد');
-            const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
-        }catch{
-            console.log('خطایی رخ داده')
-        }
-    }
 
     const filter = (e) =>{
         history.push(`/cp/comments?filter=${e.target.value}`)
@@ -209,8 +129,6 @@ const Comments = () =>{
 
     return(
         <Fragment>
-            {/* Modal */}
-            <Modal  delete={deleteComment} closeModalFn={()=>{setShowDeleteModal(false)}} showModal={showDeleteModal}></Modal>
             {/* toasts */}
             <SuccessMsg openMsg={successOpenToast} msg={successMsgToast}></SuccessMsg>
             <FailedMsg openMsg={failedOpenToast} msg={failedMsgToast}></FailedMsg>
@@ -282,7 +200,7 @@ const Comments = () =>{
                                                     {allComments.map(dt=>{
                                                         return(
                                                             <div style={{padding:'6px 120px 6px 120px'}} className={Style.commentDiv}>
-                                                                <CommentItself like={like} dislike={dislike} setItemToDelete={setItemToDelete} setShowDeleteModal={setShowDeleteModal} deleteComment={deleteComment} commentValidation={commentValidation} comment={dt}></CommentItself>
+                                                                <CommentItself  setRefreshList={setRefreshList}  comment={dt}></CommentItself>
                                                             </div>
                                                         )
                                                     })}

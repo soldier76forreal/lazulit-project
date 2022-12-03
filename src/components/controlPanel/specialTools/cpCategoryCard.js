@@ -88,9 +88,9 @@ const CpCategoryCard = (props) =>{
                                     <td>
                                         <div  className={Style.profDiv}>
                                             {dt.author.profileImage !== undefined?
-                                                <img className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${dt.author.profileImage.filename}`}></img>
+                                                <img alt={dt.author.firstName+' '+dt.author.lastName}  title={dt.author.firstName+' '+dt.author.lastName} className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${dt.author.profileImage.filename}`}></img>
                                                 :
-                                                <img className={Style.profImg} src={`${prof}`}></img>
+                                                <img alt='placeholder' title='placeholder' className={Style.profImg} src={`${prof}`}></img>
                                             }                                            
                                             <h4>{dt.author.firstName+' '+dt.author.lastName}</h4>
                                         </div>

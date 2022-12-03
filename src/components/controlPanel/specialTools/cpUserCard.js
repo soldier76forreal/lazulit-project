@@ -56,16 +56,16 @@ const CpUserCard = (props) =>{
                             return(
                                 <tr key={dt._id} style={{backgroundColor:"#e2e2e2"}}>
                                     <td> 
-                                            <div className={Style.rightSideDiv}>
-                                                <div  className={Style.profDiv}>
-                                                    {dt.profileImage !== undefined ?
-                                                    <img className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${dt.profileImage.filename}`}></img>
-                                                    :
-                                                    <img className={Style.profImg} src={`${prof}`}></img>
-                                                    }
-                                                    <h4>{dt.firstName+' '+dt.lastName}</h4>
-                                                </div>
+                                        <div className={Style.rightSideDiv}>
+                                            <div  className={Style.profDiv}>
+                                                {dt.profileImage !== undefined ?
+                                                <img alt={dt.firstName+' '+dt.lastName} title={dt.firstName+' '+dt.lastName} className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${dt.profileImage.filename}`}></img>
+                                                :
+                                                <img alt='placeholder' title='placeholder' className={Style.profImg} src={`${prof}`}></img>
+                                                }
+                                                <h4>{dt.firstName+' '+dt.lastName}</h4>
                                             </div>
+                                        </div>
                                         
                                     </td>
                                     <td>

@@ -135,14 +135,14 @@ const deleteBtn = (e) =>{
                         <div className={props.showModal === true ? `${Style.modalBoarder} ${Style.scaleIn}` : props.showModal === false ? `${Style.modalBoarder} ${Style.scaleOut}` : null} >
                             {file[0] !== undefined ?
                                 <div  className={Style.profDiv}>
-                                    <img className={Style.profImg} src={`${URL.createObjectURL(file[0])}`}></img>
+                                    <img alt='theImage' title='theImage' className={Style.profImg} src={`${URL.createObjectURL(file[0])}`}></img>
                                 </div>
                             :
                                 <div  className={Style.profDiv}>
                                     {props.imageName !== ''?
-                                    <img className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${props.imageName}`}></img>
+                                    <img alt='theImage' title='theImage' className={Style.profImg} src={`${authCtx.defaultTargetApi}/uploads/${props.imageName}`}></img>
                                     :
-                                    <img className={Style.profImg} src={`${prof}`}></img>
+                                    <img alt='placeholder' title='placeholder' className={Style.profImg} src={`${prof}`}></img>
                                     }
                                 </div>
                             }

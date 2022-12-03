@@ -16,8 +16,10 @@ import NoDataFigure from '../../tools/noDataFigure';
 import NormalHeader from '../../tools/normalHeader';
 import AuthContext from '../../../store/auth';
 import jwtDecode from "jwt-decode";
+import TitleIcon from '@mui/icons-material/Title';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import EditFileNameModal from './editFileNameModal';
+import EditFileTitleModal from './editFileTitleModal';
 const CpImageUpload = (props) =>{
     //------------------------------------------------------------------------success toast states
     const [successOpenToast , setSuccessOpenToast] = useState(false);
@@ -48,6 +50,10 @@ const CpImageUpload = (props) =>{
     const [limitQuery , setLimitQuery] = useState(20);
     //------------------------------------------------------------------------show edit modal
     const [showEditModal , setShowEditModal] = useState(false);
+    //------------------------------------------------------------------------editeTitleModal
+    // const [showEditeTitleModal , setShowEditeTitleModal] = useState(false);
+    // const [imageTitle , setImageTitle] = useState('');
+    // const [fileTitleIdToDelete , setFileTitleIdToDelete] = useState('');
     //------------------------------------------------------------------------progress bar states
     let [currentProgress , setCurrentProgress] = useState('');
     const [uploadedData , setUploadedData] = useState([]);
@@ -86,8 +92,8 @@ const CpImageUpload = (props) =>{
 
      //-------------------------function to get files from file picker btn-------------------------
     const getFile =(e)=>{
-        //check if files less that 6
-        if(file.length <6){
+        //check if files less that 8
+        if(file.length <8){
              //check file format
             if(e.target.files[0].name.split(".").pop()==='jpg' || e.target.files[0].name.split(".").pop()==='png' || e.target.files[0].name.split(".").pop()==='jpeg'){
                 //check if file is repetitive
@@ -121,8 +127,8 @@ const CpImageUpload = (props) =>{
     const dropZoneHandler =(e)=>{
         e.preventDefault();
         let currentFileTemp = e.dataTransfer.files;
-        //check if files less that 6
-        if(file.length <6){
+        //check if files less that 8
+        if(file.length <8){
             //check file format
             if(currentFileTemp[0].name.split(".").pop()==='jpg' || currentFileTemp[0].name.split(".").pop()==='png' || currentFileTemp[0].name.split(".").pop()==='jpeg'){
                 //check if file is repetitive
@@ -327,6 +333,34 @@ useEffect(() => {
     getFiles()
 }, [limitQuery , deleted , uploadedData , fileUpdated]);
 
+//-------------------------change image title-------------------------
+// const changeImageTitle = (g)=>{
+//     setShowEditeTitleModal(true);
+//     var found = recivedUploadedFile.find(e => e._id === g.currentTarget.value);
+//     setFileTitleIdToDelete(g.currentTarget.value);
+//     setImageTitle(found.title);
+// }
+// const changeImageTitleToSendToApi = async(title)=>{
+//     const  dataToSend ={id:fileTitleIdToDelete , title:title};
+//     try{
+//         const response = await authCtx.jwtInst({
+//             method:"post",
+//             url:`${authCtx.defaultTargetApi}/upload/changeImageTitle`,
+//             data:dataToSend,
+//             config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+//         })
+//         const data = await response.data;
+//         setFileUpdated(Math.random());
+//         setSuccessOpenToast(true);
+//         setSuccessMsgToast(data);
+//         const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+//         setShowEditeTitleModal(false);
+//     }catch(error){
+//         setFailedOpenToast(true);
+//         setFailedMsgToast(error.response.data);
+//         const closingSuccessMsgTimeOut = setTimeout(()=>{setFailedOpenToast(false)}, 3000);
+//     }
+// }
 //-------------------------search file-------------------------
 
         //search category
@@ -385,6 +419,7 @@ useEffect(() => {
     }, [file]);
     return(
         <Fragment>
+            {/* <EditFileTitleModal title={imageTitle} changeTitle={changeImageTitleToSendToApi}  showModal={showEditeTitleModal} fileIdToEdit={fileTitleIdToDelete} closeModal={()=>{setShowEditeTitleModal(false)}}></EditFileTitleModal> */}
             <EditFileNameModal renameTheFile={renameTheFile} fileIdToEdit={renameFileId} showModal={showEditModal} closeModal={()=>{setShowEditModal(false)}}></EditFileNameModal>
             <form onSubmit={e =>{e.preventDefault()}}  encType="multipart/form-data" method="post">
                 {/* toasts */}
@@ -426,7 +461,7 @@ useEffect(() => {
                                      <FontAwesomeIcon  style={{fontSize:'18px'  ,color:'#FFF'}}  icon='times'></FontAwesomeIcon>
                                 </button>
                                 {/* card image */}
-                                <img className={Style.priviewImageStyle} src={`${URL.createObjectURL(data)}`}></img>
+                                <img title={`image-`+i} alt={`image-`+i} className={Style.priviewImageStyle} src={`${URL.createObjectURL(data)}`}></img>
                             </div>
                             {/* file name */}
                             <div className={Style.imageSub}>
@@ -478,12 +513,11 @@ useEffect(() => {
                                                         <h4>{data.metaData.originalname.split("." ,1).pop()}</h4>
                                                     </div>
                                                     <div className={Style.cardImageDiv}>
-                                                        <img src={`${authCtx.defaultTargetApi}/uploads/${data.metaData.filename}`}></img>
+                                                        <img title={data.metaData.title} alt={data.metaData.title} src={`${authCtx.defaultTargetApi}/uploads/${data.metaData.filename}`}></img>
                                                         <div className={Style.buttonOnTop}>
                                                             <button  onClick={openEditModal} value={data._id} title="تغییر نام" className={Style.renameBtnDiv}><DriveFileRenameOutlineIcon title="کپی کرن لینک" sx={{color: '#fff' ,iconHover:'#FFF' }}></DriveFileRenameOutlineIcon></button>
                                                             <button style={{marginLeft:'0px'}} onClick={copyLink} value={`${authCtx.defaultTargetApi}/uploads/${data.metaData.filename}`} title="کپی کرن لینک" className={Style.cardCopyLinkBtnDiv}><ContentPasteIcon title="کپی کرن لینک" sx={{color: '#fff' ,iconHover:'#FFF' }}></ContentPasteIcon></button>
                                                             <button onClick={openModalByDeleteBtn} value={data._id} title="حذف کردن"  className={Style.cardDeleteBtnDiv}><Delete title="حذف کردن"  sx={{color: '#fff' ,iconHover:'#FFF' }}></Delete></button>
-                                                            
                                                             <div className={Style.imageCardFormat}>
                                                                 <h4>jpg</h4>
                                                             </div>
@@ -518,11 +552,11 @@ useEffect(() => {
                                                             <h4>{data.metaData.originalname.split("." ,1).pop()}</h4>
                                                         </div>
                                                         <div className={Style.cardImageDiv}>
-                                                            <img src={`${authCtx.defaultTargetApi}/uploads/${data.metaData.filename}`}></img>
+                                                            <img title={data.metaData.title} alt={data.metaData.title} src={`${authCtx.defaultTargetApi}/uploads/${data.metaData.filename}`}></img>
                                                             <div className={Style.buttonOnTop}>
                                                                 <button  onClick={openEditModal} value={data._id} title="تغییر نام" className={Style.renameBtnDiv}><DriveFileRenameOutlineIcon title="کپی کرن لینک" sx={{color: '#fff' ,iconHover:'#FFF' }}></DriveFileRenameOutlineIcon></button>
                                                                 <button onClick={copyLink} value={`${authCtx.defaultTargetApi}/uploads/${data.metaData.filename}`} title="کپی کرن لینک" className={Style.cardCopyLinkBtnDiv}><ContentPasteIcon title="کپی کرن لینک" sx={{color: '#fff' ,iconHover:'#FFF' }}></ContentPasteIcon></button>
-                                                                <button onClick={openModalByDeleteBtn} value={data._id} title="حذف کردن"  className={Style.cardDeleteBtnDiv}><Delete title="حذف کردن"  sx={{color: '#fff' ,iconHover:'#FFF' }}></Delete></button>
+                                                                <button onClick={deleteFile} value={data._id} title="حذف کردن"  className={Style.cardDeleteBtnDiv}><Delete title="حذف کردن"  sx={{color: '#fff' ,iconHover:'#FFF' }}></Delete></button>
                                                                 <div className={Style.imageCardFormat}>
                                                                     <h4>jpg</h4>
                                                                 </div>

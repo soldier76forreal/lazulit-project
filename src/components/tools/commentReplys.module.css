@@ -235,34 +235,3 @@
   
 
  }
-
-
- .rotateIn{
-   
-    animation: arrowUp ease-in-out 0.2s forwards;
-}
-.rotateOut{
-       
-
-    animation: arrowDown ease-in-out 0.2s forwards;
-
-}
-@keyframes arrowUp {
-    0% {
-       
-        transform:rotate(0deg);
-    }
-
-    100% {
-        transform:rotate(180deg);
-    }
-}
-@keyframes arrowDown {
-    0% {
-        transform:rotate(180deg);
-    }
-
-    100% {
-        transform:rotate(0deg);
-    }
-}
