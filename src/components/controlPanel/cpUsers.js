@@ -127,50 +127,50 @@ const CpUser = () =>{
             }
 
 
-                // change role
-                const changeRole = async (e , j) =>{
-                    const dataToValidate = {id:j.name , label:e.label};               
-                        try{
-                            const response = await axios({
-                                method:"post",
-                                url:`${authCtx.defaultTargetApi}/users/userRoleUpdate`,
-                                data:dataToValidate,
-                                config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
-                            })
-                            const data = await response.data; 
-                            setListRefresh(Math.random());
-                    
-                        }catch(error){
-                            setFailedOpenToast(true);
-                            setFailedMsgToast('تاییدیه انجام نشد');
-                            const closingFailedMsgTimeOut = setTimeout(()=>{setFailedOpenToast(false)}, 3000);
-                        }
-                }
-
-
-
-            //delete category 
-            const deleteCategory = async () =>{
-                const  dataToSend ={productId:productIdToDelete };
+            // change role
+            const changeRole = async (e , j) =>{
+                const dataToValidate = {id:j.name , label:e.label};               
                     try{
                         const response = await axios({
                             method:"post",
-                            url:`${authCtx.defaultTargetApi}/product/deleteProduct`,
-                            data:dataToSend,
+                            url:`${authCtx.defaultTargetApi}/users/userRoleUpdate`,
+                            data:dataToValidate,
                             config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
                         })
-                        const data =  response; 
-                        setSuccessOpenToast(true);
-                        setSuccessMsgToast(await data.data);
-                        setShowDeleteModal(false);
-                        const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                        const data = await response.data; 
                         setListRefresh(Math.random());
+                
                     }catch(error){
                         setFailedOpenToast(true);
-                        setFailedMsgToast(error.response.data);
+                        setFailedMsgToast('تاییدیه انجام نشد');
                         const closingFailedMsgTimeOut = setTimeout(()=>{setFailedOpenToast(false)}, 3000);
                     }
             }
+
+
+
+        //delete category 
+        const deleteCategory = async () =>{
+            const  dataToSend ={productId:productIdToDelete };
+                try{
+                    const response = await axios({
+                        method:"post",
+                        url:`${authCtx.defaultTargetApi}/product/deleteProduct`,
+                        data:dataToSend,
+                        config: { headers: {'Content-Type': 'application/x-www-form-urlencoded' }}
+                    })
+                    const data =  response; 
+                    setSuccessOpenToast(true);
+                    setSuccessMsgToast(await data.data);
+                    setShowDeleteModal(false);
+                    const closingSuccessMsgTimeOut = setTimeout(()=>{setSuccessOpenToast(false)}, 3000);
+                    setListRefresh(Math.random());
+                }catch(error){
+                    setFailedOpenToast(true);
+                    setFailedMsgToast(error.response.data);
+                    const closingFailedMsgTimeOut = setTimeout(()=>{setFailedOpenToast(false)}, 3000);
+                }
+        }
 
 
         //search category
@@ -228,11 +228,11 @@ const CpUser = () =>{
         setImageName(e.currentTarget.value);
     }
 
-        //open and close Modal of delete btn
-        const openModalByDeleteBtn =(e)=>{
-            setShowDeleteModal(true);
-            setProductIdToDelete(e.currentTarget.value);
-        }
+    //open and close Modal of delete btn
+    const openModalByDeleteBtn =(e)=>{
+        setShowDeleteModal(true);
+        setProductIdToDelete(e.currentTarget.value);
+    }
     //------------------------------useEffect------------------------------
     
     useEffect(() => {
@@ -242,7 +242,6 @@ const CpUser = () =>{
         <Fragment>
             {/* Modal */}
         <EditUserModal setListRefresh={setListRefresh} imageName={imageName} editModalId={editModalId} closeModal={()=>{setEditModalStatus(false);}} showModal={editModalStatus}></EditUserModal>
-
             <Modal  delete={deleteCategory} closeModalFn={()=>{setShowDeleteModal(false)}} showModal={showDeleteModal}></Modal>
             {/* toasts */}
             <SuccessMsg openMsg={successOpenToast} msg={successMsgToast}></SuccessMsg>
@@ -315,8 +314,8 @@ const CpUser = () =>{
                                                     {/* card it self */}
                                                     {searchInProductText === '' ?
                                                             <div className={Style.cardDiv}>
-                                                                <CpUserCard openEditModal={openEditModal} changeRole={changeRole} setSelectedRole={setSelectedRole} selectedRole={selectedRole} openModalByDeleteBtn={openModalByDeleteBtn} validationUpdate={validationUpdate}  data={allUsers}></CpUserCard>
-                                                                {allUsersLength > 20 ? 
+                                                            <CpUserCard openEditModal={openEditModal} changeRole={changeRole} setSelectedRole={setSelectedRole} selectedRole={selectedRole} openModalByDeleteBtn={openModalByDeleteBtn} validationUpdate={validationUpdate}  data={allUsers}></CpUserCard>
+                                                            {allUsersLength > 20 ? 
                                                                 <Row>  
                                                                     <div  style={{width:'100%' ,marginTop:'10px' , textAlign:'center'}}>
                                                                         <button onClick={showMore} className={Style.showMoreBtn}>نمایش بیشتر</button>
@@ -353,7 +352,6 @@ const CpUser = () =>{
                         </Col>
                     </Row>
                 </Container>
-
         </Fragment>
     )
 }

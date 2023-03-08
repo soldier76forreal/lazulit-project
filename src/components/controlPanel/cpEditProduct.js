@@ -429,7 +429,7 @@ const CpEditProduct = () =>{
             if(imageGalleryFirst === '' || imageGallerySecond === '' || imageGalleryThird === '' || imageGalleryFourth === ''){
                 setImageGalleryErr("گالری را تکمیل کنید");
                 ref2.current.scrollIntoView(); 
-            }
+            } 
             if(price === ''){
                 setPriceErr('قیمت را وارد کنید')
                 ref1.current.scrollIntoView();

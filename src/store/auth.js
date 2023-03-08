@@ -36,7 +36,7 @@ export const AuthContextProvider = (props) =>{
     }
     const jwt = axios.create(
         ({
-            baseURL:'http://localhost:3001',
+            baseURL:'https://api.lazulitemarble.com',
             withCredentials:true,
             headers:{
                 Authorization : `Bearer ${token}`
@@ -49,7 +49,7 @@ export const AuthContextProvider = (props) =>{
         login:logInHandler,
         logout:logOutHandler,
         jwtInst:jwt,
-        defaultTargetApi:'http://localhost:3001'
+        defaultTargetApi:'https://api.lazulitemarble.com'
     };
 
     jwt.interceptors.request.use(async (config)=>{
@@ -72,7 +72,7 @@ export const AuthContextProvider = (props) =>{
             const response = await axios({
                 withCredentials:true,
                 method:"post",
-                url:"http://localhost:3001/auth/refreshToken",
+                url:"https://api.lazulitemarble.com/auth/refreshToken",
             })
             const data =  response.data; 
             return data;
@@ -87,7 +87,7 @@ export const AuthContextProvider = (props) =>{
             const response = await axios({
                 withCredentials:true,
                 method:"post",
-                url:"http://localhost:3001/auth/deleteRefreshToken",
+                url:"https://api.lazulitemarble.com/auth/deleteRefreshToken",
             })
             const data =  response.data; 
 
